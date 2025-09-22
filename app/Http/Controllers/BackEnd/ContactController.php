@@ -12,7 +12,7 @@ class ContactController extends Controller
     {
         $rows = Contact::latest()->paginate(10);
 
-        return view('backend.feedback.index', compact('rows'));
+        return view('dashboard.feedback.index', compact('rows'));
     }
 
     /**
@@ -23,8 +23,8 @@ class ContactController extends Controller
      */
     public function show($id)
     {
-        $row = Contact::findorFail($id);
+        $feedback = Contact::findorFail($id);
 
-        return view('backend.feedback.show', compact('row'));
+        return view('dashboard.feedback.show', compact('feedback'));
     }
 }

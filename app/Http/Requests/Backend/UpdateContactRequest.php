@@ -25,17 +25,17 @@ class UpdateContactRequest extends FormRequest
     {
         return [
             'email' => 'required|email',
-            'en_address' => '',
-            'ar_address' => 'required',
-            'phone' => 'required',
-            'facebook' => 'required',
-            'twitter' => 'required',
-            'instagram' => 'required',
-            
-            'snapchat' => 'required', 
-            'linkedin' => 'required', 
-            'tiktok' => 'required',
-            'banner_image' => 'mimes:jpg,jpeg,png,svg',
+            'en_address' => 'required|string',
+            'ar_address' => 'required|string',
+            'phones' => 'required|array',
+            'phones.*' => 'sometimes|nullable|string',
+            'facebook' => 'required|string',
+            'twitter' => 'required|string',
+            'instagram' => 'required|string',
+            'snapchat' => 'required|string',
+            'linkedin' => 'required|string',
+            'tiktok' => 'required|string',    
+            'banner_image' => 'mimes:jpg,jpeg,png,webp',
         ];
     }
 }

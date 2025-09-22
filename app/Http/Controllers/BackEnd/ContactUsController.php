@@ -3,46 +3,50 @@
 namespace App\Http\Controllers\BackEnd;
 
 use App\ContactUs;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\Backend\UpdateContactRequest;
+use Intervention\Image\Laravel\Facades\Image;
+use Illuminate\Support\Str; 
 
 class ContactUsController extends Controller
 {
     public function index() {
-        $contact = ContactUs::first();
-
-        return view('backend.contact_us.index', compact('contact'));
+        $contact = ContactUs::select('email', 'en_address','ar_address', 'phones')->firstOrFail();
+        return view('dashboard.contact_us.index', compact('contact'));
     }
 
-    public function edit($id) {
-        $row = ContactUs::findorFail($id);
+    public function edit() {
+        $contact = ContactUs::firstOrFail();
 
-        return view('backend.contact_us.edit', compact('row'));
+        return view('dashboard.contact_us.edit', compact('contact'));
     }
 
-    public function update(UpdateContactRequest $request, $id) {
-        $contact = ContactUs::findorFail($id);
-        $requestArray = $request->all();
+    public function update(UpdateContactRequest $request) {
+        $contactUs = ContactUs::firstOrFail();
+        $data = $request->validated();
            
         if($request->hasFile('banner_image')) {
             $file = $request->file('banner_image');
-            $fileName = time().Str::random(10).'.'.$file->getClientOriginalExtension();
-            $file->move(public_path('contact'), $fileName);
-
-            if($contact->banner_image !== NULL) {
-                if(file_exists(public_path('contact/'. $contact->banner_image))) {
-                    unlink(public_path('contact/'. $contact->banner_image));
+            $fileName = time().Str::random(10).'.'.'webp';
+            if(!file_exists(public_path('contact_us'))) {
+                mkdir(public_path('contact_us'), 0755, true);
+            }
+            $imagePath = public_path('contact_us/' . $fileName);
+            $image = Image::read($file->getRealPath())
+                ->toWebp(80)
+                ->save($imagePath);
+            if($contactUs->banner_image !== NULL) {
+                if(file_exists(public_path('contact_us/'. $contactUs->banner_image))) {
+                    unlink(public_path('contact_us/'. $contactUs->banner_image));
                 }
             }
+            $data['banner_image'] = $fileName;
         }
-        $requestArray = ['banner_image' => $request->hasFile('banner_image') ? $fileName : $contact->banner_image] + $request->all();
 
-        $contact->update($requestArray);
-
-        Session::flash('flash_message', 'Contact Us updated successfully');
+        $contactUs->update($data);
+        Session::flash('success', 'Contact us updated successfully');
         return redirect()->route('contact-us.index');
     }
 }

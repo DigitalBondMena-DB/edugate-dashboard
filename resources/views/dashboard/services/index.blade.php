@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 
-@php $pageTitle = 'Partners Control'; @endphp
+@php $pageTitle = 'Feedbacks Control'; @endphp
 
 @section('title')
     {{ $pageTitle }}
@@ -26,9 +26,9 @@
                             </div>
                         </div>
                         <div class="col-md-4 col-6 text-end">
-                            <a class="btn btn-white btn-round shadow-sm px-4" href="{{ route('clients.create') }}">
+                            <a class="btn btn-white btn-round shadow-sm px-4" href="{{ route('service.create') }}">
                                 <i class="fas fa-plus me-2"></i>
-                                Add New Partner
+                                Add New Feedback
                             </a>
                         </div>
                     </div>
@@ -41,26 +41,26 @@
                                 <thead class="table-light">
                                     <tr>
                                         <th scope="col" class="text-center" style="width: 60px;">#</th>
-                                        <th scope="col" class="text-center" style="width: 35%;">Name (AR)</th>
-                                        <th scope="col" class="text-center" style="width: 35%;">Name (EN)</th>
-                                        <th scope="col" class="text-center" style="width: 120px;">Logo</th>
+                                        <th scope="col" class="text-center" style="width: 35%;">Feedback Name (AR)</th>
+                                        <th scope="col" class="text-center" style="width: 35%;">Feedback Name (EN)</th>
+                                        <th scope="col" class="text-center" style="width: 120px;">Feedback Image</th>
                                         <th scope="col" class="text-center" style="width: 120px;">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($rows as $partner)
+                                    @foreach($rows as $feedback)
                                         <tr>
                                             <td class="text-center">
-                                                <span class="badge bg-success rounded-pill">{{ $partner->id }}</span>
+                                                <span class="badge bg-success rounded-pill">{{ $feedback->id }}</span>
                                             </td>
                                             <td>
                                                 <div class="text-center">
-                                                    <div class="text-dark fw-bold">{{ $partner->ar_name }}</div>
+                                                    <div class="text-dark fw-bold">{{ $feedback->ar_name }}</div>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="text-center">
-                                                    <div class="text-dark fw-bold">{{ $partner->en_name }}</div>
+                                                    <div class="text-dark fw-bold">{{ $feedback->en_name }}</div>
                                                 </div>
                                             </td>
                                             <td class="text-center">
@@ -69,27 +69,27 @@
                                                     <div class="position-relative image-preview-container">
                                                         <img class="rounded border shadow-sm slider-thumbnail" 
                                                              style="width: 80px; height: 50px; object-fit: cover; cursor: pointer; transition: all 0.3s ease;"
-                                                             src="{{ asset('clients/' . $partner->logo) }}" 
-                                                             alt="Partner Logo"
+                                                             src="{{ asset('services/' . $feedback->image) }}" 
+                                                             alt="Partner Image"
                                                              data-bs-toggle="modal" 
-                                                             data-bs-target="#imageModal{{ $partner->id }}"
+                                                             data-bs-target="#imageModal{{ $feedback->id }}"
                                                              onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.2)';"
                                                              onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.1)';">
                                                     </div>
                                                 </div>
 
                                                 {{-- Image Modal --}}
-                                                <div class="modal fade" id="imageModal{{ $partner->id }}" tabindex="-1" aria-labelledby="imageModalLabel{{ $partner->id }}" aria-hidden="true">
+                                                <div class="modal fade" id="imageModal{{ $feedback->id }}" tabindex="-1" aria-labelledby="imageModalLabel{{ $feedback->id }}" aria-hidden="true">
                                                     <div class="modal-dialog modal-lg modal-dialog-centered">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="imageModalLabel{{ $partner->id }}">
-                                                                    <i class="fas fa-image me-2"></i>Logo Preview
+                                                                <h5 class="modal-title" id="imageModalLabel{{ $feedback->id }}">
+                                                                    <i class="fas fa-image me-2"></i>Image Preview
                                                                 </h5>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body text-center p-0">
-                                                                <img src="{{ asset('clients/' . $partner->logo) }}" 
+                                                                <img src="{{ asset('clients/' . $feedback->image) }}" 
                                                                      class="img-fluid rounded" 
                                                                      alt="Full Size Partner Image"
                                                                      style="max-height: 70vh; object-fit: contain;">
@@ -97,7 +97,7 @@
                                                             <div class="modal-footer justify-content-between">
                                                                 <div class="text-muted small">
                                                                     <i class="fas fa-info-circle me-1"></i>
-                                                                    Image: {{ $partner->logo }}
+                                                                    Image: {{ $feedback->image }}
                                                                 </div>
                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                                                     <i class="fas fa-times me-1"></i>Close
@@ -110,31 +110,31 @@
                                             <td>
                                                 <div class="d-flex justify-content-center gap-2">
                                                     {{-- Edit Button --}}
-                                                    <a href="{{ route('clients.edit', $partner->id) }}" class="text-decoration-none">
+                                                    <a href="{{ route('service.edit', $feedback->id) }}" class="text-decoration-none">
                                                         <button class="btn btn-outline-primary btn-sm" 
-                                                                title="Edit Partners" data-bs-toggle="tooltip">
+                                                                title="Edit Feedbacks" data-bs-toggle="tooltip">
                                                             <span style="font-size: 14px;">✏️</span>
                                                         </button>
                                                     </a>
                                                     
                                                     {{-- Toggle Status Button --}}
-                                                    @if($partner->active === 'activated')
-                                                        <form action="{{ route('clients.toggleStatus', $partner->id) }}" method="POST" class="d-inline">
+                                                    @if($feedback->active === 'activated')
+                                                        <form action="{{ route('service.toggleStatus', $feedback->id) }}" method="POST" class="d-inline">
                                                             @csrf
                                                             @method('PATCH')
                                                             <button class="btn btn-outline-warning btn-sm" type="submit"
-                                                                    title="Deactivate Partners" data-bs-toggle="tooltip"
-                                                                    onclick="return confirm('Are you sure you want to deactivate this Partners?');">
+                                                                    title="Deactivate Feedbacks" data-bs-toggle="tooltip"
+                                                                    onclick="return confirm('Are you sure you want to deactivate this Feedbacks?');">
                                                                 <span style="font-size: 14px;"><i class="fa-solid fa-eye"></i></span>
                                                             </button>
                                                         </form>
                                                     @else
-                                                        <form action="{{ route('clients.toggleStatus', $partner->id) }}" method="POST" class="d-inline">
+                                                        <form action="{{ route('service.toggleStatus', $feedback->id) }}" method="POST" class="d-inline">
                                                             @csrf
                                                             @method('PATCH')
                                                             <button class="btn btn-outline-success btn-sm" type="submit"
-                                                                    title="Activate Partners" data-bs-toggle="tooltip"
-                                                                    onclick="return confirm('Are you sure you want to activate this Partners?');">
+                                                                    title="Activate Feedbacks" data-bs-toggle="tooltip"
+                                                                    onclick="return confirm('Are you sure you want to activate this Feedbacks?');">
                                                                 <span style="font-size: 14px;"><i class="fa-solid fa-eye-slash"></i></span>
                                                             </button>
                                                         </form>
@@ -159,11 +159,11 @@
                                         <span style="font-size: 3rem;">🎨</span>
                                     </div>
                                 </div>
-                                <h5 class="text-muted mb-3">No Partners Available</h5>
-                                <p class="text-muted mb-4">Start creating beautiful partners for your website</p>
-                                <a href="{{ route('clients.create') }}" class="btn btn-primary btn-round shadow-sm px-4">
+                                <h5 class="text-muted mb-3">No Feedbacks Available</h5>
+                                <p class="text-muted mb-4">Start creating beautiful Feedbacks for your website</p>
+                                <a href="{{ route('service.create') }}" class="btn btn-primary btn-round shadow-sm px-4">
                                     <span class="me-2" style="font-weight: bold;">+</span>
-                                    Create First Partners
+                                    Create First Feedbacks
                                 </a>
                             </div>
                         @endif

@@ -7,8 +7,9 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
-use App\Http\Requests\dashboard\StoreClientsRequest;
-use App\Http\Requests\dashboard\UpdateClientsRequest;
+use App\Http\Requests\Backend\StoreClientsRequest;
+use App\Http\Requests\Backend\UpdateClientsRequest;
+use Intervention\Image\Laravel\Facades\Image;
 
 class ClientsController extends Controller
 {
@@ -42,19 +43,24 @@ class ClientsController extends Controller
      */
     public function store(StoreClientsRequest $request)
     {
-        $requestArray = $request->all();
+        $data =$request->validated();
 
         if($request->hasFile('logo')) {
             $file = $request->file('logo');
-            $fileName = time().Str::random(10).'.'.$file->getClientOriginalExtension();
-            $file->move(public_path('clients'), $fileName);
+            $fileName = time().Str::random(10).'.webp';
+            if(!file_exists(public_path('clients'))) {
+                mkdir(public_path('clients'), 0755, true);
+            }
+            $imagePath = public_path('clients/' . $fileName);
+            $image = Image::read($file->getRealPath())
+                ->toWebp(80)
+                ->save($imagePath);
+                $data['logo'] = $fileName;
+                $row = Client::create($data);
+                Session::flash('flash_message', 'Partner added successfully');
+                return redirect()->route('clients.index');
         }
-
-        $requestArray = ['logo' => $fileName] + $request->all();
-
-        $row = Client::create($requestArray);
-
-        Session::flash('flash_message', 'Client added successfully');
+        Session::flash('flash_message', 'Error adding partner');
         return redirect()->route('clients.index');
     }
 
@@ -89,30 +95,35 @@ class ClientsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateClientsRequest $request, $id)
+    public function update(UpdateClientsRequest $request, Client $client)
     {
-        $clients = Client::findorFail($id);
 
-        $requestArray = $request->all();
+        $data = $request->validated();
 
         if($request->hasFile('logo')) {
             $file = $request->file('logo');
-            $fileName = time().Str::random(10).'.'.$file->getClientOriginalExtension();
-            $file->move(public_path('clients'), $fileName);
-
-            if($clients->logo !== NULL) {
-                if(file_exists(public_path('clients/'. $clients->logo))) {
-                    unlink(public_path('clients/'. $clients->logo));
+            $fileName = time().Str::random(10).'.webp';
+            if(!file_exists(public_path('clients'))) {
+                mkdir(public_path('clients'), 0755, true);
+            }
+            $imagePath = public_path('clients/' . $fileName);
+            $image = Image::read($file->getRealPath())
+                ->toWebp(80)
+                ->save($imagePath);
+            if($client->logo !== NULL) {
+                if(file_exists(public_path('clients/'. $client->logo))) {
+                    unlink(public_path('clients/'. $client->logo));
                 }
             }
-        }
-        $requestArray = ['logo' => $request->hasFile('logo') ? $fileName: $clients->logo] + $request->all();
+            $data['logo'] = $fileName;
+            }   
 
-        $clients->update($requestArray);
-
+        $client->update($data);
         Session::flash('flash_message', 'Client updated successfully');
         return redirect()->route('clients.index');
     }
+        
+    
 
     /**
      * Remove the specified resource from storage.
@@ -120,21 +131,21 @@ class ClientsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        $clients = Client::findorFail($id);
+    // public function destroy($id)
+    // {
+    //     $clients = Client::findorFail($id);
 
-        if($clients->logo !== NULL) {
-            if(file_exists(public_path('clients/'. $clients->logo))) {
-                unlink(public_path('clients/'. $clients->logo));
-            }
-        }
+    //     if($clients->logo !== NULL) {
+    //         if(file_exists(public_path('clients/'. $clients->logo))) {
+    //             unlink(public_path('clients/'. $clients->logo));
+    //         }
+    //     }
 
-        $clients->delete();
+    //     $clients->delete();
 
-        Session::flash('flash_message', 'Client deleted successfully');
-        return redirect()->route('clients.index');
-    }
+    //     Session::flash('flash_message', 'Client deleted successfully');
+    //     return redirect()->route('clients.index');
+    // }
 
     public function toggleStatus(Client $client)
     {

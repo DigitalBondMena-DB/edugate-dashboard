@@ -24,10 +24,10 @@ class UpdateClientsRequest extends FormRequest
     public function rules()
     {
         return [
-            'en_name' => '',
-            'ar_name' => 'required',
-            'logo' =>'mimes:jpg,jpeg,png,svg,webp',
-            'link' => 'url'
+            'en_name' => 'required|string|max:100',
+            'ar_name' => 'required|string|max:100',
+            'logo' =>'mimes:jpg,jpeg,png,webp',
+            'link' => 'required|url'
         ];
     }
 }

@@ -19,9 +19,9 @@ class ServicesController extends Controller
      */
     public function index()
     {
-        $rows = Service::latest()->paginate(10);
+        $rows = Service::select('id', 'en_name', 'ar_name', 'image')->latest()->paginate(10);
 
-        return view('backend.services.index', compact('rows'));
+        return view('dashboard.services.index', compact('rows'));
     }
 
     /**
@@ -31,7 +31,7 @@ class ServicesController extends Controller
      */
     public function create()
     {
-        return view('backend.services.create');
+        return view('dashboard.services.create');
     }
 
     /**
@@ -79,7 +79,7 @@ class ServicesController extends Controller
     {
         $row = Service::findorFail($id);
 
-        return view('backend.services.edit', compact('row'));
+        return view('dashboard.services.edit', compact('row'));
     }
 
     /**
@@ -120,19 +120,26 @@ class ServicesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    // public function destroy($id)
+    // {
+    //     $service = Service::findorFail($id);
+
+    //     if($service->image !== NULL) {
+    //         if(file_exists(public_path('service/'. $service->image))) {
+    //             unlink(public_path('service/'. $service->image));
+    //         }
+    //     }
+
+    //     $service->delete();
+
+    //     Session::flash('flash_message', 'Feedback deleted successfully');
+    //     return redirect()->route('Service.index');
+    // }
+    public function toggleStatus(Service $service)
     {
-        $service = Service::findorFail($id);
-
-        if($service->image !== NULL) {
-            if(file_exists(public_path('service/'. $service->image))) {
-                unlink(public_path('service/'. $service->image));
-            }
-        }
-
-        $service->delete();
-
-        Session::flash('flash_message', 'Feedback deleted successfully');
-        return redirect()->route('Service.index');
+        $service->active = $service->active === 'activated' ? 'deactivated' : 'activated';
+        $service->save();
+        Session::flash('flash_message', "Feedback {$service->active} successfully.");
+        return redirect()->route('service.index');
     }
 }

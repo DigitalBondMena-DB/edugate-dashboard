@@ -24,9 +24,9 @@ class StoreClientsRequest extends FormRequest
     public function rules()
     {
         return [
-            'en_name' => '',
-            'ar_name' => 'required',
-            'logo' =>'required|mimes:jpg,jpeg,png,svg,webp',
+            'en_name' => 'required|string|max:100',
+            'ar_name' => 'required|string|max:100',
+            'logo' =>'required|mimes:jpg,jpeg,png,webp',
             'link' => 'required|url'
         ];
     }

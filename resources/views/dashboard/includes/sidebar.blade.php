@@ -44,7 +44,7 @@
 
                 </li>
                 <li>
-                    <a aria-expanded="false" href="#contact information">
+                    <a aria-expanded="false" href="/admin/contact-us">
                         <svg stroke="currentColor" stroke-width="1.5">
                         </svg>
                         contact information
@@ -52,7 +52,7 @@
 
                 </li>
                 <li>
-                    <a aria-expanded="false" href="#user contacts">
+                    <a aria-expanded="false" href="/admin/feedback">
                         <svg stroke="currentColor" stroke-width="1.5">
                         </svg>
                         user contacts
@@ -60,7 +60,7 @@
 
                 </li>
                 <li>
-                    <a aria-expanded="false" href="#user feedbacks">
+                    <a aria-expanded="false" href="/admin/service">
                         <svg stroke="currentColor" stroke-width="1.5">
                         </svg>
                         user feedbacks

@@ -124,6 +124,7 @@ Route::namespace('BackEnd')->prefix('admin')->middleware('admin')->group(functio
 
     Route::resource('/activities', 'ActivitiesController');
     Route::resource('/service', 'ServicesController');
+    Route::patch('/services/{service}/toggle-status', 'ServicesController@toggleStatus')->name('service.toggleStatus');
 
     Route::resource('/event-categery', 'EventCategeryController');
     Route::resource('/event-detail', 'EventDetailController');
@@ -145,13 +146,15 @@ Route::namespace('BackEnd')->prefix('admin')->middleware('admin')->group(functio
     Route::resource('/mains', 'MainController');
     Route::resource('/clients', 'ClientsController');
     Route::patch('/clients/{client}/toggle-status', 'ClientsController@toggleStatus')->name('clients.toggleStatus');
-    Route::resource('/feeback', 'ContactController');
+    Route::resource('/feedback', 'ContactController');
     Route::resource('/ad-form-countries', 'AdFormCountry');
     Route::resource('/ad-form-areas', 'AdFormArea');
     Route::get('/ad-form-areas/create/{id}', 'AdFormArea@create')->name('adFormAreaCreate');
     Route::resource('/valid-ips', 'ValidIpsController');
     Route::get('/valid-ips/{id}/{status}', 'ValidIpsController@updateStatus')->name('validIpsUpdate');
-    Route::resource('/contact-us', 'ContactUsController');
+    Route::resource('/contact-us', 'ContactUsController')->only(['index']);
+    Route::get('/contact-us/edit', 'ContactUsController@edit')->name('contact-us.edit');
+    Route::put('/contact-us', 'ContactUsController@update')->name('contact-us.update');
     Route::resource('/user-contact', 'ContactController');
 
     // Route::get('/datatable/ads/list', 'DataTablesController@adsListView')->name('adsListView');
