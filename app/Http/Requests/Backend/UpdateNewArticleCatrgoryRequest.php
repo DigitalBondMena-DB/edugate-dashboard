@@ -24,8 +24,8 @@ class UpdateNewArticleCatrgoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'en_title' => '',
-            'ar_title' => 'required',
+            'en_title' => 'required|string|max:100',
+            'ar_title' => 'required|string|max:100',
         ];
     }
 }

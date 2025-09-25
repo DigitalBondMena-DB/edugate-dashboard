@@ -107,10 +107,13 @@ Route::namespace('BackEnd')->prefix('admin')->middleware('admin')->group(functio
     Route::resource('/serviceAboutSection' , 'ServiceAboutSectionController');
 
     Route::resource('/serviceuser' , 'ServiceuserController');
+    Route::patch('/serviceusers/{serviceuser}/toggle-status', 'ServiceuserController@toggleStatus')->name('serviceuser.toggleStatus');
 
     Route::resource('/articleCategory' , 'NewArticleCatrgoryController');
+    Route::patch('/articleCategories/{articleCategory}/toggle-status', 'NewArticleCatrgoryController@toggleStatus')->name('articleCategory.toggleStatus');
 
     Route::resource('/articleSubCategory' , 'NewArticleSubCatrgoryController');
+    Route::patch('/articleSubCategories/{articleSubCategory}/toggle-status', 'NewArticleSubCatrgoryController@toggleStatus')->name('articleSubCategory.toggleStatus');
 
     Route::resource('/admins', 'AdminsController');
     Route::resource('/academic-guides', 'AcademicGuidesController');
@@ -127,6 +130,8 @@ Route::namespace('BackEnd')->prefix('admin')->middleware('admin')->group(functio
     Route::patch('/services/{service}/toggle-status', 'ServicesController@toggleStatus')->name('service.toggleStatus');
 
     Route::resource('/event-categery', 'EventCategeryController');
+    Route::patch('/event-categeries/{eventCategery}/toggle-status', 'EventCategeryController@toggleStatus')->name('event-categery.toggleStatus');
+    
     Route::resource('/event-detail', 'EventDetailController');
 
     Route::resource('/newArticle', 'NewArticleController');
@@ -156,6 +161,21 @@ Route::namespace('BackEnd')->prefix('admin')->middleware('admin')->group(functio
     Route::get('/contact-us/edit', 'ContactUsController@edit')->name('contact-us.edit');
     Route::put('/contact-us', 'ContactUsController@update')->name('contact-us.update');
     Route::resource('/user-contact', 'ContactController');
+
+    Route::resource('counters', 'CounterController');
+    Route::resource('hero', 'HeroController');
+
+    Route::get('why-us', 'WhyUsController@index')->name('why-us.index');
+    Route::get('why-us/create', 'WhyUsController@create')->name('why-us.create');
+    Route::post('why-us', 'WhyUsController@store')->name('why-us.store');
+    Route::get('why-us/field/{field}/edit', 'WhyUsController@edit')->name('why-us.edit');
+    Route::put('why-us/field/{field}', 'WhyUsController@update')->name('why-us.update');
+    Route::patch('why-us/field/{field}/toggle', 'WhyUsController@toggleStatus')->name('why-us.toggleStatus');
+    Route::get('why-us/image/edit', 'WhyUsController@editImage')->name('why-us.editImage');
+    Route::post('why-us/image', 'WhyUsController@updateImage')->name('why-us.updateImage');
+    
+    
+    
 
     // Route::get('/datatable/ads/list', 'DataTablesController@adsListView')->name('adsListView');
     // Route::post('/datatable/ads/getListData', 'DataTablesController@adsListData')->name('getAdsListData');

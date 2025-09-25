@@ -12,6 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('services', function (Blueprint $table) {
+            $table->string('ar_job_title')->after('ar_name');
+            $table->string('en_job_title')->after('ar_job_title');
             $table->enum('active', ['activated', 'deactivated'])->default('activated')->after('image');
         });
     }

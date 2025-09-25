@@ -24,13 +24,13 @@ class StoreNewArticleSubCatrgoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'en_title' => '',
-            'ar_title' => 'required',
-            'en_tag_title'  => '',
-            'ar_tag_title'  => 'required',
-            'en_tag_description'  => '',
-            'ar_tag_description'  => 'required',
-            'new_article_catrgory_id' => 'required',
+            'en_title' => 'required|string|max:255',
+            'ar_title' => 'required|string|max:255',
+            'en_tag_title'  => 'required|string|max:255',
+            'ar_tag_title'  => 'required|string|max:255',
+            'en_tag_description'  => 'required|string',
+            'ar_tag_description'  => 'required|string',
+            'new_article_catrgory_id' => 'required|integer|exists:new_article_catrgories,id',
         ];
     }
 }

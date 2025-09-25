@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 
-@php $pageTitle = 'Add New Partner'; @endphp
+@php $pageTitle = 'Add New Feedback'; @endphp
 
 @section('title')
     {{ $pageTitle }}
@@ -19,7 +19,7 @@
                 </div>
                 
                 <div class="card-body p-4">
-                    <form action="{{ route('clients.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('service.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
@@ -30,7 +30,7 @@
                                            id="ar_name" 
                                            class="form-control @error('ar_name') is-invalid @enderror" 
                                            value="{{ old('ar_name') }}"
-                                           placeholder="Enter Partner title in Arabic">
+                                           placeholder="Enter name title in Arabic">
                                     @error('ar_name')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -45,34 +45,75 @@
                                            id="en_name" 
                                            class="form-control @error('en_name') is-invalid @enderror" 
                                            value="{{ old('en_name') }}"
-                                           placeholder="Enter Partner title in English">
+                                           placeholder="Enter Feedback name in English">
                                     @error('en_name')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
                         </div>
-
-                        {{-- <div class="row">
-                            <div class="col-md-6"> --}}
+                        <div class="row">
+                            <div class="col-md-6">
                                 <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">Link <span class="text-danger">*</span></label>
+                                    <label class="form-label fw-bold text-dark">Arabic Job Title <span class="text-danger">*</span></label>
                                     <input type="text" 
-                                           name="link" 
-                                           id="link" 
-                                           class="form-control @error('link') is-invalid @enderror" 
-                                           value="{{ old('link') }}"
-                                           placeholder="Enter Link">
-                                    @error('link')
+                                           name="ar_job_title" 
+                                           id="ar_job_title" 
+                                           class="form-control @error('ar_job_title') is-invalid @enderror" 
+                                           value="{{ old('ar_job_title') }}"
+                                           placeholder="Enter name title in Arabic">
+                                    @error('ar_job_title')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-                            {{-- </div> --}}
+                            </div>
                             
-                        {{-- </div --}}
-
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold text-dark">English Job Title <span class="text-danger">*</span></label>
+                                    <input type="text" 
+                                           name="en_job_title" 
+                                           id="en_job_title" 
+                                           class="form-control @error('en_job_title') is-invalid @enderror" 
+                                           value="{{ old('en_job_title') }}"
+                                           placeholder="Enter Feedback name in English">
+                                    @error('en_job_title')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold text-dark">Arabic Text <span class="text-danger">*</span></label>
+                                    <textarea name="ar_text" 
+                                              id="ar_text" 
+                                              class="form-control @error('ar_text') is-invalid @enderror" 
+                                              rows="4"
+                                              placeholder="Enter slider description in Arabic">{{ old('ar_text') }}</textarea>
+                                    @error('ar_text')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold text-dark">English Text <span class="text-danger">*</span></label>
+                                    <textarea name="en_text" 
+                                              id="en_text" 
+                                              class="form-control @error('en_text') is-invalid @enderror" 
+                                              rows="4"
+                                              placeholder="Enter slider description in English">{{ old('en_text') }}</textarea>
+                                    @error('en_text')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
                         <div class="mb-4">
-                            <label class="form-label fw-bold text-dark">Partner Logo <span class="text-danger">*</span></label>
+                            <label class="form-label fw-bold text-dark">Feedback Image <span class="text-danger">*</span></label>
                             <div class="border rounded p-3 bg-light">
                                 <div class="d-flex align-items-center">
                                     <div class="me-3">
@@ -80,14 +121,14 @@
                                     </div>
                                     <div class="flex-grow-1">
                                         <input type="file" 
-                                               name="logo" 
-                                               id="logo" 
-                                               class="form-control @error('logo') is-invalid @enderror"
+                                               name="image" 
+                                               id="image" 
+                                               class="form-control @error('image') is-invalid @enderror"
                                                accept="image/*">
                                         <small class="text-muted mt-1 d-block">Supported formats: JPG, JPEG, PNG, WEBP (Max: 2MB)</small>
                                     </div>
                                 </div>
-                                @error('logo')
+                                @error('image')
                                     <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -96,11 +137,11 @@
                         <div class="border-top pt-4">
                             <div class="d-flex justify-content-between align-items-center">
                                 <a href="{{ route('clients.index') }}" class="btn btn-outline-secondary">
-                                    <span class="me-1">←</span> Back to Partners
+                                    <span class="me-1">←</span> Back to Feedbacks
                                 </a>
                                 
                                 <button type="submit" class="btn btn-primary px-4">
-                                    <span class="me-1">💾</span> Create Partner
+                                    <span class="me-1">💾</span> Create Feedback
                                 </button>
                             </div>
                         </div>

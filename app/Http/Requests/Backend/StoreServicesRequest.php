@@ -24,11 +24,13 @@ class StoreServicesRequest extends FormRequest
     public function rules()
     {
         return [
-            'en_name' => '',
-            'ar_name' => 'required',
-            'en_text' => '',
-            'ar_text' => 'required',
-            'image' => 'required|mimes:jpg,jpeg,png,svg'
+            'en_name' => 'required|string|max:255',
+            'ar_name' => 'required|string|max:255',
+            'en_job_title' => 'required|string|max:255',
+            'ar_job_title' => 'required|string|max:255',
+            'en_text' => 'required|string',
+            'ar_text' => 'required|string',
+            'image' => 'required|mimes:jpg,jpeg,png,webp|max:2048'
         ];
     }
 }

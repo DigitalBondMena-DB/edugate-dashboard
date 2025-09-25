@@ -54,7 +54,7 @@
                 </li>
                 
                 <li class="nav-item">
-                  <a class="nav-link row no-gutters justify-content-between" href="{{ route('feeback.index') }}">
+                  <a class="nav-link row no-gutters justify-content-between" href="{{ route('feedback.index') }}">
                     <p class="mb-0">Users Contacts</p>
                     <i class="bx bx-chevron-right"></i>
                   </a>

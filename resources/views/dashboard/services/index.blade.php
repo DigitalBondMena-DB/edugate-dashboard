@@ -69,7 +69,7 @@
                                                     <div class="position-relative image-preview-container">
                                                         <img class="rounded border shadow-sm slider-thumbnail" 
                                                              style="width: 80px; height: 50px; object-fit: cover; cursor: pointer; transition: all 0.3s ease;"
-                                                             src="{{ asset('services/' . $feedback->image) }}" 
+                                                             src="{{ asset('service/' . $feedback->image) }}" 
                                                              alt="Partner Image"
                                                              data-bs-toggle="modal" 
                                                              data-bs-target="#imageModal{{ $feedback->id }}"
@@ -89,7 +89,7 @@
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body text-center p-0">
-                                                                <img src="{{ asset('clients/' . $feedback->image) }}" 
+                                                                <img src="{{ asset('service/' . $feedback->image) }}" 
                                                                      class="img-fluid rounded" 
                                                                      alt="Full Size Partner Image"
                                                                      style="max-height: 70vh; object-fit: contain;">

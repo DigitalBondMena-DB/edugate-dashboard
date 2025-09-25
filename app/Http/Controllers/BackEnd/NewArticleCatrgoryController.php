@@ -19,9 +19,9 @@ class NewArticleCatrgoryController extends Controller
      */
     public function index()
     {
-        $rows = NewArticleCatrgory::latest()->paginate(10);
+        $rows = NewArticleCatrgory::select('id', 'en_title', 'ar_title', 'active')->latest()->paginate(10);
 
-        return view('backend.articleCategory.index', compact('rows'));
+        return view('dashboard.articleCategory.index', compact('rows'));
     }
 
     /**
@@ -31,7 +31,7 @@ class NewArticleCatrgoryController extends Controller
      */
     public function create()
     {
-        return view('backend.articleCategory.create');
+        return view('dashboard.articleCategory.create');
     }
 
     /**
@@ -42,7 +42,7 @@ class NewArticleCatrgoryController extends Controller
      */
     public function store(StoreNewArticleCatrgoryRequest $request)
     {
-        $requestArray = $request->all();
+        $data = $request->validated();
 
         function make_slug($string, $separator = '-') {
             $string = trim($string);
@@ -59,12 +59,9 @@ class NewArticleCatrgoryController extends Controller
             return $string;
         }
         
-        $ar_slug = make_slug($request->ar_title);
-        
-        $requestArray = ['en_slug' => Str::slug($request->en_title), 'ar_slug' => $ar_slug ] + $request->all();
-        
-
-        $row = NewArticleCatrgory::create($requestArray);
+        $data['ar_slug'] = make_slug($request->ar_title);
+        $data['en_slug'] = Str::slug($request->en_title);
+        $row = NewArticleCatrgory::create($data);
 
         Session::flash('flash_message', 'Article Category added successfully');
         
@@ -90,9 +87,9 @@ class NewArticleCatrgoryController extends Controller
      */
     public function edit($id)
     {
-        $row = NewArticleCatrgory::findorFail($id);
+    $row = NewArticleCatrgory::select('id', 'en_title', 'ar_title')->findorFail($id);
 
-        return view('backend.articleCategory.edit', compact('row'));
+        return view('dashboard.articleCategory.edit', compact('row'));
     }
 
     /**
@@ -102,13 +99,12 @@ class NewArticleCatrgoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateNewArticleCatrgoryRequest $request, $id)
+    public function update(UpdateNewArticleCatrgoryRequest $request, NewArticleCatrgory $articleCategory)
     {
-        $newArticle = NewArticleCatrgory::findorFail($id);
+        // dd($articleCategory);
+        $data = $request->validated();
 
-        $requestArray = $request->all();
-
-        $newArticle->update($requestArray);
+        $articleCategory->update($data);
 
         Session::flash('flash_message', 'Article Category updated successfully');
         return redirect()->route('articleCategory.index');
@@ -120,14 +116,21 @@ class NewArticleCatrgoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        $newArticle = NewArticleCatrgory::findorFail($id);
+    // public function destroy($id)
+    // {
+    //     $newArticle = NewArticleCatrgory::findorFail($id);
 
         
-        $newArticle->delete();
+    //     $newArticle->delete();
 
-        Session::flash('flash_message', 'Article Category deleted successfully');
+    //     Session::flash('flash_message', 'Article Category deleted successfully');
+    //     return redirect()->route('articleCategory.index');
+    // }
+    public function toggleStatus(NewArticleCatrgory $articleCategory)
+    {
+        $articleCategory->active = $articleCategory->active === 'activated' ? 'deactivated' : 'activated';
+        $articleCategory->save();
+        Session::flash('flash_message', "Article Category {$articleCategory->active} successfully.");
         return redirect()->route('articleCategory.index');
     }
 }

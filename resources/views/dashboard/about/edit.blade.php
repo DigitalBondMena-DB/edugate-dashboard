@@ -24,22 +24,19 @@
                         @csrf
                         @method('PUT')
                         
-                        <div class="row">
-                            <div class="col-md-6">
+                        
                                 <div class="mb-4">
                                     <label class="form-label fw-bold text-dark">Arabic Story <span class="text-danger">*</span></label>
-                                    <textarea name="ar_story" 
+                                    <textarea name="ar_story"
                                               id="ar_story" 
-                                              class="form-control @error('ar_story') is-invalid @enderror" 
+                                              class="form-control dataTables_filter @error('ar_story') is-invalid @enderror" 
                                               rows="4"
                                               placeholder="Enter slider description in Arabic">{{ old('ar_story', $about->ar_story) }}</textarea>
                                     @error('ar_story')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-                            </div>
-                            
-                            <div class="col-md-6">
+                           
                                 <div class="mb-4">
                                     <label class="form-label fw-bold text-dark">English Story <span class="text-danger">*</span></label>
                                     <textarea name="en_story" 
@@ -51,156 +48,7 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-                            </div>
-                        </div>
-                        <div class="mb-4">
-                            <label class="form-label fw-bold text-dark">Story Image</label>
-                            
-                            @if($about->story_image)
-                                <div class="mb-3">
-                                    <div class="border rounded p-3 bg-light">
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-3">
-                                                <span style="font-size: 1.5rem;">🖼️</span>
-                                            </div>
-                                            <div class="position-relative">
-                                                <p class="mb-2 fw-bold text-muted">Current Image:</p>
-                                                <div class="position-relative image-preview-container">
-                                                    <img class="rounded border shadow-sm slider-thumbnail" 
-                                                         style="width: 150px; height: 100px; object-fit: cover; cursor: pointer; transition: all 0.3s ease;"
-                                                         src="{{ asset('about/' . $about->story_image) }}" 
-                                                         alt="Current Story Image"
-                                                         data-bs-toggle="modal" 
-                                                         data-bs-target="#imageModal{{ 1 }}">
-                                                </div>
-                                                <small class="text-muted d-block mt-1">Click to preview full size</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {{-- Image Modal --}}
-                                <div class="modal fade" id="imageModal{{ 1 }}" tabindex="-1" aria-labelledby="imageModalLabel{{ 1 }}" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="imageModalLabel{{ 1 }}">
-                                                    <i class="fas fa-image me-2"></i>Story Preview
-                                                </h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body text-center p-0">
-                                                <img src="{{ asset('about/' . $about->story_image) }}" 
-                                                     class="img-fluid rounded" 
-                                                     alt="Full Size Story Image"
-                                                     style="max-height: 70vh; object-fit: contain;">
-                                            </div>
-                                            <div class="modal-footer justify-content-between">
-                                                <div class="text-muted small">
-                                                    <i class="fas fa-info-circle me-1"></i>
-                                                    Story Image: {{ $about->story_image }}
-                                                </div>
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                                    <i class="fas fa-times me-1"></i>Close
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
-                            
-                            <div class="border rounded p-3 bg-light">
-                                <div class="d-flex align-items-center">
-                                    <div class="me-3">
-                                        <span style="font-size: 2rem;">📸</span>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <label class="form-label mb-2 fw-semibold">
-                                            {{ $about->story_image ? 'Change Image (Optional)' : 'Upload New Image' }}
-                                        </label>
-                                        <input type="file" 
-                                               name="story_image" 
-                                               id="story_image" 
-                                               class="form-control @error('story_image') is-invalid @enderror"
-                                               accept="image/*"
-                                               onchange="previewNewImage(this)">
-                                        <small class="text-muted mt-1 d-block">
-                                            Supported formats: JPG, JPEG, PNG, WEBP (Max: 2MB)
-                                            {{ $about->story_image ? ' • Leave empty to keep current image' : '' }}
-                                        </small>
-                                        
-                                        {{-- New Image Preview --}}
-                                        <div id="newImagePreview" class="mt-3" style="display: none;">
-                                            <p class="mb-2 fw-bold text-success small">New Image Preview:</p>
-                                            <img id="newImageDisplay" class="rounded border" style="max-width: 150px; max-height: 100px; object-fit: cover;" alt="New Image Preview">
-                                        </div>
-                                    </div>
-                                </div>
-                                @error('story_image')
-                                    <div class="invalid-feedback d-block">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">Arabic Achievement Title <span class="text-danger">*</span></label>
-                                    <input type="text" 
-                                           name="ar_achevement_title" 
-                                           id="ar_achevement_title" 
-                                           class="form-control @error('ar_achevement_title') is-invalid @enderror" 
-                                           value="{{ old('ar_achevement_title', $about->ar_achevement_title) }}"
-                                           placeholder="Enter slider title in Arabic">
-                                    @error('ar_achevement_title')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-6">
-                                <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">English Achievement Title <span class="text-danger">*</span></label>
-                                    <input type="text" 
-                                           name="en_achevement_title" 
-                                           id="en_achevement_title" 
-                                           class="form-control @error('en_achevement_title') is-invalid @enderror" 
-                                           value="{{ old('en_achevement_title', $about->en_achevement_title) }}"
-                                           placeholder="Enter slider title in English">
-                                    @error('en_achevement_title')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">Arabic Achievement Text <span class="text-danger">*</span></label>
-                                    <textarea name="ar_achevement_text" 
-                                              id="ar_achevement_text" 
-                                              class="form-control @error('ar_achevement_text') is-invalid @enderror" 
-                                              rows="4"
-                                              placeholder="Enter slider description in Arabic">{{ old('ar_achevement_text', $about->ar_achevement_text) }}</textarea>
-                                    @error('ar_achevement_text')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-6">
-                                <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">English Achievement Text <span class="text-danger">*</span></label>
-                                    <textarea name="en_achevement_text" 
-                                              id="en_achevement_text" 
-                                              class="form-control @error('en_achevement_text') is-invalid @enderror" 
-                                              rows="4"
-                                              placeholder="Enter slider description in English">{{ old('en_achevement_text', $about->en_achevement_text) }}</textarea>
-                                    @error('en_achevement_text')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
+                        
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-4">
@@ -228,94 +76,6 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-                            </div>
-                        </div>
-                        <div class="mb-4">
-                            <label class="form-label fw-bold text-dark">Mission Image</label>
-                            
-                            @if($about->mission_image)
-                                <div class="mb-3">
-                                    <div class="border rounded p-3 bg-light">
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-3">
-                                                <span style="font-size: 1.5rem;">🖼️</span>
-                                            </div>
-                                            <div class="position-relative">
-                                                <p class="mb-2 fw-bold text-muted">Current Image:</p>
-                                                <div class="position-relative image-preview-container">
-                                                    <img class="rounded border shadow-sm slider-thumbnail" 
-                                                         style="width: 150px; height: 100px; object-fit: cover; cursor: pointer; transition: all 0.3s ease;"
-                                                         src="{{ asset('about/' . $about->mission_image) }}" 
-                                                         alt="Current Mission Image"
-                                                         data-bs-toggle="modal" 
-                                                         data-bs-target="#imageModal{{ 2 }}">
-                                                </div>
-                                                <small class="text-muted d-block mt-1">Click to preview full size</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {{-- Image Modal --}}
-                                <div class="modal fade" id="imageModal{{ 2 }}" tabindex="-1" aria-labelledby="imageModalLabel{{ 2 }}" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="imageModalLabel{{ 2 }}">
-                                                    <i class="fas fa-image me-2"></i>Mission Preview
-                                                </h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body text-center p-0">
-                                                <img src="{{ asset('about/' . $about->mission_image) }}" 
-                                                     class="img-fluid rounded" 
-                                                     alt="Full Size Mission Image"
-                                                     style="max-height: 70vh; object-fit: contain;">
-                                            </div>
-                                            <div class="modal-footer justify-content-between">
-                                                <div class="text-muted small">
-                                                    <i class="fas fa-info-circle me-1"></i>
-                                                    Mission Image: {{ $about->mission_image }}
-                                                </div>
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                                    <i class="fas fa-times me-1"></i>Close
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
-                            
-                            <div class="border rounded p-3 bg-light">
-                                <div class="d-flex align-items-center">
-                                    <div class="me-3">
-                                        <span style="font-size: 2rem;">📸</span>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <label class="form-label mb-2 fw-semibold">
-                                            {{ $about->mission_image ? 'Change Image (Optional)' : 'Upload New Image' }}
-                                        </label>
-                                        <input type="file" 
-                                               name="mission_image" 
-                                               id="mission_image" 
-                                               class="form-control @error('mission_image') is-invalid @enderror"
-                                               accept="image/*"
-                                               onchange="previewNewImage(this)">
-                                        <small class="text-muted mt-1 d-block">
-                                            Supported formats: JPG, JPEG, PNG, WEBP (Max: 2MB)
-                                            {{ $about->mission_image ? ' • Leave empty to keep current image' : '' }}
-                                        </small>
-                                        
-                                        {{-- New Image Preview --}}
-                                        <div id="newImagePreview" class="mt-3" style="display: none;">
-                                            <p class="mb-2 fw-bold text-success small">New Image Preview:</p>
-                                            <img id="newImageDisplay" class="rounded border" style="max-width: 150px; max-height: 100px; object-fit: cover;" alt="New Image Preview">
-                                        </div>
-                                    </div>
-                                </div>
-                                @error('mission_image')
-                                    <div class="invalid-feedback d-block">{{ $message }}</div>
-                                @enderror
                             </div>
                         </div>
                         <div class="row">
@@ -348,9 +108,9 @@
                             </div>
                         </div>
                         <div class="mb-4">
-                            <label class="form-label fw-bold text-dark">Vision Image</label>
+                            <label class="form-label fw-bold text-dark">Image</label>
                             
-                            @if($about->vision_image)
+                            @if($about->image)
                                 <div class="mb-3">
                                     <div class="border rounded p-3 bg-light">
                                         <div class="d-flex align-items-center">
@@ -362,7 +122,7 @@
                                                 <div class="position-relative image-preview-container">
                                                     <img class="rounded border shadow-sm slider-thumbnail" 
                                                          style="width: 150px; height: 100px; object-fit: cover; cursor: pointer; transition: all 0.3s ease;"
-                                                         src="{{ asset('about/' . $about->vision_image) }}" 
+                                                         src="{{ asset('about/' . $about->image) }}" 
                                                          alt="Current Vision Image"
                                                          data-bs-toggle="modal" 
                                                          data-bs-target="#imageModal{{ 3 }}">
@@ -384,7 +144,7 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body text-center p-0">
-                                                <img src="{{ asset('about/' . $about->vision_image) }}" 
+                                                <img src="{{ asset('about/' . $about->image) }}" 
                                                      class="img-fluid rounded" 
                                                      alt="Full Size Vision Image"
                                                      style="max-height: 70vh; object-fit: contain;">
@@ -392,7 +152,7 @@
                                             <div class="modal-footer justify-content-between">
                                                 <div class="text-muted small">
                                                     <i class="fas fa-info-circle me-1"></i>
-                                                    Vision Image: {{ $about->vision_image }}
+                                                    Vision Image: {{ $about->image }}
                                                 </div>
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                                     <i class="fas fa-times me-1"></i>Close
@@ -410,17 +170,17 @@
                                     </div>
                                     <div class="flex-grow-1">
                                         <label class="form-label mb-2 fw-semibold">
-                                            {{ $about->vision_image ? 'Change Image (Optional)' : 'Upload New Image' }}
+                                            {{ $about->image ? 'Change Image (Optional)' : 'Upload New Image' }}
                                         </label>
                                         <input type="file" 
-                                               name="vision_image" 
-                                               id="vision_image" 
-                                               class="form-control @error('vision_image') is-invalid @enderror"
+                                               name="image" 
+                                               id="image" 
+                                               class="form-control @error('image') is-invalid @enderror"
                                                accept="image/*"
                                                onchange="previewNewImage(this)">
                                         <small class="text-muted mt-1 d-block">
                                             Supported formats: JPG, JPEG, PNG, WEBP (Max: 2MB)
-                                            {{ $about->vision_image ? ' • Leave empty to keep current image' : '' }}
+                                            {{ $about->image ? ' • Leave empty to keep current image' : '' }}
                                         </small>
                                         
                                         {{-- New Image Preview --}}
@@ -430,124 +190,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                @error('vision_image')
-                                    <div class="invalid-feedback d-block">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">Arabic Goal <span class="text-danger">*</span></label>
-                                    <textarea name="ar_goal" 
-                                              id="ar_goal" 
-                                              class="form-control @error('ar_goal') is-invalid @enderror" 
-                                              rows="4"
-                                              placeholder="Enter slider description in Arabic">{{ old('ar_goal', $about->ar_goal) }}</textarea>
-                                    @error('ar_goal')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-6">
-                                <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">English Goal <span class="text-danger">*</span></label>
-                                    <textarea name="en_goal" 
-                                              id="en_goal" 
-                                              class="form-control @error('en_goal') is-invalid @enderror" 
-                                              rows="4"
-                                              placeholder="Enter slider description in English">{{ old('en_goal', $about->en_goal) }}</textarea>
-                                    @error('en_goal')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mb-4">
-                            <label class="form-label fw-bold text-dark">Banner Image</label>
-                            
-                            @if($about->banner_image)
-                                <div class="mb-3">
-                                    <div class="border rounded p-3 bg-light">
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-3">
-                                                <span style="font-size: 1.5rem;">🖼️</span>
-                                            </div>
-                                            <div class="position-relative">
-                                                <p class="mb-2 fw-bold text-muted">Current Image:</p>
-                                                <div class="position-relative image-preview-container">
-                                                    <img class="rounded border shadow-sm slider-thumbnail" 
-                                                         style="width: 150px; height: 100px; object-fit: cover; cursor: pointer; transition: all 0.3s ease;"
-                                                         src="{{ asset('about/' . $about->banner_image) }}" 
-                                                         alt="Current Banner Image"
-                                                         data-bs-toggle="modal" 
-                                                         data-bs-target="#imageModal{{ 4 }}">
-                                                </div>
-                                                <small class="text-muted d-block mt-1">Click to preview full size</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {{-- Image Modal --}}
-                                <div class="modal fade" id="imageModal{{ 4 }}" tabindex="-1" aria-labelledby="imageModalLabel{{ 4 }}" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="imageModalLabel{{ 4 }}">
-                                                    <i class="fas fa-image me-2"></i>Banner Preview
-                                                </h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body text-center p-0">
-                                                <img src="{{ asset('about/' . $about->banner_image) }}" 
-                                                     class="img-fluid rounded" 
-                                                     alt="Full Size Banner Image"
-                                                     style="max-height: 70vh; object-fit: contain;">
-                                            </div>
-                                            <div class="modal-footer justify-content-between">
-                                                <div class="text-muted small">
-                                                    <i class="fas fa-info-circle me-1"></i>
-                                                    Banner Image: {{ $about->banner_image }}
-                                                </div>
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                                    <i class="fas fa-times me-1"></i>Close
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
-                            
-                            <div class="border rounded p-3 bg-light">
-                                <div class="d-flex align-items-center">
-                                    <div class="me-3">
-                                        <span style="font-size: 2rem;">📸</span>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <label class="form-label mb-2 fw-semibold">
-                                            {{ $about->banner_image ? 'Change Image (Optional)' : 'Upload New Image' }}
-                                        </label>
-                                        <input type="file" 
-                                               name="banner_image" 
-                                               id="banner_image" 
-                                               class="form-control @error('banner_image') is-invalid @enderror"
-                                               accept="image/*"
-                                               onchange="previewNewImage(this)">
-                                        <small class="text-muted mt-1 d-block">
-                                            Supported formats: JPG, JPEG, PNG, WEBP (Max: 2MB)
-                                            {{ $about->banner_image ? ' • Leave empty to keep current image' : '' }}
-                                        </small>
-                                        
-                                        {{-- New Image Preview --}}
-                                        <div id="newImagePreview" class="mt-3" style="display: none;">
-                                            <p class="mb-2 fw-bold text-success small">New Image Preview:</p>
-                                            <img id="newImageDisplay" class="rounded border" style="max-width: 150px; max-height: 100px; object-fit: cover;" alt="New Image Preview">
-                                        </div>
-                                    </div>
-                                </div>
-                                @error('banner_image')
+                                @error('image')
                                     <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                             </div>

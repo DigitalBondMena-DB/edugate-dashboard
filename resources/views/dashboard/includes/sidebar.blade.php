@@ -68,7 +68,7 @@
 
                 </li>
                 <li>
-                    <a aria-expanded="false" href="#services">
+                    <a aria-expanded="false" href="/admin/serviceuser">
                         <svg stroke="currentColor" stroke-width="1.5">
                         </svg>
                         services
@@ -92,7 +92,7 @@
 
                 </li>
                 <li>
-                    <a aria-expanded="false" href="#article category">
+                    <a aria-expanded="false" href="/admin/articleSubCategory">
                         <svg stroke="currentColor" stroke-width="1.5">
                         </svg>
                         article category

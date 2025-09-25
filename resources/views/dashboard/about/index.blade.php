@@ -59,7 +59,7 @@
                                                     <div class="position-relative image-preview-container">
                                                         <img class="rounded border shadow-sm slider-thumbnail" 
                                                              style="width: 80px; height: 50px; object-fit: cover; cursor: pointer; transition: all 0.3s ease;"
-                                                             src="{{ asset('about/' . $about->story_image) }}" 
+                                                             src="{{ asset('about/' . $about->image) }}" 
                                                              alt="About Story Image"
                                                              data-bs-toggle="modal" 
                                                              data-bs-target="#imageModal{{ 1 }}"
@@ -79,7 +79,7 @@
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body text-center p-0">
-                                                                <img src="{{ asset('about/' . $about->story_image) }}" 
+                                                                <img src="{{ asset('about/' . $about->image) }}" 
                                                                      class="img-fluid rounded" 
                                                                      alt="Full Size About Story Image"
                                                                      style="max-height: 70vh; object-fit: contain;">
@@ -87,7 +87,7 @@
                                                             <div class="modal-footer justify-content-between">
                                                                 <div class="text-muted small">
                                                                     <i class="fas fa-info-circle me-1"></i>
-                                                                    Image: {{ $about->story_image }}
+                                                                    Image: {{ $about->image }}
                                                                 </div>
                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                                                     <i class="fas fa-times me-1"></i>Close

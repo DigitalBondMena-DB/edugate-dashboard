@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 
-@php $pageTitle = 'Edit Partner'; @endphp
+@php $pageTitle = 'Edit Feedback'; @endphp
 
 @section('title')
     {{ $pageTitle }}
@@ -19,7 +19,7 @@
                 </div>
                 
                 <div class="card-body p-4">
-                    <form action="{{ route('clients.update', $row->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('service.update', $row->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         
@@ -32,7 +32,7 @@
                                            id="ar_name" 
                                            class="form-control @error('ar_name') is-invalid @enderror" 
                                            value="{{ old('ar_name', $row->ar_name) }}"
-                                           placeholder="Enter partner name in Arabic">
+                                           placeholder="Enter Feedback title in Arabic">
                                     @error('ar_name')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -47,8 +47,68 @@
                                            id="en_name" 
                                            class="form-control @error('en_name') is-invalid @enderror" 
                                            value="{{ old('en_name', $row->en_name) }}"
-                                           placeholder="Enter partner name in English">
+                                           placeholder="Enter Feedback title in English">
                                     @error('en_name')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold text-dark">Arabic Job Title <span class="text-danger">*</span></label>
+                                    <input type="text" 
+                                           name="ar_job_title" 
+                                           id="ar_job_title" 
+                                           class="form-control @error('ar_job_title') is-invalid @enderror" 
+                                           value="{{ old('ar_job_title', $row->ar_job_title) }}"
+                                           placeholder="Enter Feedback title in Arabic">
+                                    @error('ar_job_title')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold text-dark">English Job Title <span class="text-danger">*</span></label>
+                                    <input type="text" 
+                                           name="en_job_title" 
+                                           id="en_job_title" 
+                                           class="form-control @error('en_job_title') is-invalid @enderror" 
+                                           value="{{ old('en_job_title', $row->en_job_title) }}"
+                                           placeholder="Enter Feedback title in English">
+                                    @error('en_job_title')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold text-dark">Arabic Text <span class="text-danger">*</span></label>
+                                    <textarea name="ar_text" 
+                                              id="ar_text" 
+                                              class="form-control @error('ar_text') is-invalid @enderror" 
+                                              rows="4"
+                                              placeholder="Enter Feedback description in Arabic">{{ old('ar_text', $row->ar_text) }}</textarea>
+                                    @error('ar_text')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold text-dark">English Text <span class="text-danger">*</span></label>
+                                    <textarea name="en_text" 
+                                              id="en_text" 
+                                              class="form-control @error('en_text') is-invalid @enderror" 
+                                              rows="4"
+                                              placeholder="Enter Feedback description in English">{{ old('en_text', $row->en_text) }}</textarea>
+                                    @error('en_text')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -56,22 +116,9 @@
                         </div>
 
                         <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">Link <span class="text-danger">*</span></label>
-                                    <input type="text" 
-                                           name="link" 
-                                           id="link" 
-                                           class="form-control @error('link') is-invalid @enderror" 
-                                           value="{{ old('link', $row->link) }}"
-                                           placeholder="Enter partner name in English">
-                                    @error('link')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                        <div class="mb-4">
-                            <label class="form-label fw-bold text-dark">Partner Logo</label>
+                            <label class="form-label fw-bold text-dark">Feedback Image</label>
                             
-                            @if($row->logo)
+                            @if($row->image)
                                 <div class="mb-3">
                                     <div class="border rounded p-3 bg-light">
                                         <div class="d-flex align-items-center">
@@ -79,12 +126,12 @@
                                                 <span style="font-size: 1.5rem;">🖼️</span>
                                             </div>
                                             <div class="position-relative">
-                                                <p class="mb-2 fw-bold text-muted">Current Logo:</p>
+                                                <p class="mb-2 fw-bold text-muted">Current Image:</p>
                                                 <div class="position-relative image-preview-container">
                                                     <img class="rounded border shadow-sm slider-thumbnail" 
                                                          style="width: 150px; height: 100px; object-fit: cover; cursor: pointer; transition: all 0.3s ease;"
-                                                         src="{{ asset('clients/' . $row->logo) }}" 
-                                                         alt="Current Partner Logo"
+                                                         src="{{ asset('service/' . $row->image) }}" 
+                                                         alt="Current Feedback Image"
                                                          data-bs-toggle="modal" 
                                                          data-bs-target="#imageModal{{ $row->id }}">
                                                 </div>
@@ -100,20 +147,20 @@
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="imageModalLabel{{ $row->id }}">
-                                                    <i class="fas fa-image me-2"></i>Logo Preview
+                                                    <i class="fas fa-image me-2"></i>Feedback Preview
                                                 </h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body text-center p-0">
-                                                <img src="{{ asset('clients/' . $row->logo) }}" 
+                                                <img src="{{ asset('service/' . $row->image) }}" 
                                                      class="img-fluid rounded" 
-                                                     alt="Full Size Partner Logo"
+                                                     alt="Full Size Feedback Image"
                                                      style="max-height: 70vh; object-fit: contain;">
                                             </div>
                                             <div class="modal-footer justify-content-between">
                                                 <div class="text-muted small">
                                                     <i class="fas fa-info-circle me-1"></i>
-                                                    Current Logo: {{ $row->logo }}
+                                                    Image: {{ $row->image }}
                                                 </div>
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                                     <i class="fas fa-times me-1"></i>Close
@@ -131,27 +178,27 @@
                                     </div>
                                     <div class="flex-grow-1">
                                         <label class="form-label mb-2 fw-semibold">
-                                            {{ $row->logo ? 'Change Logo (Optional)' : 'Upload New Logo' }}
+                                            {{ $row->image ? 'Change Image (Optional)' : 'Upload New Image' }}
                                         </label>
                                         <input type="file" 
-                                               name="logo" 
-                                               id="logo" 
-                                               class="form-control @error('logo') is-invalid @enderror"
+                                               name="image" 
+                                               id="image" 
+                                               class="form-control @error('image') is-invalid @enderror"
                                                accept="image/*"
                                                onchange="previewNewImage(this)">
                                         <small class="text-muted mt-1 d-block">
                                             Supported formats: JPG, PNG, GIF (Max: 2MB)
-                                            {{ $row->logo ? ' • Leave empty to keep current logo' : '' }}
+                                            {{ $row->image ? ' • Leave empty to keep current image' : '' }}
                                         </small>
                                         
                                         {{-- New Image Preview --}}
                                         <div id="newImagePreview" class="mt-3" style="display: none;">
-                                            <p class="mb-2 fw-bold text-success small">New Logo Preview:</p>
-                                            <img id="newImageDisplay" class="rounded border" style="max-width: 150px; max-height: 100px; object-fit: cover;" alt="New Logo Preview">
+                                            <p class="mb-2 fw-bold text-success small">New Image Preview:</p>
+                                            <img id="newImageDisplay" class="rounded border" style="max-width: 150px; max-height: 100px; object-fit: cover;" alt="New Image Preview">
                                         </div>
                                     </div>
                                 </div>
-                                @error('logo')
+                                @error('image')
                                     <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -159,12 +206,12 @@
 
                         <div class="border-top pt-4">
                             <div class="d-flex justify-content-between align-items-center">
-                                <a href="{{ route('clients.index') }}" class="btn btn-outline-secondary">
-                                    <span class="me-1">←</span> Back to Partners
+                                <a href="{{ route('service.index') }}" class="btn btn-outline-secondary">
+                                    <span class="me-1">←</span> Back to Feedbacks
                                 </a>
                                 
                                 <button type="submit" class="btn btn-primary px-4">
-                                    <span class="me-1">💾</span> Update Partner
+                                    <span class="me-1">💾</span> Update Feedback
                                 </button>
                             </div>
                         </div>

@@ -12,7 +12,8 @@ class NewArticleCatrgory extends Model
         'en_title', 
         'ar_title', 
         'en_slug' , 
-        'ar_slug', 
+        'ar_slug',
+        'active'
     ];
 
 

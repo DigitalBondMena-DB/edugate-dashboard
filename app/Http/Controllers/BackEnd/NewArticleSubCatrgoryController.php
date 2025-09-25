@@ -18,12 +18,18 @@ class NewArticleSubCatrgoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $rows = NewArticleSubCatrgory::latest()->paginate(10);
-
-        return view('backend.articleSubCategory.index', compact('rows'));
+    public function index(Request $request)
+{
+    $query = NewArticleSubCatrgory::select('id', 'en_title', 'ar_title', 'active', 'new_article_catrgory_id');
+    
+   if ($request->has('category_id') && $request->category_id != '0') {
+        $query->where('new_article_catrgory_id', $request->category_id);
     }
+    $rows = $query->latest()->paginate(10);
+    $categories = NewArticleCatrgory::select('ar_title', 'en_title', 'id')->get();
+    
+    return view('dashboard.articleSubCategory.index', compact('rows', 'categories', 'request'));
+}
 
     /**
      * Show the form for creating a new resource.
@@ -32,8 +38,8 @@ class NewArticleSubCatrgoryController extends Controller
      */
     public function create()
     {
-        $categories = NewArticleCatrgory::get();
-        return view('backend.articleSubCategory.create' , compact('categories'));
+        $categories = NewArticleCatrgory::select('ar_title', 'en_title', 'id')->get();
+        return view('dashboard.articleSubCategory.create' , compact('categories'));
     }
 
     /**
@@ -44,7 +50,7 @@ class NewArticleSubCatrgoryController extends Controller
      */
     public function store(StoreNewArticleSubCatrgoryRequest $request)
     {
-        $requestArray = $request->all();
+        $data = $request->validated();
 
         function make_slug($string, $separator = '-') {
             $string = trim($string);
@@ -61,12 +67,9 @@ class NewArticleSubCatrgoryController extends Controller
             return $string;
         }
         
-        $ar_slug = make_slug($request->ar_title);
-        
-        $requestArray = ['en_slug' => Str::slug($request->en_title), 'ar_slug' => $ar_slug ] + $request->all();
-        
-
-        $row = NewArticleSubCatrgory::create($requestArray);
+        $data['ar_slug'] = make_slug($request->ar_title);
+        $data['en_slug'] = Str::slug($request->en_title);
+        $row = NewArticleSubCatrgory::create($data);
 
         Session::flash('flash_message', 'Article Sub Category added successfully');
         return redirect()->route('articleSubCategory.index');
@@ -95,7 +98,7 @@ class NewArticleSubCatrgoryController extends Controller
 
         $categories = NewArticleCatrgory::get();
 
-        return view('backend.articleSubCategory.edit', compact('row' , 'categories'));
+        return view('dashboard.articleSubCategory.edit', compact('row' , 'categories'));
     }
 
     /**
@@ -105,13 +108,12 @@ class NewArticleSubCatrgoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateNewArticleSubCatrgoryRequest $request, $id)
+    public function update(UpdateNewArticleSubCatrgoryRequest $request, NewArticleSubCatrgory $articleSubCategory)
     {
-        $newArticle = NewArticleSubCatrgory::findorFail($id);
 
-        $requestArray = $request->all();
+        $data = $request->validated();
 
-        $newArticle->update($requestArray);
+        $articleSubCategory->update($data);
 
         Session::flash('flash_message', 'Article Sub Category updated successfully');
         return redirect()->route('articleSubCategory.index');
@@ -123,14 +125,22 @@ class NewArticleSubCatrgoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        $newArticle = NewArticleSubCatrgory::findorFail($id);
+    // public function destroy($id)
+    // {
+    //     $newArticle = NewArticleSubCatrgory::findorFail($id);
 
         
-        $newArticle->delete();
+    //     $newArticle->delete();
 
-        Session::flash('flash_message', 'Article Sub Category deleted successfully');
+    //     Session::flash('flash_message', 'Article Sub Category deleted successfully');
+    //     return redirect()->route('articleSubCategory.index');
+    // }
+
+    public function toggleStatus(NewArticleSubCatrgory $articleSubCategory)
+    {
+        $articleSubCategory->active = $articleSubCategory->active === 'activated' ? 'deactivated' : 'activated';
+        $articleSubCategory->save();
+        Session::flash('flash_message', "Article Sub Category {$articleSubCategory->active} successfully.");
         return redirect()->route('articleSubCategory.index');
     }
 }

@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\Backend\StoreServiceusersRequest;
 use App\Http\Requests\Backend\UpdateServiceusersRequest;
+use Illuminate\Support\Facades\Log;
+use Intervention\Image\Laravel\Facades\Image;
 
 class ServiceuserController extends Controller
 {
@@ -19,9 +21,9 @@ class ServiceuserController extends Controller
      */
     public function index()
     {
-        $rows = Serviceuser::latest()->paginate(10);
+        $rows = Serviceuser::select('id', 'en_name', 'ar_name', 'image', 'active')->latest()->paginate(10);
 
-        return view('backend.serviceuser.index', compact('rows'));
+        return view('dashboard.serviceuser.index', compact('rows'));
     }
 
     /**
@@ -31,7 +33,7 @@ class ServiceuserController extends Controller
      */
     public function create()
     {
-        return view('backend.serviceuser.create');
+        return view('dashboard.serviceuser.create');
     }
 
     /**
@@ -42,20 +44,26 @@ class ServiceuserController extends Controller
      */
     public function store(StoreServiceusersRequest $request)
     {
-        $requestArray = $request->all();
+        $data = $request->validated();
 
         if($request->hasFile('image')) {
             $file = $request->file('image');
-            $fileName = time().Str::random(10).'.'.$file->getClientOriginalExtension();
-            $file->move(public_path('serviceuser'), $fileName);
+            $fileName = time().Str::random(10).'.'.'webp';
+            if(!file_exists(public_path('serviceuser'))){
+                mkdir(public_path('serviceuser'), 0755, true);
+            }
+            $img = Image::read($file->getRealPath())
+                ->toWebp(80)
+                ->save(public_path('serviceuser/' . $fileName));
+            $data['image'] = $fileName;
+
+            $row = Serviceuser::create($data);
+            Session::flash('flash_message', 'Service added successfully');
+            return redirect()->route('serviceuser.index');
+        } else {
+            Session::flash('flash_message', 'Error adding service');
+            return redirect()->route('serviceuser.index');
         }
-
-        $requestArray = ['image' => $fileName] + $request->all();
-
-        $row = Serviceuser::create($requestArray);
-
-        Session::flash('flash_message', 'Service added successfully');
-        return redirect()->route('serviceuser.index');
     }
 
     /**
@@ -77,9 +85,9 @@ class ServiceuserController extends Controller
      */
     public function edit($id)
     {
-        $row = Serviceuser::findorFail($id);
+        $row = Serviceuser::select('id', 'en_name', 'ar_name', 'ar_first_text', 'en_first_text', 'image')->findorFail($id);
 
-        return view('backend.serviceuser.edit', compact('row'));
+        return view('dashboard.serviceuser.edit', compact('row'));
     }
 
     /**
@@ -92,26 +100,47 @@ class ServiceuserController extends Controller
     public function update(UpdateServiceusersRequest $request, $id)
     {
         $service = Serviceuser::findorFail($id);
-
-        $requestArray = $request->all();
+        // dd($service);
+        $data = $request->validated();
 
         if($request->hasFile('image')) {
             $file = $request->file('image');
-            $fileName = time().Str::random(10).'.'.$file->getClientOriginalExtension();
-            $file->move(public_path('serviceuser'), $fileName);
-
+            $fileName = time().Str::random(10).'.webp';
+            if(!file_exists(public_path('serviceuser'))){
+                mkdir(public_path('serviceuser'), 0755, true);
+            }
+            $img = Image::read($file->getRealPath())
+                ->toWebp(80)
+                ->save(public_path('serviceuser/' . $fileName));
             if($service->image !== NULL) {
                 if(file_exists(public_path('serviceuser/'. $service->image))) {
                     unlink(public_path('serviceuser/'. $service->image));
                 }
             }
+            $data['image'] = $fileName;
         }
-        $requestArray = ['image' => $request->hasFile('image') ? $fileName: $service->image] + $request->all();
 
-        $service->update($requestArray);
+        try {
+        $result = $service->update($data);
+        if($result) {
+            Session::flash('flash_message', 'Service updated successfully');
+            return redirect()->route('serviceuser.index');
+        } else {
+            // Log the failure without calling update again
+            Log::error('Service update failed', ['data' => $data, 'service_id' => $service->id]);
+            Session::flash('flash_error', 'Failed to update service');
+            return redirect()->back()->withInput();
+        }
+    } catch (\Exception $e) {
+        Log::error('Exception during service update: ' . $e->getMessage(), [
+            'data' => $data, 
+            'service_id' => $service->id,
+            'exception' => $e
+        ]);
+    }
 
-        Session::flash('flash_message', 'service updated successfully');
-        return redirect()->route('serviceuser.index');
+        Session::flash('flash_error', 'Failed to update service');
+        return redirect()->back()->withInput();
     }
 
     /**
@@ -120,19 +149,26 @@ class ServiceuserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        $service = Serviceuser::findorFail($id);
+    // public function destroy($id)
+    // {
+    //     $service = Serviceuser::findorFail($id);
 
-        if($service->image !== NULL) {
-            if(file_exists(public_path('serviceuser/'. $service->image))) {
-                unlink(public_path('serviceuser/'. $service->image));
-            }
-        }
+    //     if($service->image !== NULL) {
+    //         if(file_exists(public_path('serviceuser/'. $service->image))) {
+    //             unlink(public_path('serviceuser/'. $service->image));
+    //         }
+    //     }
 
-        $service->delete();
+    //     $service->delete();
 
-        Session::flash('flash_message', 'Service Users deleted successfully');
+    //     Session::flash('flash_message', 'Service Users deleted successfully');
+    //     return redirect()->route('serviceuser.index');
+    // }
+
+    public function toggleStatus(Serviceuser $serviceuser) {
+        $serviceuser->active = $serviceuser->active === 'activated' ? 'deactivated' : 'activated';
+        $serviceuser->save();
+        Session::flash('flash_message', "Service {$serviceuser->active} successfully.");
         return redirect()->route('serviceuser.index');
     }
 }

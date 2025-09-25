@@ -19,7 +19,7 @@ class AboutController extends Controller
      */
     public function index()
     {
-        $about = About::select('ar_story', 'en_story', 'story_image')->firstOrFail();
+        $about = About::select('ar_story', 'en_story', 'image')->firstOrFail();
         return view('dashboard.about.index', compact('about'));
     }
 
@@ -83,25 +83,10 @@ class AboutController extends Controller
         $about = About::firstOrFail();
         // dd($about);
 
-        if($request->hasFile('story_image')) {
-            $fileName = $this->imageHandler($request->file('story_image'), $about->story_image);
-            $data['story_image'] = $fileName;
-        }
-
-        if($request->hasFile('mission_image')) {
-            
-           $fileName = $this->imageHandler($request->file('mission_image'), $about->mission_image);
-            $data['mission_image'] = $fileName;
-        }
-
-        if($request->hasFile('vision_image')) {
-            $fileName = $this->imageHandler($request->file('vision_image'), $about->vision_image);
-            $data['vision_image'] = $fileName;
-        }
-
-        if($request->hasFile('banner_image')) {
-            $fileName = $this->imageHandler($request->file('banner_image'), $about->banner_image);
-            $data['banner_image'] = $fileName;
+        if($request->hasFile('image')) {
+            // $about->image == "" ? $about->image = NULL : $about->image;
+            $fileName = $this->imageHandler($request->file('image'), $about->image ?? NULL);
+            $data['image'] = $fileName;
         }
 
         $about->update($data);
@@ -130,6 +115,7 @@ class AboutController extends Controller
         $image = Image::read($file->getRealPath())
             ->toWebp(80)
             ->save($imagePath);
+            // dd($existingImage);
         if($existingImage !== NULL) {
             if(file_exists(public_path('about/'. $existingImage))) {
                 unlink(public_path('about/'. $existingImage));

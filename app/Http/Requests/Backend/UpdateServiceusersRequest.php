@@ -24,9 +24,11 @@ class UpdateServiceusersRequest extends FormRequest
     public function rules()
     {
         return [
-            'en_name' => '',
-            'ar_name' => 'required',
-            'image' => 'mimes:jpg,jpeg,png,svg,webp'
+            'en_name' => 'required|string|max:100',
+            'ar_name' => 'required|string|max:100',
+            'en_first_text' => 'required|string',
+            'ar_first_text' => 'required|string',
+            'image' => 'mimes:jpg,jpeg,png,webp'
         ];
     }
 }

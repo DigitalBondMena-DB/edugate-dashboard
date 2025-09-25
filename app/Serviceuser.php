@@ -15,8 +15,7 @@ class Serviceuser extends Model
         'ar_title',
         'en_first_text',
         'ar_first_text',
-        'en_second_text',
-        'ar_second_text' ,
-        'image'
+        'image',
+        'active'
         ];
 }

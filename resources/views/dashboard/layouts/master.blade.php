@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="{{asset('assets')}}/images/logo/favicon.png" rel="icon" type="image/x-icon">
   <link href="{{asset('assets')}}/images/logo/favicon.png" rel="shortcut icon" type="image/x-icon">
-  <title>@yield('title','Dashbo8ard')</title>
+  <title>@yield('title','Dashboard')</title>
 
   <!-- Animation css -->
     <link href="{{asset('assets')}}/vendor/animation/animate.min.css" rel="stylesheet">
@@ -44,6 +44,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- tabler icons cdn -->
 
+    <style>
+      .cke_notifications_area {
+            display:none;
+        }
+        
+        .cke_chrome  {
+            width:100% !important;
+        }
+    </style>
+
   @stack('styles')
 </head>
 <body>
@@ -77,36 +87,38 @@
   @include('dashboard.includes.footer')
 </div>
 
-{{-- Modals خاصة بكل صفحة --}}
 @yield('modals')
 
 
 <!-- latest jquery-->
-<script src="{{asset('asse')}}/js/jquery-3.6.3.min.js"></script>
+<script src="{{asset('assets')}}/js/jquery-3.6.3.min.js"></script>
 
 <!-- Bootstrap js-->
-<script src="{{asset('asse')}}/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="{{asset('assets')}}/vendor/bootstrap/bootstrap.bundle.min.js"></script>
 
 <!-- Simple bar js-->
-<script src="{{asset('asse')}}/vendor/simplebar/simplebar.js"></script>
+<script src="{{asset('assets')}}/vendor/simplebar/simplebar.js"></script>
 
 <!-- phosphor js -->
-<script src="{{asset('asse')}}/vendor/phosphor/phosphor.js"></script>
+<script src="{{asset('assets')}}/vendor/phosphor/phosphor.js"></script>
 
 <!-- Glight js -->
-<script src="{{asset('asse')}}/vendor/glightbox/glightbox.min.js"></script>
+<script src="{{asset('assets')}}/vendor/glightbox/glightbox.min.js"></script>
 
 <!-- apexcharts-->
-<script src="{{asset('asse')}}/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="{{asset('assets')}}/vendor/apexcharts/apexcharts.min.js"></script>
 
 <!-- Customizer js-->
-<script src="{{asset('asse')}}/js/customizer.js"></script>
+<script src="{{asset('assets')}}/js/customizer.js"></script>
 
 <!-- Ecommerce js-->
-<script src="{{asset('asse')}}/js/ecommerce_dashboard.js"></script>
+<script src="{{asset('assets')}}/js/ecommerce_dashboard.js"></script>
 
 <!-- App js-->
-<script src="{{asset('asse')}}/js/script.js"></script>
+<script src="{{asset('assets')}}/js/script.js"></script>
+
+
+<script src="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js"></script>
 
 
 @stack('page_js')

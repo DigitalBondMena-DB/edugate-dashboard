@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\Backend\StoreServicesRequest;
 use App\Http\Requests\Backend\UpdateServicesRequest;
+use Intervention\Image\Laravel\Facades\Image;
 
 class ServicesController extends Controller
 {
@@ -19,7 +20,7 @@ class ServicesController extends Controller
      */
     public function index()
     {
-        $rows = Service::select('id', 'en_name', 'ar_name', 'image')->latest()->paginate(10);
+        $rows = Service::select('id', 'en_name', 'ar_name', 'image', 'active')->latest()->paginate(10);
 
         return view('dashboard.services.index', compact('rows'));
     }
@@ -42,20 +43,28 @@ class ServicesController extends Controller
      */
     public function store(StoreServicesRequest $request)
     {
-        $requestArray = $request->all();
+        $data = $request->validated();
 
         if($request->hasFile('image')) {
             $file = $request->file('image');
-            $fileName = time().Str::random(10).'.'.$file->getClientOriginalExtension();
-            $file->move(public_path('service'), $fileName);
+            $fileName = time().Str::random(10).'.'.'webp';
+            if(!file_exists(public_path('service'))) {
+                mkdir(public_path('service'), 0755, true);
+            }
+            $imagePath = public_path('service/' . $fileName);
+            $image = Image::read($file->getRealPath())
+                ->toWebp(80)
+                ->save($imagePath);
+            $data['image'] = $fileName;
+
+            Service::create($data);
+
+            Session::flash('flash_message', 'Feedback added successfully');
+            return redirect()->route('service.index');
+        } else {
+            Session::flash('flash_message', 'Error adding feedback');
+            return redirect()->route('service.index');
         }
-
-        $requestArray = ['image' => $fileName] + $request->all();
-
-        $row = Service::create($requestArray);
-
-        Session::flash('flash_message', 'Feedback added successfully');
-        return redirect()->route('service.index');
     }
 
     /**
@@ -89,15 +98,17 @@ class ServicesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateServicesRequest $request, $id)
+    public function update(UpdateServicesRequest $request, Service $service)
     {
-        $service = Service::findorFail($id);
+        $data = $request->validated();
 
-        $requestArray = $request->all();
 
         if($request->hasFile('image')) {
             $file = $request->file('image');
             $fileName = time().Str::random(10).'.'.$file->getClientOriginalExtension();
+            if(!file_exists(public_path('service'))) {
+                mkdir(public_path('service'), 0755, true);
+            }
             $file->move(public_path('service'), $fileName);
 
             if($service->image !== NULL) {
@@ -105,10 +116,10 @@ class ServicesController extends Controller
                     unlink(public_path('service/'. $service->image));
                 }
             }
+            $data['image'] = $fileName;
         }
-        $requestArray = ['image' => $request->hasFile('image') ? $fileName: $service->image] + $request->all();
 
-        $service->update($requestArray);
+        $service->update($data);
 
         Session::flash('flash_message', 'Feedback updated successfully');
         return redirect()->route('service.index');
