@@ -174,7 +174,8 @@ Route::namespace('BackEnd')->prefix('admin')->middleware('admin')->group(functio
     Route::get('why-us/image/edit', 'WhyUsController@editImage')->name('why-us.editImage');
     Route::post('why-us/image', 'WhyUsController@updateImage')->name('why-us.updateImage');
     
-    
+    Route::get('/control', 'HomeController@index')->name('admin.control');
+    Route::resource('page-banners', 'PageBannerController');
     
 
     // Route::get('/datatable/ads/list', 'DataTablesController@adsListView')->name('adsListView');

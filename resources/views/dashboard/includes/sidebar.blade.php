@@ -1,18 +1,15 @@
 <!-- Menu Navigation starts -->
 <nav>
     <div class="app-logo">
-        <a class="logo d-inline-block" href="index.html">
+        <a class="logo d-inline-block" href="{{ route('admin.control') }}">
             <img alt="#" src="{{ asset('assets') }}/images/logo/1.png">
         </a>
-        <span class="bg-light-primary toggle-semi-nav d-flex-center">
-            <i class="ti ti-chevron-right"></i>
-        </span>
     </div>
 
         <div class="app-nav" id="app-simple-bar">
             <ul class="main-nav p-0 mt-2">
                 <li>
-                    <a aria-expanded="false" href="#control">
+                    <a aria-expanded="false" href="{{ route('admin.control') }}">
                         <svg stroke="currentColor" stroke-width="1.5">
                         </svg>
                         control
@@ -20,15 +17,15 @@
 
                 </li>
                 <li>
-                    <a aria-expanded="false" href="/admin/sliders">
+                    <a aria-expanded="false" href="{{ route('page-banners.index') }}">
                         <svg stroke="currentColor" stroke-width="1.5">
                         </svg>
-                        slider
+                        Pages Banners
                     </a>
 
                 </li>
                 <li>
-                    <a aria-expanded="false" href="/admin/about">
+                    <a aria-expanded="false" href="{{ route('about.index') }}">
                         <svg stroke="currentColor" stroke-width="1.5">
                         </svg>
                         about
@@ -36,7 +33,7 @@
 
                 </li>
                 <li>
-                    <a aria-expanded="false" href="/admin/clients">
+                    <a aria-expanded="false" href="{{ route('clients.index') }}">
                         <svg stroke="currentColor" stroke-width="1.5">
                         </svg>
                         partners
@@ -44,7 +41,7 @@
 
                 </li>
                 <li>
-                    <a aria-expanded="false" href="/admin/contact-us">
+                    <a aria-expanded="false" href="{{ route('contact-us.index') }}">
                         <svg stroke="currentColor" stroke-width="1.5">
                         </svg>
                         contact information
@@ -52,7 +49,7 @@
 
                 </li>
                 <li>
-                    <a aria-expanded="false" href="/admin/feedback">
+                    <a aria-expanded="false" href="{{ route('feedback.index') }}">
                         <svg stroke="currentColor" stroke-width="1.5">
                         </svg>
                         user contacts
@@ -60,7 +57,7 @@
 
                 </li>
                 <li>
-                    <a aria-expanded="false" href="/admin/service">
+                    <a aria-expanded="false" href="{{ route('service.index') }}">
                         <svg stroke="currentColor" stroke-width="1.5">
                         </svg>
                         user feedbacks
@@ -68,7 +65,7 @@
 
                 </li>
                 <li>
-                    <a aria-expanded="false" href="/admin/serviceuser">
+                    <a aria-expanded="false" href="{{ route('serviceuser.index') }}">
                         <svg stroke="currentColor" stroke-width="1.5">
                         </svg>
                         services
@@ -76,23 +73,16 @@
 
                 </li>
                 <li>
-                    <a aria-expanded="false" href="#event category">
+                    <a aria-expanded="false" href="{{ route('event-categery.index') }}">
                         <svg stroke="currentColor" stroke-width="1.5">
                         </svg>
                         event category
                     </a>
 
                 </li>
-                <li>
-                    <a aria-expanded="false" href="#event details">
-                        <svg stroke="currentColor" stroke-width="1.5">
-                        </svg>
-                        event details
-                    </a>
 
-                </li>
                 <li>
-                    <a aria-expanded="false" href="/admin/articleSubCategory">
+                    <a aria-expanded="false" href="{{ route('articleSubCategory.index') }}">
                         <svg stroke="currentColor" stroke-width="1.5">
                         </svg>
                         article category
@@ -100,10 +90,10 @@
 
                 </li>
                 <li>
-                    <a aria-expanded="false" href="#news articles">
+                    <a aria-expanded="false" href="{{ route('newArticle.index') }}">
                         <svg stroke="currentColor" stroke-width="1.5">
                         </svg>
-                        news articles
+                        new article
                     </a>
 
                 </li>

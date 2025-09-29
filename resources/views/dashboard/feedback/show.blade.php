@@ -38,7 +38,7 @@
                 </div>
 
                 <div class="border-top p-3">
-                    <a href="{{ route('feedback.index') }}" class="btn btn-outline-secondary">
+                    <a href="{{ redirect()->back()->getTargetUrl() }}" class="btn btn-outline-secondary">
                         <span class="me-1">←</span> Back
                     </a>
                 </div>

@@ -12103,7 +12103,7 @@ nav .app-logo .logo {
   width: 100%;
 }
 nav .app-logo .logo img {
-  width: 180px;
+  width: 150px;
   float: left;
 }
 nav .app-logo .nav-profile {
@@ -12672,7 +12672,7 @@ div .semi-nav ~ footer {
   width: 100%;
   height: 100%;
   transition: var(--app-transition);
-  box-shadow: var(--box-shadow);
+  /* box-shadow: var(--box-shadow); */
   overflow: hidden;
 }
 .app-wrapper .app-content .container-xxl {
@@ -34789,3 +34789,4 @@ body.dark nav .app-logo .logo img {
     display: none;
   }
 }
+

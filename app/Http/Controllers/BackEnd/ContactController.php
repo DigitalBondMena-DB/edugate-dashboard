@@ -24,6 +24,9 @@ class ContactController extends Controller
     public function show($id)
     {
         $feedback = Contact::findorFail($id);
+        
+        $feedback->seen = true;
+        $feedback->save();
 
         return view('dashboard.feedback.show', compact('feedback'));
     }

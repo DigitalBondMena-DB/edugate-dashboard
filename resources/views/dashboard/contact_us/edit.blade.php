@@ -266,7 +266,7 @@
 
                         <div class="border-top pt-4">
                             <div class="d-flex justify-content-between align-items-center">
-                                <a href="{{ route('about.index') }}" class="btn btn-outline-secondary">
+                                <a href="{{ route('contact-us.index') }}" class="btn btn-outline-secondary">
                                     <span class="me-1">←</span> Back
                                 </a>
                                 <button type="submit" class="btn btn-primary px-4">

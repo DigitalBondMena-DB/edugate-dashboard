@@ -31,7 +31,7 @@
                                               id="ar_story" 
                                               class="form-control dataTables_filter @error('ar_story') is-invalid @enderror" 
                                               rows="4"
-                                              placeholder="Enter slider description in Arabic">{{ old('ar_story', $about->ar_story) }}</textarea>
+                                              placeholder="Enter Story in Arabic">{{ old('ar_story', $about->ar_story) }}</textarea>
                                     @error('ar_story')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -43,7 +43,7 @@
                                               id="en_story" 
                                               class="form-control @error('en_story') is-invalid @enderror" 
                                               rows="4"
-                                              placeholder="Enter slider description in English">{{ old('en_story', $about->en_story) }}</textarea>
+                                              placeholder="Enter Story in English">{{ old('en_story', $about->en_story) }}</textarea>
                                     @error('en_story')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -57,7 +57,7 @@
                                               id="ar_mission" 
                                               class="form-control @error('ar_mission') is-invalid @enderror" 
                                               rows="4"
-                                              placeholder="Enter slider description in Arabic">{{ old('ar_mission', $about->ar_mission) }}</textarea>
+                                              placeholder="Enter mission in Arabic">{{ old('ar_mission', $about->ar_mission) }}</textarea>
                                     @error('ar_mission')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -71,7 +71,7 @@
                                               id="en_mission" 
                                               class="form-control @error('en_mission') is-invalid @enderror" 
                                               rows="4"
-                                              placeholder="Enter slider description in English">{{ old('en_mission', $about->en_mission) }}</textarea>
+                                              placeholder="Enter mission in English">{{ old('en_mission', $about->en_mission) }}</textarea>
                                     @error('en_mission')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -86,7 +86,7 @@
                                               id="ar_vision" 
                                               class="form-control @error('ar_vision') is-invalid @enderror" 
                                               rows="4"
-                                              placeholder="Enter slider description in Arabic">{{ old('ar_vision', $about->ar_vision) }}</textarea>
+                                              placeholder="Enter vision in Arabic">{{ old('ar_vision', $about->ar_vision) }}</textarea>
                                     @error('ar_vision')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -100,7 +100,7 @@
                                               id="en_vision" 
                                               class="form-control @error('en_vision') is-invalid @enderror" 
                                               rows="4"
-                                              placeholder="Enter slider description in English">{{ old('en_vision', $about->en_vision) }}</textarea>
+                                              placeholder="Enter vision in English">{{ old('en_vision', $about->en_vision) }}</textarea>
                                     @error('en_vision')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -123,9 +123,9 @@
                                                     <img class="rounded border shadow-sm slider-thumbnail" 
                                                          style="width: 150px; height: 100px; object-fit: cover; cursor: pointer; transition: all 0.3s ease;"
                                                          src="{{ asset('about/' . $about->image) }}" 
-                                                         alt="Current Vision Image"
+                                                         alt="Current Image"
                                                          data-bs-toggle="modal" 
-                                                         data-bs-target="#imageModal{{ 3 }}">
+                                                         data-bs-target="#imageModal{{ $about->id }}">
                                                 </div>
                                                 <small class="text-muted d-block mt-1">Click to preview full size</small>
                                             </div>
@@ -134,25 +134,25 @@
                                 </div>
 
                                 {{-- Image Modal --}}
-                                <div class="modal fade" id="imageModal{{ 3 }}" tabindex="-1" aria-labelledby="imageModalLabel{{ 3 }}" aria-hidden="true">
+                                <div class="modal fade" id="imageModal{{ $about->id }}" tabindex="-1" aria-labelledby="imageModalLabel{{ $about->id }}" aria-hidden="true">
                                     <div class="modal-dialog modal-lg modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="imageModalLabel{{ 3 }}">
-                                                    <i class="fas fa-image me-2"></i>Vision Preview
+                                                <h5 class="modal-title" id="imageModalLabel{{ $about->id }}">
+                                                    <i class="fas fa-image me-2"></i>Preview
                                                 </h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body text-center p-0">
                                                 <img src="{{ asset('about/' . $about->image) }}" 
                                                      class="img-fluid rounded" 
-                                                     alt="Full Size Vision Image"
+                                                     alt="Full Size Image"
                                                      style="max-height: 70vh; object-fit: contain;">
                                             </div>
                                             <div class="modal-footer justify-content-between">
                                                 <div class="text-muted small">
                                                     <i class="fas fa-info-circle me-1"></i>
-                                                    Vision Image: {{ $about->image }}
+                                                    Image: {{ $about->image }}
                                                 </div>
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                                     <i class="fas fa-times me-1"></i>Close
@@ -202,7 +202,7 @@
                                 </a>
                                 
                                 <button type="submit" class="btn btn-primary px-4">
-                                    <span class="me-1">💾</span> Update Slider
+                                    <span class="me-1">💾</span> Update About
                                 </button>
                             </div>
                         </div>
