@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 
-@php $pageTitle = 'Users Feedbacks Control'; @endphp
+@php $pageTitle = 'Users Contact Control'; @endphp
 
 @section('title') {{ $pageTitle }} @endsection
 

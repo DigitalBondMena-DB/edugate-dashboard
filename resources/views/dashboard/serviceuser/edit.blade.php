@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 
-@php $pageTitle = 'Edit Feedback'; @endphp
+@php $pageTitle = 'Edit Service'; @endphp
 
 @section('title')
     {{ $pageTitle }}
@@ -15,7 +15,7 @@
                         <div>
                             <h4 class="card-title text-dark mb-1">{{ $pageTitle }}</h4>
                         </div>
-                    </div>
+                    </div>route
                 </div>
                 {{-- @dd($row->id) --}}
                 <div class="card-body p-4">
@@ -32,7 +32,7 @@
                                            id="ar_name" 
                                            class="form-control @error('ar_name') is-invalid @enderror" 
                                            value="{{ old('ar_name', $row->ar_name) }}"
-                                           placeholder="Enter Feedback title in Arabic">
+                                           placeholder="Enter Name in Arabic">
                                     @error('ar_name')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -47,7 +47,7 @@
                                            id="en_name" 
                                            class="form-control @error('en_name') is-invalid @enderror" 
                                            value="{{ old('en_name', $row->en_name) }}"
-                                           placeholder="Enter Feedback title in English">
+                                           placeholder="Enter Name in English">
                                     @error('en_name')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -63,7 +63,7 @@
                                               id="ar_first_text" 
                                               class="form-control @error('ar_first_text') is-invalid @enderror" 
                                               rows="4"
-                                              placeholder="Enter Feedback description in Arabic">{{ old('ar_first_text', $row->ar_first_text) }}</textarea>
+                                              placeholder="Enter Text in Arabic">{{ old('ar_first_text', $row->ar_first_text) }}</textarea>
                                     @error('ar_first_text')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -77,7 +77,7 @@
                                               id="en_first_text" 
                                               class="form-control @error('en_first_text') is-invalid @enderror" 
                                               rows="4"
-                                              placeholder="Enter Feedback description in English">{{ old('en_first_text', $row->en_first_text) }}</textarea>
+                                              placeholder="Enter Text in English">{{ old('en_first_text', $row->en_first_text) }}</textarea>
                                     @error('en_first_text')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -86,7 +86,7 @@
                         </div>
 
                         <div class="mb-4">
-                            <label class="form-label fw-bold text-dark">Feedback Image</label>
+                            <label class="form-label fw-bold text-dark">Service Image</label>
                             
                             @if($row->image)
                                 <div class="mb-3">
@@ -101,7 +101,7 @@
                                                     <img class="rounded border shadow-sm slider-thumbnail" 
                                                          style="width: 150px; height: 100px; object-fit: cover; cursor: pointer; transition: all 0.3s ease;"
                                                          src="{{ asset('serviceuser/' . $row->image) }}" 
-                                                         alt="Current Feedback Image"
+                                                         alt="Current Service Image"
                                                          data-bs-toggle="modal" 
                                                          data-bs-target="#imageModal{{ $row->id }}">
                                                 </div>
@@ -117,14 +117,14 @@
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="imageModalLabel{{ $row->id }}">
-                                                    <i class="fas fa-image me-2"></i>Feedback Preview
+                                                    <i class="fas fa-image me-2"></i> Image Preview
                                                 </h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body text-center p-0">
                                                 <img src="{{ asset('serviceuser/' . $row->image) }}" 
                                                      class="img-fluid rounded" 
-                                                     alt="Full Size Feedback Image"
+                                                     alt="Full Size Service Image"
                                                      style="max-height: 70vh; object-fit: contain;">
                                             </div>
                                             <div class="modal-footer justify-content-between">
@@ -177,11 +177,11 @@
                         <div class="border-top pt-4">
                             <div class="d-flex justify-content-between align-items-center">
                                 <a href="{{ route('serviceuser.index') }}" class="btn btn-outline-secondary">
-                                    <span class="me-1">←</span> Back to Feedbacks
+                                    <span class="me-1">←</span> Back to Services
                                 </a>
                                 
                                 <button type="submit" class="btn btn-primary px-4">
-                                    <span class="me-1">💾</span> Update Feedback
+                                    <span class="me-1">💾</span> Update Service
                                 </button>
                             </div>
                         </div>

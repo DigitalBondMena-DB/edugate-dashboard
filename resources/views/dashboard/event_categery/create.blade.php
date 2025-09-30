@@ -27,7 +27,7 @@
                             <div class="mb-4">
                                 <label class="form-label fw-bold text-dark">Arabic Name <span class="text-danger">*</span></label>
                                 <input type="text" name="ar_name" class="form-control @error('ar_name') is-invalid @enderror"
-                                       value="{{ old('ar_name') }}" placeholder="العنوان بالعربية">
+                                       value="{{ old('ar_name') }}" placeholder="Name in Arabic">
                                 @error('ar_name') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
                         </div>
@@ -45,14 +45,14 @@
                     <div class="mb-4">
                         <label class="form-label fw-bold text-dark">Arabic Description</label>
                         <textarea name="ar_description" rows="4" class="form-control @error('ar_description') is-invalid @enderror"
-                                  placeholder="وصف مختصر">{{ old('ar_description') }}</textarea>
+                                  placeholder="Arabic description">{{ old('ar_description') }}</textarea>
                         @error('ar_description') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>
 
                     <div class="mb-4">
                         <label class="form-label fw-bold text-dark">English Description</label>
                         <textarea name="en_description" rows="4" class="form-control @error('en_description') is-invalid @enderror"
-                                  placeholder="Short description">{{ old('en_description') }}</textarea>
+                                  placeholder="English description">{{ old('en_description') }}</textarea>
                         @error('en_description') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>
 

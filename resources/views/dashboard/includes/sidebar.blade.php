@@ -1,7 +1,7 @@
 <!-- Menu Navigation starts -->
 <nav>
     <div class="app-logo">
-        <a class="logo d-inline-block" href="{{ route('admin.control') }}">
+        <a class="logo d-inline-block" href="{{ route('welcome') }}">
             <img alt="#" src="{{ asset('assets') }}/images/logo/1.png">
         </a>
     </div>
@@ -9,7 +9,7 @@
         <div class="app-nav" id="app-simple-bar">
             <ul class="main-nav p-0 mt-2">
                 <li>
-                    <a aria-expanded="false" href="{{ route('admin.control') }}">
+                    <a aria-expanded="false" href="{{ route('welcome') }}">
                         <svg stroke="currentColor" stroke-width="1.5">
                         </svg>
                         control
@@ -94,14 +94,6 @@
                         <svg stroke="currentColor" stroke-width="1.5">
                         </svg>
                         new article
-                    </a>
-
-                </li>
-                <li>
-                    <a aria-expanded="false" href="#seo tags">
-                        <svg stroke="currentColor" stroke-width="1.5">
-                        </svg>
-                        seo tags
                     </a>
 
                 </li>

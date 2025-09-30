@@ -32,7 +32,7 @@
                                            id="ar_name" 
                                            class="form-control @error('ar_name') is-invalid @enderror" 
                                            value="{{ old('ar_name', $row->ar_name) }}"
-                                           placeholder="Enter Feedback title in Arabic">
+                                           placeholder="Enter name in Arabic">
                                     @error('ar_name')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -47,7 +47,7 @@
                                            id="en_name" 
                                            class="form-control @error('en_name') is-invalid @enderror" 
                                            value="{{ old('en_name', $row->en_name) }}"
-                                           placeholder="Enter Feedback title in English">
+                                           placeholder="Enter name in English">
                                     @error('en_name')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -63,7 +63,7 @@
                                            id="ar_job_title" 
                                            class="form-control @error('ar_job_title') is-invalid @enderror" 
                                            value="{{ old('ar_job_title', $row->ar_job_title) }}"
-                                           placeholder="Enter Feedback title in Arabic">
+                                           placeholder="Enter job title in Arabic">
                                     @error('ar_job_title')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -78,7 +78,7 @@
                                            id="en_job_title" 
                                            class="form-control @error('en_job_title') is-invalid @enderror" 
                                            value="{{ old('en_job_title', $row->en_job_title) }}"
-                                           placeholder="Enter Feedback title in English">
+                                           placeholder="Enter job title in English">
                                     @error('en_job_title')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -93,7 +93,7 @@
                                               id="ar_text" 
                                               class="form-control @error('ar_text') is-invalid @enderror" 
                                               rows="4"
-                                              placeholder="Enter Feedback description in Arabic">{{ old('ar_text', $row->ar_text) }}</textarea>
+                                              placeholder="Enter text in Arabic">{{ old('ar_text', $row->ar_text) }}</textarea>
                                     @error('ar_text')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -107,7 +107,7 @@
                                               id="en_text" 
                                               class="form-control @error('en_text') is-invalid @enderror" 
                                               rows="4"
-                                              placeholder="Enter Feedback description in English">{{ old('en_text', $row->en_text) }}</textarea>
+                                              placeholder="Enter text in English">{{ old('en_text', $row->en_text) }}</textarea>
                                     @error('en_text')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror

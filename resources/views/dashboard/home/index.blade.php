@@ -172,6 +172,11 @@
 </div>
 
 <!-- Quick Actions -->
+<form id="submit_form" class="logout-form" action="{{ url('/en/logout') }}" method="POST" style="" >
+                                            @csrf
+                                        <button class="btn btn-danger" type="submit" id="checkout" href="{{ url('/en/logout') }}">Log Out</button>
+                                            
+                                        </form>
 <div class="row">
     <div class="col-12">
         <div class="control-card p-4">
@@ -179,9 +184,9 @@
             
             <div class="row">
                 <div class="col-lg-4 col-md-6 mb-3">
-                    <a href="/admin/sliders" class="quick-link">
-                        <i class="fas fa-images"></i>
-                        Manage Sliders
+                    <a href="/admin/event-categery" class="quick-link">
+                        <i class="fas fa-calendar-alt"></i>
+                        Event Categories
                     </a>
                 </div>
                 

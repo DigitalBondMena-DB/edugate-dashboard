@@ -142,7 +142,7 @@ margin-bottom: 10px
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
                         <i class="fa fa-bars"></i>
                     </button>
-                    <a class="navbar-brand animation-area position-relative" href="{{ route('home') ?? '' }}" >
+                    <a class="navbar-brand animation-area position-relative" href="{{ route('welcome') ?? '' }}" >
                         <img src="{{ asset('frontend/img/SMall.png') ?? '' }}" class="logo logo-display"  alt="Logo">
                         <img src="{{ asset('frontend/img/SMall.png') ?? '' }}" class="logo logo-scrolled"  alt="Logo">
                         <ul class="box-area">
@@ -160,7 +160,7 @@ margin-bottom: 10px
                         
                         
                        <li>
-                            <a href="{{ route('home') ?? '' }}">Home</a>
+                            <a href="{{ route('welcome') ?? '' }}">Home</a>
                         </li>
                         <li>
                             <a href="{{ route('about-us') ?? '' }}">About us</a>

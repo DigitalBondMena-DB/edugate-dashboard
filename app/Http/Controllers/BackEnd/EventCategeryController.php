@@ -22,7 +22,7 @@ class EventCategeryController extends Controller
      */
     public function index()
     {
-        $rows = EventCategery::select('id', 'en_name', 'ar_name', 'active')->latest()->paginate(10);
+        $rows = EventCategery::select('id', 'en_name', 'ar_name', 'active', 'ar_description', 'en_description')->latest()->paginate(10);
         return view('dashboard.event_categery.index', compact('rows'));
     }
 
