@@ -19,13 +19,13 @@
                 </div>
 
                 <div class="card-body p-4">
-                    @if($why && $why->image)
+                    @if ($why && $why->image)
                         <div class="mb-4">
                             <label class="form-label fw-bold text-dark">Current Image</label>
                             <div class="border rounded p-3 bg-light">
-                                <img src="{{ asset('why-us/'.$why->image) }}" class="rounded border"
-                                     style="max-width: 220px; max-height: 140px; object-fit: cover; cursor:pointer"
-                                     data-bs-toggle="modal" data-bs-target="#imageModal">
+                                <img src="{{ asset('why-us/' . $why->image) }}" class="rounded border"
+                                    style="max-width: 220px; max-height: 140px; object-fit: cover; cursor:pointer"
+                                    data-bs-toggle="modal" data-bs-target="#imageModal">
                             </div>
 
                             <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
@@ -36,7 +36,8 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                         </div>
                                         <div class="modal-body text-center p-0">
-                                            <img src="{{ asset('why-us/'.$why->image) }}" class="img-fluid rounded" style="max-height:70vh; object-fit:contain;">
+                                            <img src="{{ asset('why-us/' . $why->image) }}" class="img-fluid rounded"
+                                                style="max-height:70vh; object-fit:contain;">
                                         </div>
                                     </div>
                                 </div>
@@ -44,16 +45,19 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('why-us.updateImage', $why?->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('why-us.updateImage', $why?->id) }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('POST')
 
                         <div class="mb-4">
                             <label class="form-label fw-bold text-dark">New Image <span class="text-danger">*</span></label>
                             <input type="file" name="image" id="image"
-                                   class="form-control @error('image') is-invalid @enderror" accept="image/*">
+                                class="form-control @error('image') is-invalid @enderror" accept="image/*">
                             <small class="text-muted mt-1 d-block">Supported: JPG, JPEG, PNG, WEBP (Max: 2MB)</small>
-                            @error('image') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
+                            @error('image')
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="border-top pt-4 d-flex justify-content-between">

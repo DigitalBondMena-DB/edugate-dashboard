@@ -9,12 +9,12 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            @if(Session::has('flash_message'))
+            @if (Session::has('flash_message'))
                 <div class="alert alert-success">
                     {{ Session::get('flash_message') }}
                 </div>
             @endif
-            
+
             <div class="card">
                 <div class="card-header card-header-primary">
                     <div class="row align-items-center">
@@ -33,10 +33,10 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="card-body p-0">
                     <div class="table-responsive">
-                        @if(count($rows))
+                        @if (count($rows))
                             <table class="table table-striped table-hover align-middle mb-0">
                                 <thead class="table-light">
                                     <tr>
@@ -47,7 +47,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($rows as $category)
+                                    @foreach ($rows as $category)
                                         <tr>
                                             <td class="text-center">
                                                 <span class="badge bg-success rounded-pill">{{ $category->id }}</span>
@@ -65,33 +65,39 @@
                                             <td>
                                                 <div class="d-flex justify-content-center gap-2">
                                                     {{-- Edit Button --}}
-                                                    <a href="{{ route('articleCategory.edit', $category->id) }}" class="text-decoration-none">
-                                                        <button class="btn btn-outline-primary btn-sm" 
-                                                                title="Edit Category" data-bs-toggle="tooltip">
+                                                    <a href="{{ route('articleCategory.edit', $category->id) }}"
+                                                        class="text-decoration-none">
+                                                        <button class="btn btn-outline-primary btn-sm" title="Edit Category"
+                                                            data-bs-toggle="tooltip">
                                                             <span style="font-size: 14px;">✏️</span>
                                                         </button>
                                                     </a>
-                                                    
+
                                                     {{-- Toggle Status Button --}}
-                                                    {{-- @dd($category); --}}
-                                                    @if($category->active === 'activated')
-                                                        <form action="{{ route('articleCategory.toggleStatus', $category->id) }}" method="POST" class="d-inline">
+                                                    @if ($category->active === 'activated')
+                                                        <form
+                                                            action="{{ route('articleCategory.toggleStatus', $category->id) }}"
+                                                            method="POST" class="d-inline">
                                                             @csrf
                                                             @method('PATCH')
                                                             <button class="btn btn-outline-warning btn-sm" type="submit"
-                                                                    title="Deactivate Category" data-bs-toggle="tooltip"
-                                                                    onclick="return confirm('Are you sure you want to deactivate this slider?');">
-                                                                <span style="font-size: 14px;"><i class="fa-solid fa-eye"></i></span>
+                                                                title="Deactivate Category" data-bs-toggle="tooltip"
+                                                                onclick="return confirm('Are you sure you want to deactivate this slider?');">
+                                                                <span style="font-size: 14px;"><i
+                                                                        class="fa-solid fa-eye"></i></span>
                                                             </button>
                                                         </form>
                                                     @else
-                                                        <form action="{{ route('articleCategory.toggleStatus', $category->id) }}" method="POST" class="d-inline">
+                                                        <form
+                                                            action="{{ route('articleCategory.toggleStatus', $category->id) }}"
+                                                            method="POST" class="d-inline">
                                                             @csrf
                                                             @method('PATCH')
                                                             <button class="btn btn-outline-success btn-sm" type="submit"
-                                                                    title="Activate Category" data-bs-toggle="tooltip"
-                                                                    onclick="return confirm('Are you sure you want to activate this slider?');">
-                                                                <span style="font-size: 14px;"><i class="fa-solid fa-eye-slash"></i></span>
+                                                                title="Activate Category" data-bs-toggle="tooltip"
+                                                                onclick="return confirm('Are you sure you want to activate this slider?');">
+                                                                <span style="font-size: 14px;"><i
+                                                                        class="fa-solid fa-eye-slash"></i></span>
                                                             </button>
                                                         </form>
                                                     @endif
@@ -101,7 +107,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            
+
                             <div class="px-3 py-3 border-top mt-2">
                                 <div class="d-flex justify-content-center">
                                     {{ $rows->links('pagination::custom-bootstrap4') }}
@@ -110,13 +116,14 @@
                         @else
                             <div class="text-center py-5">
                                 <div class="mb-4">
-                                    <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-light" 
-                                         style="width: 100px; height: 100px;">
+                                    <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-light"
+                                        style="width: 100px; height: 100px;">
                                         <span style="font-size: 3rem;">🎨</span>
                                     </div>
                                 </div>
                                 <h5 class="text-muted mb-3">No Categories Available</h5>
-                                <a href="{{ route('articleCategory.create') }}" class="btn btn-primary btn-round shadow-sm px-4">
+                                <a href="{{ route('articleCategory.create') }}"
+                                    class="btn btn-primary btn-round shadow-sm px-4">
                                     <span class="me-2" style="font-weight: bold;">+</span>
                                     Create First Category
                                 </a>
@@ -132,12 +139,12 @@
         .slider-thumbnail {
             transition: all 0.3s ease !important;
         }
-        
+
         .slider-thumbnail:hover {
             transform: scale(1.05) !important;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
         }
-        
+
         .image-preview-container {
             position: relative;
             display: inline-block;

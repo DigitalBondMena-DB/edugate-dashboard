@@ -1,138 +1,274 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 
-<!-- Mirrored from aprendagames.com/stock/brokebot/errorpages-headless-robot.html?errorcode=404 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 21 Mar 2023 11:07:09 GMT -->
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>This Page Is Under Regular Maintenance</title>
-<link rel="shortcut icon" href="https://www.edugateuae.com/frontend/img/Icon.png" type="image/x-icon">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Edugate | 404</title>
 
-<link rel="stylesheet" type="text/css" href="{{ asset('frontend/brokebot/css/robot_page.css')}}">
-<link rel="stylesheet" type="text/css" href="{{ asset('frontend/brokebot/css/robot_styles.css')}}">
-<script src="{{ asset('frontend/brokebot/cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js')}}"/></script>
-<script type="text/javascript" src="{{ asset('frontend/brokebot/js/brokebot.js')}}"/></script>
-<script src="{{ asset('frontend/brokebot/dist/snap.svg-min.js')}}" type="text/javascript"></script>
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:700,300' rel='stylesheet' type='text/css'>
-<script>
-	var isHeadless = true;
-</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800&display=swap" rel="stylesheet">
 
+    <style>
+        :root {
+            --edu-green: #00A651;
+            --edu-red: #ED1C24;
+            --ink: #101318;
+            --muted: #6c7685;
+            --card: #ffffff;
+            --bg: #f6f8fb;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            font-family: "Rubik", system-ui, -apple-system, Segoe UI, Roboto, Arial;
+            color: var(--ink);
+            background:
+                radial-gradient(1200px 700px at -10% -10%, rgba(237, 28, 36, .08) 0, transparent 60%),
+                radial-gradient(1200px 700px at 110% 110%, rgba(0, 166, 81, .10) 0, transparent 60%),
+                var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wrap {
+            width: min(1080px, 96vw);
+            background: var(--card);
+            border-radius: 20px;
+            box-shadow: 0 18px 60px rgba(16, 19, 24, .12);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+        }
+
+        @media (max-width: 980px) {
+            .wrap {
+                grid-template-columns: 1fr;
+            }
+
+            .left {
+                display: none;
+            }
+        }
+
+        .left {
+            background:
+                linear-gradient(165deg, rgba(0, 166, 81, .14), rgba(0, 166, 81, .06));
+            padding: 28px 28px 0;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            letter-spacing: .6px;
+        }
+
+        .brand .cube {
+            width: 44px;
+            height: 44px;
+            position: relative;
+            display: grid;
+            place-items: center;
+        }
+
+        .brand .cube::before {
+            content: "";
+            position: absolute;
+            top: -6px;
+            left: 3px;
+            right: 3px;
+            height: 14px;
+            background: var(--edu-red);
+            transform: skewX(-15deg);
+            border-radius: 3px;
+            box-shadow: 0 6px 0 0 rgba(237, 28, 36, .25) inset;
+        }
+
+        .brand .cube::after {
+            content: "";
+            position: absolute;
+            inset: 6px 4px 4px;
+            background: var(--edu-green);
+            border-radius: 6px;
+            box-shadow: inset 0 0 0 8px rgba(0, 0, 0, .06);
+            -webkit-mask:
+                radial-gradient(12px 10px at 50% 26%, transparent 98%, #000 99%) top / 100% 34% no-repeat,
+                linear-gradient(#000 0 0) center/ 72% 18% no-repeat,
+                radial-gradient(12px 10px at 50% 74%, transparent 98%, #000 99%) bottom / 100% 34% no-repeat,
+                linear-gradient(#000 0 0) left/ 28% 100% no-repeat;
+            mask:
+                radial-gradient(12px 10px at 50% 26%, transparent 98%, #000 99%) top / 100% 34% no-repeat,
+                linear-gradient(#000 0 0) center/ 72% 18% no-repeat,
+                radial-gradient(12px 10px at 50% 74%, transparent 98%, #000 99%) bottom / 100% 34% no-repeat,
+                linear-gradient(#000 0 0) left/ 28% 100% no-repeat;
+        }
+
+        .brand .text {
+            font-size: 20px
+        }
+
+        .hat {
+            position: relative;
+            margin: 30px auto 10px;
+            width: min(420px, 86%);
+            aspect-ratio: 16/10;
+            filter: drop-shadow(0 18px 24px rgba(16, 19, 24, .16));
+        }
+
+        .hat svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .credit {
+            color: var(--muted);
+            font-size: 13px;
+            padding: 0 6px 20px;
+            text-align: center
+        }
+
+        .right {
+            padding: 48px 44px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center
+        }
+
+        .code {
+            font-weight: 800;
+            font-size: clamp(56px, 9vw, 104px);
+            line-height: .9;
+            letter-spacing: -2px;
+            background: linear-gradient(180deg, var(--edu-red) 0, #ff6b73 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 6px 0 rgba(237, 28, 36, .12);
+            margin: 0 0 8px;
+        }
+
+        h1 {
+            margin: .2rem 0 1rem;
+            font-size: clamp(22px, 2.6vw, 34px);
+        }
+
+        p.lead {
+            margin: 0 0 1.25rem;
+            color: var(--muted);
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 10px
+        }
+
+        .btn {
+            --bg: var(--edu-green);
+            --bg-h: #078a4d;
+            --fg: #fff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 18px;
+            border-radius: 12px;
+            border: 2px solid var(--bg);
+            background: var(--bg);
+            color: var(--fg);
+            font-weight: 700;
+            text-decoration: none;
+            transition: .2s ease;
+        }
+
+        .btn:hover {
+            background: var(--bg-h);
+            border-color: var(--bg-h)
+        }
+
+        .btn.secondary {
+            --bg: #e9eef3;
+            --bg-h: #dde6ee;
+            --fg: #1c2129;
+            border-color: transparent;
+            text-decoration: none;
+        }
+
+        .btn.secondary:hover {
+            background: var(--bg-h)
+        }
+
+        .tips {
+            margin-top: 18px;
+            font-size: 13.5px;
+            color: var(--muted)
+        }
+
+        .arabic {
+            margin-top: 6px;
+            color: #728094
+        }
+    </style>
 </head>
 
-<body>	
-	<div>
+<body>
 
-		<div class="robotpage-top-half" >
-			<div id="robot_holder "  >
-			
-				<!-- Generator: Adobe Illustrator 18.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-				<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-				<svg id="brokebotSVG" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-					 viewBox="0 0 551 239" enable-background="new 0 0 551 239" xml:space="preserve" preserveAspectRatio="xMidYMax">
-					<text id="errorCodeTxt" transform="matrix(1 0 0 1 6.7231 240.0011)" class="error_code">oh!</text>
-					<g id="robotHead" >
-						<rect x="359.2" y="173.1" class="robot_limbs_and_ears" width="6.4" height="23.3"/>
-						<rect x="348.1" y="185.4" class="robot_body" width="28.5" height="11"/>
-						<path class="robot_limbs_and_ears" d="M392,197.7h-59.2l0,0c0-3.7,3-6.8,6.8-6.8h45.6C388.9,190.9,392,193.9,392,197.7L392,197.7z"/>
-						<rect x="288.5" y="207.5" class="robot_limbs_and_ears" width="147.7" height="18.7"/>
-						<path class="robot_body" d="M419.3,238.9H305.5c-5.5,0-10-4.5-10-10V207c0-5.5,4.5-10,10-10h113.8c5.5,0,10,4.5,10,10v21.9
-							C429.3,234.4,424.8,238.9,419.3,238.9z"/>
-						<circle class="robot_eye_whites" cx="317" cy="216.4" r="11.7"/>
-						<circle class="robot_eye_whites" cx="407.7" cy="216.4" r="11.7"/>
-						<g id="eyesMove">
-							<g id="eyesBlink">
-								<rect x="311" y="210.4" class="robot_eyes" width="12.1" height="12.1"/>
-								<polygon class="robot_eyes_highlight" points="323.1,210.4 311,210.4 323.1,222.5 			"/>
-								<rect x="401.7" y="210.4" class="robot_eyes" width="12.1" height="12.1"/>
-								<polygon class="robot_eyes_highlight" points="413.7,210.4 401.7,210.4 413.7,222.5 			"/>
-							</g>
-						</g>
-						<rect x="339" y="219.9" class="robot_limbs_and_ears" width="5.3" height="9.8"/>
-						<rect x="347.3" y="219.9" class="robot_limbs_and_ears" width="5.3" height="9.8"/>
-						<rect x="355.6" y="219.9" class="robot_limbs_and_ears" width="5.3" height="9.8"/>
-						<rect x="363.9" y="219.9" class="robot_limbs_and_ears" width="5.3" height="9.8"/>
-						<rect x="372.2" y="219.9" class="robot_limbs_and_ears" width="5.3" height="9.8"/>
-						<rect x="380.5" y="219.9" class="robot_limbs_and_ears" width="5.3" height="9.8"/>
-						<circle class="robot_antenna" cx="362.4" cy="167.9" r="10"/>
-						<circle class="robot_antenna_highlight" cx="363.4" cy="165.9" r="5.5"/>
-					</g>
-					<g id="robotbody">
-						<rect x="154.3" y="184.1" class="robot_limbs_and_ears" width="7" height="16.7"/>
-						<path class="robot_limbs_and_ears" d="M162.6,234.1h-9.7c-2.8,0-5-2.2-5-5v-22.7c0-2.8,2.2-5,5-5h9.7c2.8,0,5,2.2,5,5v22.7
-							C167.6,231.8,165.3,234.1,162.6,234.1z"/>
-						<path class="robot_hands_feet" d="M172.7,238.9c0-8.2-6.7-14.9-14.9-14.9c-8.2,0-14.9,6.7-14.9,14.9H172.7z"/>
-						<circle class="robot_joints_and_belly" cx="157.8" cy="203.1" r="5.1"/>
-						<path class="robot_limbs_and_ears" d="M221.3,234.1h-9.7c-2.8,0-5-2.2-5-5v-22.7c0-2.8,2.2-5,5-5h9.7c2.8,0,5,2.2,5,5v22.7
-							C226.3,231.8,224,234.1,221.3,234.1z"/>
-						<path class="robot_hands_feet" d="M231.3,238.9c0-8.2-6.7-14.9-14.9-14.9c-8.2,0-14.9,6.7-14.9,14.9H231.3z"/>
-						<circle id="leftKnee" class="robot_joints_and_belly" cx="216.4" cy="203.1" r="5.1"/>
-						
-						<g id="upperBody">
-							
-							<rect x="146" y="143" transform="matrix(-0.968 -0.2511 0.2511 -0.968 362.8447 338.4026)" class="robot_limbs_and_ears" width="114" height="6.1"/>
-							<g id="leftArm">
-								<path id="leftOuterClaw" class="robot_hands_feet" d="M247.7,212.6l21.1,21.1c5.8-5.8,5.8-15.3,0-21.1C262.9,206.7,253.5,206.7,247.7,212.6
-									z"/>
-								<path id="leftInnerClaw" class="robot_hands_feet" d="M247.7,212.6c-5.8,5.8-5.8,15.3,0,21.1l21.1-21.1
-									C262.9,206.7,253.5,206.7,247.7,212.6z"/>
-								<rect x="254.7" y="161.1" class="robot_limbs_and_ears" width="7" height="25"/>
-								<path class="robot_limbs_and_ears" d="M263,217.5l-9.7,0c-2.8,0-5-2.3-5-5l0-22.7c0-2.8,2.3-5,5-5l9.7,0c2.7,0,5,2.3,5,5l0,22.7
-									C268,215.3,265.7,217.5,263,217.5z"/>
-								<circle class="robot_joints_and_belly" cx="258.2" cy="186.5" r="5.1"/>
-							</g>
-							<path class="robot_body" d="M270.4,163.5c1.7-6.7-2.3-13.6-9-15.4c-6.7-1.7-13.6,2.3-15.4,9c-1.7,6.7,2.3,13.6,9,15.4
-								C261.8,174.3,268.7,170.3,270.4,163.5z"/>
-							
-								<rect x="130" y="138.3" transform="matrix(0.8845 0.4666 -0.4666 0.8845 83.8309 -45.3494)" class="robot_limbs_and_ears" width="7" height="16.7"/>
-							<g id="rightLowerArm">
-								<path id="rightInnerClaw" class="robot_hands_feet" d="M119,181.3l21.1,21.1c5.8-5.8,5.8-15.3,0-21.1C134.2,175.5,124.8,175.5,119,181.3z"
-									/>
-								<path id="rightOuterClaw" class="robot_hands_feet" d="M119,181.3c-5.8,5.8-5.8,15.3,0,21.1l21.1-21.1C134.2,175.5,124.8,175.5,119,181.3z"
-									/>
-								<path class="robot_limbs_and_ears" d="M134.5,186.2l-9.7,0.1c-2.7,0-5-2.2-5-5l-0.2-22.7c0-2.7,2.2-5,5-5l9.7-0.1c2.7,0,5,2.2,5,5l0.2,22.7
-									C139.5,183.9,137.3,186.2,134.5,186.2z"/>
-							</g>
-							<circle class="robot_joints_and_belly" cx="129.4" cy="154.3" r="5.1"/>
-							<path class="robot_body" d="M154.3,133.4c1.7-6.7-2.3-13.6-9-15.4c-6.7-1.7-13.6,2.3-15.4,9c-1.7,6.7,2.3,13.6,9,15.4
-								C145.7,144.2,152.6,140.2,154.3,133.4z"/>
-							<path class="robot_hands_feet" d="M210.2,119.6l-1.4-1.5c0.1-0.1,9.1-8.7,7.2-15.5l1.9-0.5C220.2,110,210.6,119.2,210.2,119.6z"/>
-							<path class="robot_hands_feet" d="M215.9,117.4l-1.3-1.5c0.4-0.3,9.3-7.5,17.2-7.7l0,2C224.6,110.3,216,117.3,215.9,117.4z"/>
-							<path class="robot_body" d="M210,116l-0.7-1.9c0.1,0,11.8-4.5,12.6-11.5l2,0.3C222.9,111.1,210.5,115.8,210,116z"/>
-							
-							<rect x="203.8" y="108.1" transform="matrix(0.7809 0.6246 -0.6246 0.7809 121.0947 -105.8214)" class="robot_limbs_and_ears" width="15.2" height="23.2"/>
-							<path class="robot_body" d="M217.3,207.9l-62.6-16.2c-5.3-1.4-8.5-6.9-7.2-12.2l19.6-58.3c1.4-5.3,6.4-8.7,11.2-7.4l56.2,14.6
-								c4.8,1.2,7.6,6.6,6.2,11.9l-11.2,60.5C228.1,206,222.6,209.3,217.3,207.9z"/>
-							<path class="robot_joints_and_belly" d="M211.5,184.8l-40.4-10.5c-3.4-0.9-5.5-4.4-4.6-7.9l12.7-37.6c0.9-3.4,4.1-5.6,7.2-4.8l36.3,9.4
-								c3.1,0.8,4.9,4.3,4,7.7l-7.2,39.1C218.5,183.6,214.9,185.6,211.5,184.8z"/>
-						</g>
-					</g>
-				</svg>
-			</div>
-		</div>
-		
-		<div class="robotpage-bottom-half" style="margin-top: 70px;" >
-		
-			<div>
-				
-				<p id="robot-text" style="" >This Page Is Under Regular Maintenance </p>
-				<p style="">We’re Taking A Breather. Will Be Back Soon With A Makeover!</p>
-				<div class="robot-buttons">
-					<a class="robot-buttons" style="background-color: #e54560;" href="#">RELOAD</a> 
-				</div>
-			</div>
-			
-			
-			<div class="clear"></div>
-			
-			
-			
-		</div>
-		
-	</div>
+    <main class="wrap" role="main" aria-labelledby="error-title">
+        <aside class="left">
+            <div class="brand">
+                <span class="cube" aria-hidden="true"></span>
+                <span class="text">EDUGATE</span>
+            </div>
 
-	
+            <div class="hat" aria-hidden="true">
+                <svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg">
+
+                    <polygon points="40,120 320,30 600,120 320,205" fill="var(--edu-red)" />
+
+                    <rect x="500" y="120" width="16" height="110" rx="8" fill="var(--edu-red)" />
+                    <circle cx="508" cy="255" r="28" fill="var(--edu-red)" />
+
+                    <rect x="90" y="210" width="280" height="150" rx="18" fill="var(--edu-green)" />
+                    <rect x="130" y="245" width="200" height="24" rx="8" fill="#ffffff22" />
+                    <rect x="130" y="290" width="200" height="24" rx="8" fill="#ffffff22" />
+                </svg>
+            </div>
+
+            <div class="credit">Inspired by Edugate brand colors</div>
+        </aside>
+        <section class="right">
+            <div class="code" aria-label="404">404</div>
+            <h1 id="error-title">Page not found</h1>
+            <p class="lead">The page you’re looking for doesn’t exist, was moved, or is temporarily unavailable.</p>
+
+            <div class="actions">
+                <a href="{{ url('/') }}" class="btn" aria-label="Back to Home">⟵ Back to Home</a>
+                <a href="javascript:history.back()" class="btn secondary" aria-label="Go Back">Go Back</a>
+            </div>
+
+            <div class="tips">If you think this is a mistake, please contact the site administrator.</div>
+        </section>
+    </main>
 
 </body>
 
-<!-- Mirrored from aprendagames.com/stock/brokebot/errorpages-headless-robot.html?errorcode=404 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 21 Mar 2023 11:07:11 GMT -->
 </html>

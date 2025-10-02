@@ -17,37 +17,36 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="card-body p-4">
-                    <form action="{{ route('articleSubCategory.update', $row->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('articleSubCategory.update', $row->id) }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-                        
+
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">Arabic Title <span class="text-danger">*</span></label>
-                                    <input type="text" 
-                                           name="ar_title" 
-                                           id="ar_title" 
-                                           class="form-control @error('ar_title') is-invalid @enderror" 
-                                           value="{{ old('ar_title', $row->ar_title) }}"
-                                           placeholder="Enter sub category title in Arabic">
+                                    <label class="form-label fw-bold text-dark">Arabic Title <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="ar_title" id="ar_title"
+                                        class="form-control @error('ar_title') is-invalid @enderror"
+                                        value="{{ old('ar_title', $row->ar_title) }}"
+                                        placeholder="Enter sub category title in Arabic">
                                     @error('ar_title')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-6">
                                 <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">English Title <span class="text-danger">*</span></label>
-                                    <input type="text" 
-                                           name="en_title" 
-                                           id="en_title" 
-                                           class="form-control @error('en_title') is-invalid @enderror" 
-                                           value="{{ old('en_title', $row->en_title) }}"
-                                           placeholder="Enter sub category title in English">
+                                    <label class="form-label fw-bold text-dark">English Title <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="en_title" id="en_title"
+                                        class="form-control @error('en_title') is-invalid @enderror"
+                                        value="{{ old('en_title', $row->en_title) }}"
+                                        placeholder="Enter sub category title in English">
                                     @error('en_title')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -57,28 +56,26 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">Arabic Tag Title <span class="text-danger">*</span></label>
-                                    <input type="text" 
-                                           name="ar_tag_title" 
-                                           id="ar_tag_title" 
-                                           class="form-control @error('ar_tag_title') is-invalid @enderror" 
-                                           value="{{ old('ar_tag_title', $row->ar_tag_title) }}"
-                                           placeholder="Enter sub category title in Arabic">
+                                    <label class="form-label fw-bold text-dark">Arabic Tag Title <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="ar_tag_title" id="ar_tag_title"
+                                        class="form-control @error('ar_tag_title') is-invalid @enderror"
+                                        value="{{ old('ar_tag_title', $row->ar_tag_title) }}"
+                                        placeholder="Enter sub category title in Arabic">
                                     @error('ar_tag_title')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-6">
                                 <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">English Tag Title <span class="text-danger">*</span></label>
-                                    <input type="text" 
-                                           name="en_tag_title" 
-                                           id="en_tag_title" 
-                                           class="form-control @error('en_tag_title') is-invalid @enderror" 
-                                           value="{{ old('en_tag_title', $row->en_tag_title) }}"
-                                           placeholder="Enter sub category title in English">
+                                    <label class="form-label fw-bold text-dark">English Tag Title <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="en_tag_title" id="en_tag_title"
+                                        class="form-control @error('en_tag_title') is-invalid @enderror"
+                                        value="{{ old('en_tag_title', $row->en_tag_title) }}"
+                                        placeholder="Enter sub category title in English">
                                     @error('en_tag_title')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -88,53 +85,54 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">Arabic Tag Description <span class="text-danger">*</span></label>
-                                    <input type="text" 
-                                           name="ar_tag_description" 
-                                           id="ar_tag_description" 
-                                           class="form-control @error('ar_tag_description') is-invalid @enderror" 
-                                           value="{{ old('ar_tag_description', $row->ar_tag_description) }}"
-                                           placeholder="Enter sub category title in Arabic">
+                                    <label class="form-label fw-bold text-dark">Arabic Tag Description <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="ar_tag_description" id="ar_tag_description"
+                                        class="form-control @error('ar_tag_description') is-invalid @enderror"
+                                        value="{{ old('ar_tag_description', $row->ar_tag_description) }}"
+                                        placeholder="Enter sub category title in Arabic">
                                     @error('ar_tag_description')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-6">
                                 <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">English Tag Description <span class="text-danger">*</span></label>
-                                    <input type="text" 
-                                           name="en_tag_description" 
-                                           id="en_tag_description" 
-                                           class="form-control @error('en_tag_description') is-invalid @enderror" 
-                                           value="{{ old('en_tag_description', $row->en_tag_description) }}"
-                                           placeholder="Enter sub category title in English">
+                                    <label class="form-label fw-bold text-dark">English Tag Description <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="en_tag_description" id="en_tag_description"
+                                        class="form-control @error('en_tag_description') is-invalid @enderror"
+                                        value="{{ old('en_tag_description', $row->en_tag_description) }}"
+                                        placeholder="Enter sub category title in English">
                                     @error('en_tag_description')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">Category <span class="text-danger">*</span></label>
-                                    <select name="new_article_catrgory_id" id="new_article_catrgory_id" class="form-select @error('new_article_catrgory_id') is-invalid @enderror">
+                                    <label class="form-label fw-bold text-dark">Category <span
+                                            class="text-danger">*</span></label>
+                                    <select name="new_article_catrgory_id" id="new_article_catrgory_id"
+                                        class="form-select @error('new_article_catrgory_id') is-invalid @enderror">
                                         <option value="">Select Category</option>
                                         @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}" {{ old('new_article_catrgory_id', $row->new_article_catrgory_id) == $category->id ? 'selected' : '' }}>
+                                            <option value="{{ $category->id }}"
+                                                {{ old('new_article_catrgory_id', $row->new_article_catrgory_id) == $category->id ? 'selected' : '' }}>
                                                 {{ $category->ar_title }} - {{ $category->en_title }}
                                             </option>
                                         @endforeach
-                                    </select>                                    
+                                    </select>
                                     @error('new_article_catrgory_id')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
-                        </div>  
+                        </div>
 
 
                         <div class="border-top pt-4">
@@ -142,7 +140,7 @@
                                 <a href="{{ route('articleSubCategory.index') }}" class="btn btn-outline-secondary">
                                     <span class="me-1">←</span> Back to Sub Categories
                                 </a>
-                                
+
                                 <button type="submit" class="btn btn-primary px-4">
                                     <span class="me-1">💾</span> Update Sub Category
                                 </button>
@@ -158,12 +156,12 @@
         .slider-thumbnail {
             transition: all 0.3s ease !important;
         }
-        
+
         .slider-thumbnail:hover {
             transform: scale(1.05) !important;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
         }
-        
+
         .image-preview-container {
             position: relative;
             display: inline-block;
@@ -174,15 +172,15 @@
         function previewNewImage(input) {
             const preview = document.getElementById('newImagePreview');
             const display = document.getElementById('newImageDisplay');
-            
+
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
-                
+
                 reader.onload = function(e) {
                     display.src = e.target.result;
                     preview.style.display = 'block';
                 }
-                
+
                 reader.readAsDataURL(input.files[0]);
             } else {
                 preview.style.display = 'none';

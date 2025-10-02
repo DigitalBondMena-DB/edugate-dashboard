@@ -17,24 +17,22 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="card-body p-4">
 
                     <form action="{{ route('counters.update', $counter->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
-                        {{-- Email --}}
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">Arabic Title <span class="text-danger">*</span></label>
-                                    <input type="title_ar"
-                                        name="title_ar"
-                                        id="title_ar"
+                                    <label class="form-label fw-bold text-dark">Arabic Title <span
+                                            class="text-danger">*</span></label>
+                                    <input type="title_ar" name="title_ar" id="title_ar"
                                         class="form-control @error('title_ar') is-invalid @enderror"
                                         value="{{ old('title_ar', $counter->title_ar) }}"
-                                        placeholder="Enter Email">
+                                        placeholder="Enter Title in Arabic">
                                     @error('title_ar')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -42,13 +40,12 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">English Title <span class="text-danger">*</span></label>
-                                    <input type="title_en"
-                                        name="title_en"
-                                        id="title_en"
+                                    <label class="form-label fw-bold text-dark">English Title <span
+                                            class="text-danger">*</span></label>
+                                    <input type="title_en" name="title_en" id="title_en"
                                         class="form-control @error('title_en') is-invalid @enderror"
                                         value="{{ old('title_en', $counter->title_en) }}"
-                                        placeholder="Enter Email">
+                                        placeholder="Enter Title in English">
                                     @error('title_en')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -56,13 +53,11 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">Count <span class="text-danger">*</span></label>
-                                    <input type="count"
-                                        name="count"
-                                        id="count"
+                                    <label class="form-label fw-bold text-dark">Count <span
+                                            class="text-danger">*</span></label>
+                                    <input type="count" name="count" id="count"
                                         class="form-control @error('count') is-invalid @enderror"
-                                        value="{{ old('count', $counter->count) }}"
-                                        placeholder="Enter Email">
+                                        value="{{ old('count', $counter->count) }}" placeholder="Enter Count">
                                     @error('count')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -74,7 +69,7 @@
 
 
 
-                        
+
 
                         <div class="border-top pt-4">
                             <div class="d-flex justify-content-between align-items-center">
@@ -97,11 +92,16 @@
         .slider-thumbnail {
             transition: all 0.3s ease !important;
         }
+
         .slider-thumbnail:hover {
             transform: scale(1.05) !important;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
         }
-        .image-preview-container { position: relative; display: inline-block; }
+
+        .image-preview-container {
+            position: relative;
+            display: inline-block;
+        }
     </style>
 
     <script>

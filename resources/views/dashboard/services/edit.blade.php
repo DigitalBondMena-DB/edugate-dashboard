@@ -17,37 +17,33 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="card-body p-4">
                     <form action="{{ route('service.update', $row->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-                        
+
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">Arabic Name <span class="text-danger">*</span></label>
-                                    <input type="text" 
-                                           name="ar_name" 
-                                           id="ar_name" 
-                                           class="form-control @error('ar_name') is-invalid @enderror" 
-                                           value="{{ old('ar_name', $row->ar_name) }}"
-                                           placeholder="Enter name in Arabic">
+                                    <label class="form-label fw-bold text-dark">Arabic Name <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="ar_name" id="ar_name"
+                                        class="form-control @error('ar_name') is-invalid @enderror"
+                                        value="{{ old('ar_name', $row->ar_name) }}" placeholder="Enter name in Arabic">
                                     @error('ar_name')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-6">
                                 <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">English Name <span class="text-danger">*</span></label>
-                                    <input type="text" 
-                                           name="en_name" 
-                                           id="en_name" 
-                                           class="form-control @error('en_name') is-invalid @enderror" 
-                                           value="{{ old('en_name', $row->en_name) }}"
-                                           placeholder="Enter name in English">
+                                    <label class="form-label fw-bold text-dark">English Name <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="en_name" id="en_name"
+                                        class="form-control @error('en_name') is-invalid @enderror"
+                                        value="{{ old('en_name', $row->en_name) }}" placeholder="Enter name in English">
                                     @error('en_name')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -57,28 +53,26 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">Arabic Job Title <span class="text-danger">*</span></label>
-                                    <input type="text" 
-                                           name="ar_job_title" 
-                                           id="ar_job_title" 
-                                           class="form-control @error('ar_job_title') is-invalid @enderror" 
-                                           value="{{ old('ar_job_title', $row->ar_job_title) }}"
-                                           placeholder="Enter job title in Arabic">
+                                    <label class="form-label fw-bold text-dark">Arabic Job Title <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="ar_job_title" id="ar_job_title"
+                                        class="form-control @error('ar_job_title') is-invalid @enderror"
+                                        value="{{ old('ar_job_title', $row->ar_job_title) }}"
+                                        placeholder="Enter job title in Arabic">
                                     @error('ar_job_title')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-6">
                                 <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">English Job Title <span class="text-danger">*</span></label>
-                                    <input type="text" 
-                                           name="en_job_title" 
-                                           id="en_job_title" 
-                                           class="form-control @error('en_job_title') is-invalid @enderror" 
-                                           value="{{ old('en_job_title', $row->en_job_title) }}"
-                                           placeholder="Enter job title in English">
+                                    <label class="form-label fw-bold text-dark">English Job Title <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="en_job_title" id="en_job_title"
+                                        class="form-control @error('en_job_title') is-invalid @enderror"
+                                        value="{{ old('en_job_title', $row->en_job_title) }}"
+                                        placeholder="Enter job title in English">
                                     @error('en_job_title')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -88,26 +82,22 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">Arabic Text <span class="text-danger">*</span></label>
-                                    <textarea name="ar_text" 
-                                              id="ar_text" 
-                                              class="form-control @error('ar_text') is-invalid @enderror" 
-                                              rows="4"
-                                              placeholder="Enter text in Arabic">{{ old('ar_text', $row->ar_text) }}</textarea>
+                                    <label class="form-label fw-bold text-dark">Arabic Text <span
+                                            class="text-danger">*</span></label>
+                                    <textarea name="ar_text" id="ar_text" class="form-control @error('ar_text') is-invalid @enderror" rows="4"
+                                        placeholder="Enter text in Arabic">{{ old('ar_text', $row->ar_text) }}</textarea>
                                     @error('ar_text')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-6">
                                 <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">English Text <span class="text-danger">*</span></label>
-                                    <textarea name="en_text" 
-                                              id="en_text" 
-                                              class="form-control @error('en_text') is-invalid @enderror" 
-                                              rows="4"
-                                              placeholder="Enter text in English">{{ old('en_text', $row->en_text) }}</textarea>
+                                    <label class="form-label fw-bold text-dark">English Text <span
+                                            class="text-danger">*</span></label>
+                                    <textarea name="en_text" id="en_text" class="form-control @error('en_text') is-invalid @enderror" rows="4"
+                                        placeholder="Enter text in English">{{ old('en_text', $row->en_text) }}</textarea>
                                     @error('en_text')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -117,8 +107,8 @@
 
                         <div class="mb-4">
                             <label class="form-label fw-bold text-dark">Feedback Image</label>
-                            
-                            @if($row->image)
+
+                            @if ($row->image)
                                 <div class="mb-3">
                                     <div class="border rounded p-3 bg-light">
                                         <div class="d-flex align-items-center">
@@ -128,12 +118,11 @@
                                             <div class="position-relative">
                                                 <p class="mb-2 fw-bold text-muted">Current Image:</p>
                                                 <div class="position-relative image-preview-container">
-                                                    <img class="rounded border shadow-sm slider-thumbnail" 
-                                                         style="width: 150px; height: 100px; object-fit: cover; cursor: pointer; transition: all 0.3s ease;"
-                                                         src="{{ asset('service/' . $row->image) }}" 
-                                                         alt="Current Feedback Image"
-                                                         data-bs-toggle="modal" 
-                                                         data-bs-target="#imageModal{{ $row->id }}">
+                                                    <img class="rounded border shadow-sm slider-thumbnail"
+                                                        style="width: 150px; height: 100px; object-fit: cover; cursor: pointer; transition: all 0.3s ease;"
+                                                        src="{{ asset('service/' . $row->image) }}"
+                                                        alt="Current Feedback Image" data-bs-toggle="modal"
+                                                        data-bs-target="#imageModal{{ $row->id }}">
                                                 </div>
                                                 <small class="text-muted d-block mt-1">Click to preview full size</small>
                                             </div>
@@ -142,20 +131,21 @@
                                 </div>
 
                                 {{-- Image Modal --}}
-                                <div class="modal fade" id="imageModal{{ $row->id }}" tabindex="-1" aria-labelledby="imageModalLabel{{ $row->id }}" aria-hidden="true">
+                                <div class="modal fade" id="imageModal{{ $row->id }}" tabindex="-1"
+                                    aria-labelledby="imageModalLabel{{ $row->id }}" aria-hidden="true">
                                     <div class="modal-dialog modal-lg modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="imageModalLabel{{ $row->id }}">
                                                     <i class="fas fa-image me-2"></i>Feedback Preview
                                                 </h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body text-center p-0">
-                                                <img src="{{ asset('service/' . $row->image) }}" 
-                                                     class="img-fluid rounded" 
-                                                     alt="Full Size Feedback Image"
-                                                     style="max-height: 70vh; object-fit: contain;">
+                                                <img src="{{ asset('service/' . $row->image) }}"
+                                                    class="img-fluid rounded" alt="Full Size Feedback Image"
+                                                    style="max-height: 70vh; object-fit: contain;">
                                             </div>
                                             <div class="modal-footer justify-content-between">
                                                 <div class="text-muted small">
@@ -170,7 +160,7 @@
                                     </div>
                                 </div>
                             @endif
-                            
+
                             <div class="border rounded p-3 bg-light">
                                 <div class="d-flex align-items-center">
                                     <div class="me-3">
@@ -180,21 +170,20 @@
                                         <label class="form-label mb-2 fw-semibold">
                                             {{ $row->image ? 'Change Image (Optional)' : 'Upload New Image' }}
                                         </label>
-                                        <input type="file" 
-                                               name="image" 
-                                               id="image" 
-                                               class="form-control @error('image') is-invalid @enderror"
-                                               accept="image/*"
-                                               onchange="previewNewImage(this)">
+                                        <input type="file" name="image" id="image"
+                                            class="form-control @error('image') is-invalid @enderror" accept="image/*"
+                                            onchange="previewNewImage(this)">
                                         <small class="text-muted mt-1 d-block">
                                             Supported formats: JPG, PNG, GIF (Max: 2MB)
                                             {{ $row->image ? ' • Leave empty to keep current image' : '' }}
                                         </small>
-                                        
+
                                         {{-- New Image Preview --}}
                                         <div id="newImagePreview" class="mt-3" style="display: none;">
                                             <p class="mb-2 fw-bold text-success small">New Image Preview:</p>
-                                            <img id="newImageDisplay" class="rounded border" style="max-width: 150px; max-height: 100px; object-fit: cover;" alt="New Image Preview">
+                                            <img id="newImageDisplay" class="rounded border"
+                                                style="max-width: 150px; max-height: 100px; object-fit: cover;"
+                                                alt="New Image Preview">
                                         </div>
                                     </div>
                                 </div>
@@ -209,7 +198,7 @@
                                 <a href="{{ route('service.index') }}" class="btn btn-outline-secondary">
                                     <span class="me-1">←</span> Back to Feedbacks
                                 </a>
-                                
+
                                 <button type="submit" class="btn btn-primary px-4">
                                     <span class="me-1">💾</span> Update Feedback
                                 </button>
@@ -225,12 +214,12 @@
         .slider-thumbnail {
             transition: all 0.3s ease !important;
         }
-        
+
         .slider-thumbnail:hover {
             transform: scale(1.05) !important;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
         }
-        
+
         .image-preview-container {
             position: relative;
             display: inline-block;
@@ -241,15 +230,15 @@
         function previewNewImage(input) {
             const preview = document.getElementById('newImagePreview');
             const display = document.getElementById('newImageDisplay');
-            
+
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
-                
+
                 reader.onload = function(e) {
                     display.src = e.target.result;
                     preview.style.display = 'block';
                 }
-                
+
                 reader.readAsDataURL(input.files[0]);
             } else {
                 preview.style.display = 'none';

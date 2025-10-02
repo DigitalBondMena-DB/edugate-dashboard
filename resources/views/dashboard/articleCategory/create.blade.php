@@ -8,7 +8,7 @@
 
 @section('content')
     <div class="row">
-    <div class="col-12">
+        <div class="col-12">
             <div class="card shadow-sm">
                 <div class="card-header card-header-primary">
                     <div class="d-flex align-items-center">
@@ -17,35 +17,31 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="card-body p-4">
                     <form action="{{ route('articleCategory.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">Arabic Title <span class="text-danger">*</span></label>
-                                    <input type="text" 
-                                           name="ar_title" 
-                                           id="ar_title" 
-                                           class="form-control @error('ar_title') is-invalid @enderror" 
-                                           value="{{ old('ar_title') }}"
-                                           placeholder="Enter slider title in Arabic">
+                                    <label class="form-label fw-bold text-dark">Arabic Title <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="ar_title" id="ar_title"
+                                        class="form-control @error('ar_title') is-invalid @enderror"
+                                        value="{{ old('ar_title') }}" placeholder="Enter slider title in Arabic">
                                     @error('ar_title')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-6">
                                 <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">English Title <span class="text-danger">*</span></label>
-                                    <input type="text" 
-                                           name="en_title" 
-                                           id="en_title" 
-                                           class="form-control @error('en_title') is-invalid @enderror" 
-                                           value="{{ old('en_title') }}"
-                                           placeholder="Enter slider title in English">
+                                    <label class="form-label fw-bold text-dark">English Title <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="en_title" id="en_title"
+                                        class="form-control @error('en_title') is-invalid @enderror"
+                                        value="{{ old('en_title') }}" placeholder="Enter slider title in English">
                                     @error('en_title')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -57,7 +53,7 @@
                                 <a href="{{ route('articleCategory.index') }}" class="btn btn-outline-secondary">
                                     <span class="me-1">←</span> Back to Categories
                                 </a>
-                                
+
                                 <button type="submit" class="btn btn-primary px-4">
                                     <span class="me-1">💾</span> Create Category
                                 </button>

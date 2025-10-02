@@ -19,21 +19,25 @@
                 <div class="card-body p-4 no-interact">
                     <div class="mb-3">
                         <label class="form-label fw-bold text-dark">Name</label>
-                        <input type="text" class="form-control" value="{{ $feedback->name }}" disabled aria-disabled="true">
+                        <input type="text" class="form-control" value="{{ $feedback->name }}" disabled
+                            aria-disabled="true">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label fw-bold text-dark">Email</label>
-                        <input type="text" class="form-control" value="{{ $feedback->email }}" disabled aria-disabled="true">
+                        <input type="text" class="form-control" value="{{ $feedback->email }}" disabled
+                            aria-disabled="true">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label fw-bold text-dark">Phone</label>
-                        <input type="text" class="form-control" value="{{ $feedback->phone }}" disabled aria-disabled="true">
+                        <input type="text" class="form-control" value="{{ $feedback->phone }}" disabled
+                            aria-disabled="true">
                     </div>
                     <div class="mb-4">
                         <label class="form-label fw-bold text-dark d-block">Request Type</label>
-                        <input type="text" class="form-control" value="{{ $feedback->request_type }}" disabled aria-disabled="true">
+                        <input type="text" class="form-control" value="{{ $feedback->request_type }}" disabled
+                            aria-disabled="true">
                     </div>
                 </div>
 
@@ -50,6 +54,7 @@
         .no-interact {
             pointer-events: none;
         }
+
         .no-interact input,
         .no-interact textarea,
         .no-interact select {

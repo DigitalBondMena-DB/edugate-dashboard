@@ -21,7 +21,11 @@
                     </li>
                     <li class="header-logout">
                         <div class="head-icon bg-light-dark rounded-circle f-s-22 p-2">
-                            <i class="ph ph-sign-out"></i>
+                            <form action="{{ url('/logout') }}" method="post">
+                                @csrf
+                                <button type="submit" class="bg-transparent border-0 p-0"><i
+                                        class="ph ph-sign-out"></i></button>
+                            </form>
                         </div>
                     </li>
                 </ul>
