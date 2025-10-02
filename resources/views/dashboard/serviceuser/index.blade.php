@@ -140,20 +140,11 @@
                     </div>
                 </div>
 
-
-                @if ($rows->hasPages())
-                    <div class="card-footer bg-transparent border-0 py-3">
-                        <div class="d-flex justify-content-center">
-                            {{ $rows->withQueryString()->onEachSide(1)->links('pagination::custom-bootstrap4') }}
-                        </div>
-                    </div>
-                @endif
-
             </div>
 
         </div>
     </div>
-
+@include('dashboard.includes.pagination')
     <style>
         .fixed-table {
             table-layout: fixed;

@@ -107,12 +107,6 @@
                                     @endforeach
                                 </tbody>
                             </table>
-
-                            <div class="px-3 py-3 border-top mt-2">
-                                <div class="d-flex justify-content-center">
-                                    {{ $rows->links('pagination::custom-bootstrap4') }}
-                                </div>
-                            </div>
                         @else
                             <div class="text-center py-5">
                                 <div class="mb-4">
@@ -134,7 +128,7 @@
             </div>
         </div>
     </div>
-
+@include('dashboard.includes.pagination')
     <style>
         .slider-thumbnail {
             transition: all 0.3s ease !important;

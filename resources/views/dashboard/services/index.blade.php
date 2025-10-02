@@ -122,12 +122,6 @@
                                     @endforeach
                                 </tbody>
                             </table>
-
-                            <div class="px-3 py-3 bg-transparent">
-                                <div class="d-flex justify-content-center">
-                                    {{ $rows->withQueryString()->onEachSide(1)->links('pagination::custom-bootstrap4') }}
-                                </div>
-                            </div>
                         @else
                             <div class="text-center py-5">
                                 <div class="mb-4">
@@ -149,6 +143,8 @@
 
         </div>
     </div>
+
+    @include('dashboard.includes.pagination')
 
     <style>
         .fixed-table {
