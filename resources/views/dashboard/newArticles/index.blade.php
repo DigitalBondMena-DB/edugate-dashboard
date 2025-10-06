@@ -98,10 +98,10 @@
                                             </td>
 
                                             <td class="text-start text-wrap-cell">
-                                                {{ $article->ar_title > 30 ? '...' . Str::substr($article->ar_title, 0, 30) : $article->ar_title ?: '-' }}
+                                                {{ ($article->ar_title > 30) ? ('...' . Str::substr($article->ar_title, 0, 30)) : ($article->ar_title ?: '-') }}
                                             </td>
                                             <td class="text-start text-wrap-cell">
-                                                {{ $article->en_title > 30 ? Str::substr($article->en_title, 0, 30) . '...' : $article->en_title ?: '-' }}
+                                                {{ ($article->en_title > 30) ? (Str::substr($article->en_title, 0, 30) . '...') : ($article->en_title ?: '-') }}
                                             </td>
                                             <td class="text-center">
 
