@@ -53,8 +53,9 @@
 
                                 <colgroup>
                                     <col style="width:8%">
-                                    <col style="width:37%">
-                                    <col style="width: 37%">
+                                    <col style="width:27%">
+                                    <col style="width: 27%">
+                                    <col style="width:20%">
                                     <col style="width:18%">
                                 </colgroup>
 
@@ -63,6 +64,7 @@
                                         <th class="text-center">#</th>
                                         <th class="text-center">Title (AR)</th>
                                         <th class="text-center">Title (EN)</th>
+                                        <th class="text-center">Banner Image</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
@@ -80,6 +82,33 @@
 
                                             <td class="text-start text-wrap-cell" dir="ltr">
                                                 {{ $subCategory->en_title }}
+                                            </td>
+
+                                            <td class="text-center">
+                                                <img src="{{ asset('subcategory/' . $subCategory->banner_image) }}" alt="Category Image"
+                                                    class="rounded border shadow-sm slider-thumbnail"
+                                                    style="width:96px;height:64px;object-fit:cover;cursor:pointer"
+                                                    data-bs-toggle="modal" data-bs-target="#imageModal{{ $subCategory->id }}">
+                                                {{-- Image Modal --}}
+                                                <div class="modal fade" id="imageModal{{ $subCategory->id }}" tabindex="-1"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title"><i class="fas fa-image me-2"></i>
+                                                                    Image Preview</h5>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body text-center p-0">
+                                                                <img src="{{ asset('subcategory/' . $subCategory->banner_image) }}"
+                                                                    class="img-fluid rounded"
+                                                                    style="max-height:70vh;object-fit:contain"
+                                                                    alt="Full Size Image">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </td>
 
                                             <td class="text-center actions-cell">

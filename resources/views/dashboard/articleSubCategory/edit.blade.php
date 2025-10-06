@@ -56,6 +56,35 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-4">
+                                    <label class="form-label fw-bold text-dark">Arabic Description <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="ar_description" id="ar_description"
+                                        class="form-control @error('ar_description') is-invalid @enderror"
+                                        value="{{ old('ar_description', $row->ar_description) }}"
+                                        placeholder="Enter sub category description in Arabic">
+                                    @error('ar_description')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold text-dark">English Description <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="en_description" id="en_description"
+                                        class="form-control @error('en_description') is-invalid @enderror"
+                                        value="{{ old('en_description', $row->en_description) }}"
+                                        placeholder="Enter sub category description in English">
+                                    @error('en_description')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-4">
                                     <label class="form-label fw-bold text-dark">Arabic Tag Title <span
                                             class="text-danger">*</span></label>
                                     <input type="text" name="ar_tag_title" id="ar_tag_title"
@@ -111,7 +140,64 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold text-dark">Arabic Detail Title <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="ar_detail_title" id="ar_detail_title"
+                                        class="form-control @error('ar_detail_title') is-invalid @enderror"
+                                        value="{{ old('ar_detail title', $row->ar_detail_title) }}"
+                                        placeholder="Enter sub category detail title in Arabic">
+                                    @error('ar_detail_title')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
 
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold text-dark">English detail Title <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="en_detail_title" id="en_detail_title"
+                                        class="form-control @error('en_detail_title') is-invalid @enderror"
+                                        value="{{ old('en_detail_title', $row->en_detail_title) }}"
+                                        placeholder="Enter sub category detail title in English">
+                                    @error('en_detail_title')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold text-dark">Arabic Detail Description <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="ar_detail_text" id="ar_detail_text"
+                                        class="form-control @error('ar_detail_text') is-invalid @enderror"
+                                        value="{{ old('ar_detail_text', $row->ar_detail_text) }}"
+                                        placeholder="Enter sub category detail description in Arabic">
+                                    @error('ar_detail_text')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold text-dark">English Detail Description <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="en_detail_text" id="en_detail_text"
+                                        class="form-control @error('en_detail_text') is-invalid @enderror"
+                                        value="{{ old('en_detail_text', $row->en_detail_text) }}"
+                                        placeholder="Enter sub category detail description in English">
+                                    @error('en_detail_text')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-4">
@@ -131,6 +217,96 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold text-dark">Banner Image</label>
+
+                            @if ($row->banner_image)
+                                <div class="mb-3">
+                                    <div class="border rounded p-3 bg-light">
+                                        <div class="d-flex align-items-center">
+                                            <div class="me-3">
+                                                <span style="font-size: 1.5rem;">🖼️</span>
+                                            </div>
+                                            <div class="position-relative">
+                                                <p class="mb-2 fw-bold text-muted">Current Image:</p>
+                                                <div class="position-relative image-preview-container">
+                                                    <img class="rounded border shadow-sm slider-thumbnail"
+                                                        style="width: 150px; height: 100px; object-fit: cover; cursor: pointer; transition: all 0.3s ease;"
+                                                        src="{{ asset('subcategory/' . $row->banner_image) }}"
+                                                        alt="Current Feedback Image" data-bs-toggle="modal"
+                                                        data-bs-target="#imageModal{{ $row->id }}">
+                                                </div>
+                                                <small class="text-muted d-block mt-1">Click to preview full size</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{-- Image Modal --}}
+                                <div class="modal fade" id="imageModal{{ $row->id }}" tabindex="-1"
+                                    aria-labelledby="imageModalLabel{{ $row->id }}" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="imageModalLabel{{ $row->id }}">
+                                                    <i class="fas fa-image me-2"></i> Preview
+                                                </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body text-center p-0">
+                                                <img src="{{ asset('service/' . $row->banner_image) }}"
+                                                    class="img-fluid rounded" alt="Full Size Image"
+                                                    style="max-height: 70vh; object-fit: contain;">
+                                            </div>
+                                            <div class="modal-footer justify-content-between">
+                                                <div class="text-muted small">
+                                                    <i class="fas fa-info-circle me-1"></i>
+                                                    Image: {{ $row->banner_image }}
+                                                </div>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                    <i class="fas fa-times me-1"></i>Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+
+                            <div class="border rounded p-3 bg-light">
+                                <div class="d-flex align-items-center">
+                                    <div class="me-3">
+                                        <span style="font-size: 2rem;">📸</span>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <label class="form-label mb-2 fw-semibold">
+                                            {{ $row->banner_image ? 'Change Image (Optional)' : 'Upload New Image' }}
+                                        </label>
+                                        <input type="file" name="banner_image" id="image"
+                                            class="form-control @error('banner_image') is-invalid @enderror" accept="image/*"
+                                            onchange="previewNewImage(this)">
+                                        <small class="text-muted mt-1 d-block">
+                                            Supported formats: JPG, PNG, GIF (Max: 2MB)
+                                            {{ $row->banner_image ? ' • Leave empty to keep current image' : '' }}
+                                        </small>
+
+                                        {{-- New Image Preview --}}
+                                        <div id="newImagePreview" class="mt-3" style="display: none;">
+                                            <p class="mb-2 fw-bold text-success small">New Image Preview:</p>
+                                            <img id="newImageDisplay" class="rounded border"
+                                                style="max-width: 150px; max-height: 100px; object-fit: cover;"
+                                                alt="New Image Preview">
+                                        </div>
+                                    </div>
+                                </div>
+                                @error('banner_image')
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
 

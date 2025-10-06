@@ -52,6 +52,7 @@ Route::namespace('BackEnd')->prefix('admin')->middleware('admin')->group(functio
     Route::resource('/clients', 'ClientsController');
     Route::patch('/clients/{client}/toggle-status', 'ClientsController@toggleStatus')->name('clients.toggleStatus');
     Route::resource('/feedback', 'ContactController');
+    Route::resource('/study_abroad', 'StudyAbroadFormController');
     Route::resource('/contact-us', 'ContactUsController')->only(['index']);
     Route::get('/contact-us/edit', 'ContactUsController@edit')->name('contact-us.edit');
     Route::put('/contact-us', 'ContactUsController@update')->name('contact-us.update');
@@ -70,3 +71,4 @@ Route::namespace('BackEnd')->prefix('admin')->middleware('admin')->group(functio
     Route::post('why-us/image', 'WhyUsController@updateImage')->name('why-us.updateImage');
     Route::resource('page-banners', 'PageBannerController');
 });
+

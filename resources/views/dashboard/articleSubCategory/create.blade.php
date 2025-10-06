@@ -51,6 +51,35 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-4">
+                                    <label class="form-label fw-bold text-dark">Arabic Description <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="ar_description" id="ar_description"
+                                        class="form-control @error('ar_description') is-invalid @enderror"
+                                        value="{{ old('ar_description') }}"
+                                        placeholder="Enter sub category description in Arabic">
+                                    @error('ar_description')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold text-dark">English Description <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="en_description" id="en_description"
+                                        class="form-control @error('en_description') is-invalid @enderror"
+                                        value="{{ old('en_description') }}"
+                                        placeholder="Enter sub category description in English">
+                                    @error('en_description')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-4">
                                     <label class="form-label fw-bold text-dark">Arabic Tag Title <span
                                             class="text-danger">*</span></label>
                                     <input type="text" name="ar_tag_title" id="ar_tag_title"
@@ -107,6 +136,62 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-4">
+                                    <label class="form-label fw-bold text-dark">Arabic Detail Title <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="ar_detail_title" id="ar_detail_title"
+                                        class="form-control @error('ar_detail_title') is-invalid @enderror"
+                                        value="{{ old('ar_detail_title') }}" placeholder="Enter sub category Detail title in Arabic">
+                                    @error('ar_detail_title')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold text-dark">English Detail Title <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="en_detail_title" id="en_detail_title"
+                                        class="form-control @error('en_detail_title') is-invalid @enderror"
+                                        value="{{ old('en_detail_title') }}" placeholder="Enter sub category Detail title in English">
+                                    @error('en_detail_title')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold text-dark">Arabic Detail Description <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="ar_detail_text" id="ar_detail_text"
+                                        class="form-control @error('ar_detail_text') is-invalid @enderror"
+                                        value="{{ old('ar_detail_text') }}"
+                                        placeholder="Enter sub category detail description in Arabic">
+                                    @error('ar_detail_text')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold text-dark">English Detail Description <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="en_detail_text" id="en_detail_text"
+                                        class="form-control @error('en_detail_text') is-invalid @enderror"
+                                        value="{{ old('en_detail_text') }}"
+                                        placeholder="Enter sub category detail description in English">
+                                    @error('en_detail_text')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-4">
                                     <label class="form-label fw-bold text-dark">Category <span
                                             class="text-danger">*</span></label>
                                     <select name="new_article_catrgory_id"
@@ -123,6 +208,27 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label fw-bold text-dark">Banner Image <span class="text-danger">*</span></label>
+                            <div class="border rounded p-3 bg-light">
+                                <div class="d-flex align-items-center">
+                                    <div class="me-3">
+                                        <span style="font-size: 2rem;">📸</span>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <input type="file" 
+                                               name="banner_image" 
+                                               id="image" 
+                                               class="form-control @error('banner_image') is-invalid @enderror"
+                                               accept="image/*">
+                                        <small class="text-muted mt-1 d-block">Supported formats: JPG, JPEG, PNG, WEBP (Max: 2MB)</small>
+                                    </div>
+                                </div>
+                                @error('banner_image')
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="border-top pt-4">

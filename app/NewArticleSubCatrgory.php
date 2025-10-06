@@ -18,7 +18,14 @@ class NewArticleSubCatrgory extends Model
         'en_tag_description',
         'ar_tag_description',
         'new_article_catrgory_id',
-        'active'
+        'active',
+        'banner_image',
+        'ar_description',
+        'en_description',
+        'ar_detail_title',
+        'en_detail_title',
+        'ar_detail_text',
+        'en_detail_text',
     ];
 
 

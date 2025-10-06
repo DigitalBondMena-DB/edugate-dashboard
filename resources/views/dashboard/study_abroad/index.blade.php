@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 
-@php $pageTitle = 'Study Abroad Requests Control'; @endphp
+@php $pageTitle = 'Study Abroad Control'; @endphp
 
 @section('title')
     {{ $pageTitle }}
@@ -26,10 +26,10 @@
 
                                 <colgroup>
                                     <col style="width:8%">
-                                    <col style="width:24%">
-                                    <col style="width:24%">
-                                    <col style="width:12%">
-                                    <col style="width:12%">
+                                    <col style="width:20%">
+                                    <col style="width:20%">
+                                    <col style="width:16%">
+                                    <col style="width:16%">
                                     <col style="width:10%">
                                     <col style="width:10%">
                                 </colgroup>
@@ -40,28 +40,28 @@
                                         <th class="text-center">Name</th>
                                         <th class="text-center">Email</th>
                                         <th class="text-center">Phone</th>
-                                        <th class="text-center">Request Type</th>
+                                        <th class="text-center">Country</th>
                                         <th class="text-center">seen</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    @foreach ($rows as $feedback)
+                                    @foreach ($rows as $study_abroad)
                                         <tr>
                                             <td class="text-center">
-                                                <span class="badge bg-success rounded-pill">{{ $feedback->id }}</span>
+                                                <span class="badge bg-success rounded-pill">{{ $study_abroad->id }}</span>
                                             </td>
 
                                             <td class="text-start text-wrap-cell">
-                                                {{ strlen($feedback->name) > 20 ? substr($feedback->name, 0, 20) . '...' : $feedback->name }}
+                                                {{ strlen($study_abroad->name) > 20 ? substr($study_abroad->name, 0, 20) . '...' : $study_abroad->name }}
                                             </td>
 
                                             <td class="text-start text-wrap-cell">
-                                                @if ($feedback->email)
-                                                    <a href="mailto:{{ $feedback->email }}"
+                                                @if ($study_abroad->email)
+                                                    <a href="mailto:{{ $study_abroad->email }}"
                                                         class="link-dark text-decoration-underline">
-                                                        {{ strlen($feedback->email) > 20 ? substr($feedback->email, 0, 20) . '...' : $feedback->email }}
+                                                        {{ strlen($study_abroad->email) > 20 ? substr($study_abroad->email, 0, 20) . '...' : $study_abroad->email }}
                                                     </a>
                                                 @else
                                                     <span class="text-muted">—</span>
@@ -69,10 +69,10 @@
                                             </td>
 
                                             <td class="text-start text-wrap-cell">
-                                                @if ($feedback->phone)
-                                                    <a href="tel:{{ preg_replace('/\s+/', '', $feedback->phone) }}"
+                                                @if ($study_abroad->phone)
+                                                    <a href="tel:{{ preg_replace('/\s+/', '', $study_abroad->phone) }}"
                                                         class="link-dark">
-                                                        {{ $feedback->phone }}
+                                                        {{ $study_abroad->phone }}
                                                     </a>
                                                 @else
                                                     <span class="text-muted">—</span>
@@ -80,12 +80,11 @@
                                             </td>
 
                                             <td class="text-center">
-                                                <span
-                                                    class="badge rounded-pill req-type-badge">{{ $feedback->request_type }}</span>
+                                                {{ $study_abroad->country ??'—' }}
                                             </td>
 
                                             <td class="text-center">
-                                                @if ($feedback->seen)
+                                                @if ($study_abroad->seen)
                                                     <span class="badge bg-success rounded-pill">
                                                         <i class="fas fa-check"></i>
                                                     </span>
@@ -97,7 +96,7 @@
                                             </td>
 
                                             <td class="text-center actions-cell">
-                                                <a href="{{ route('feedback.show', $feedback->id) }}"
+                                                <a href="{{ route('study_abroad.show', $study_abroad->id) }}"
                                                     class="btn btn-outline-primary btn-sm" title="Show">
                                                     👀
                                                 </a>
@@ -114,7 +113,7 @@
                                         <span style="font-size:3rem;">💬</span>
                                     </div>
                                 </div>
-                                <h5 class="text-muted mb-0">No Massages Available</h5>
+                                <h5 class="text-muted mb-0">No Feedbacks Available</h5>
                             </div>
                         @endif
                     </div>

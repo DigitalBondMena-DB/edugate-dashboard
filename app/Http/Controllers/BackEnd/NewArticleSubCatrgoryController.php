@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\BackEnd;
 
-use App\NewArticleSubCatrgory;
 use App\NewArticleCatrgory;
 use Illuminate\Support\Str;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\NewArticleSubCatrgory;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use Intervention\Image\Laravel\Facades\Image;
 use App\Http\Requests\Backend\StoreNewArticleSubCatrgoryRequest;
 use App\Http\Requests\Backend\UpdateNewArticleSubCatrgoryRequest;
 
@@ -20,7 +21,7 @@ class NewArticleSubCatrgoryController extends Controller
      */
     public function index(Request $request)
 {
-    $query = NewArticleSubCatrgory::select('id', 'en_title', 'ar_title', 'active', 'new_article_catrgory_id');
+    $query = NewArticleSubCatrgory::select('id', 'en_title', 'ar_title', 'active', 'new_article_catrgory_id', 'banner_image');
     
    if ($request->has('category_id') && $request->category_id != '0') {
         $query->where('new_article_catrgory_id', $request->category_id);
@@ -50,7 +51,19 @@ class NewArticleSubCatrgoryController extends Controller
      */
     public function store(StoreNewArticleSubCatrgoryRequest $request)
     {
+        // dd($request->hasFile('banner_image'));
         $data = $request->validated();
+        if($request->hasFile('banner_image')) {
+            $imageName = time() . Str::random(10) . '.' . 'webp';
+            if (!file_exists(public_path('subcategory'))) {
+                mkdir(public_path('subcategory'), 0755, true);
+            }
+            $imagePath = public_path('subcategory/' . $imageName);
+            $image = Image::read($request->file('banner_image')->getRealPath())
+                ->toWebp(80)
+                ->save($imagePath);
+            $data['banner_image'] = $imageName;
+        }
 
         function make_slug($string, $separator = '-') {
             $string = trim($string);
@@ -112,6 +125,21 @@ class NewArticleSubCatrgoryController extends Controller
     {
 
         $data = $request->validated();
+
+        if($request->hasFile('banner_image')) {
+            $imageName = time() . Str::random(10) . '.' . 'webp';
+            if (!file_exists(public_path('subcategory'))) {
+                mkdir(public_path('subcategory'), 0755, true);
+            }
+            $imagePath = public_path('subcategory/' . $imageName);
+            $image = Image::read($request->file('banner_image')->getRealPath())
+                ->toWebp(80)
+                ->save($imagePath);
+            if($articleSubCategory->banner_image) {
+                unlink(public_path('subcategory/'.$articleSubCategory->banner_image));
+            }
+            $data['banner_image'] = $imageName;
+        }
 
         $articleSubCategory->update($data);
 

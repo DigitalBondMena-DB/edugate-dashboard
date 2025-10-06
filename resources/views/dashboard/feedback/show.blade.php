@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 
-@php $pageTitle = 'Show Feedback'; @endphp
+@php $pageTitle = 'Show Study Abroad Request'; @endphp
 
 @section('title')
     {{ $pageTitle }}
