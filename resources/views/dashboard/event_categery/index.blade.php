@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 
-@php $pageTitle = 'Event Categories'; @endphp
+@php $pageTitle = 'Gallaries Controll'; @endphp
 
 @section('title')
     {{ $pageTitle }}
@@ -22,7 +22,7 @@
                         </div>
                         <div class="col-md-4 col-6 text-end">
                             <a class="btn btn-white btn-round shadow-sm px-4" href="{{ route('event-categery.create') }}">
-                                <i class="fas fa-plus me-2"></i> Add Category
+                                <i class="fas fa-plus me-2"></i> Add Gallary
                             </a>
                         </div>
                     </div>
@@ -60,19 +60,19 @@
                                                 <span class="badge bg-success rounded-pill">{{ $row->id }}</span>
                                             </td>
 
-                                            <td class="text-start text-wrap-cell">
+                                            <td class="text-center text-wrap-cell">
                                                 {{ $row->ar_name ?? '-' }}
                                             </td>
 
-                                            <td class="text-start text-wrap-cell">
+                                            <td class="text-center text-wrap-cell">
                                                 {{ $row->en_name ?? '-' }}
                                             </td>
 
-                                            <td class="text-start text-wrap-cell">
+                                            <td class="text-center text-wrap-cell">
                                                 {{ strlen($row->ar_description) > 20 ? substr($row->ar_description, 0, 20) . '...' : $row->ar_description ?? '-' }}
                                             </td>
 
-                                            <td class="text-start text-wrap-cell">
+                                            <td class="text-center text-wrap-cell">
                                                 {{ strlen($row->en_description) > 20 ? substr($row->en_description, 0, 20) . '...' : $row->en_description ?? '-' }}
                                             </td>
 
@@ -112,11 +112,10 @@
                                         <span style="font-size:3rem;">🧩</span>
                                     </div>
                                 </div>
-                                <h5 class="text-muted mb-3">No Categories</h5>
-                                <p class="text-muted mb-4">Create your first event category with its gallery.</p>
+                                <h5 class="text-muted mb-3">No Gallaries</h5>
                                 <a href="{{ route('event-categery.create') }}"
                                     class="btn btn-primary btn-round shadow-sm px-4">
-                                    <span class="me-2">+</span> Add Category
+                                    <span class="me-2">+</span> Add Gallary
                                 </a>
                             </div>
                         @endif

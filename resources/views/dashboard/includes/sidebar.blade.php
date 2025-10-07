@@ -5,16 +5,21 @@
             <img alt="#" src="{{ asset('assets') }}/images/logo/1.png">
         </a>
     </div>
-
     <div class="app-nav" id="app-simple-bar">
         <ul class="main-nav p-0 mt-2">
             <li>
                 <a aria-expanded="false" href="{{ route('welcome') }}">
                     <svg stroke="currentColor" stroke-width="1.5">
                     </svg>
-                    control
+                    controls
                 </a>
-
+            </li>
+            <li>
+                <a aria-expanded="false" href="{{ route('hero.index') }}">
+                    <svg stroke="currentColor" stroke-width="1.5">
+                    </svg>
+                    hero section
+                </a>
             </li>
             <li>
                 <a aria-expanded="false" href="{{ route('page-banners.index') }}">
@@ -22,7 +27,6 @@
                     </svg>
                     Pages Banners
                 </a>
-
             </li>
             <li>
                 <a aria-expanded="false" href="{{ route('about.index') }}">
@@ -33,12 +37,41 @@
 
             </li>
             <li>
+                <a aria-expanded="false" href="{{ route('counters.index') }}">
+                    <svg stroke="currentColor" stroke-width="1.5">
+                    </svg>
+                    counters
+                </a>
+            </li>
+            <li>
                 <a aria-expanded="false" href="{{ route('clients.index') }}">
                     <svg stroke="currentColor" stroke-width="1.5">
                     </svg>
                     partners
                 </a>
 
+            </li>
+            <li>
+                <a aria-expanded="false" href="{{ route('serviceuser.index') }}">
+                    <svg stroke="currentColor" stroke-width="1.5">
+                    </svg>
+                    services
+                </a>
+
+            </li>
+            <li>
+                <a aria-expanded="false" href="{{ route('service.index') }}">
+                    <svg stroke="currentColor" stroke-width="1.5">
+                    </svg>
+                    testimonials
+                </a>
+            </li>
+            <li>
+                <a aria-expanded="false" href="{{ route('why-us.index') }}">
+                    <svg stroke="currentColor" stroke-width="1.5">
+                    </svg>
+                    why us
+                </a>
             </li>
             <li>
                 <a aria-expanded="false" href="{{ route('contact-us.index') }}">
@@ -52,23 +85,15 @@
                 <a aria-expanded="false" href="{{ route('feedback.index') }}">
                     <svg stroke="currentColor" stroke-width="1.5">
                     </svg>
-                    user contacts
+                    contact us from
                 </a>
 
             </li>
             <li>
-                <a aria-expanded="false" href="{{ route('service.index') }}">
+                <a aria-expanded="false" href="{{ route('study_abroad.index') }}">
                     <svg stroke="currentColor" stroke-width="1.5">
                     </svg>
-                    user feedbacks
-                </a>
-
-            </li>
-            <li>
-                <a aria-expanded="false" href="{{ route('serviceuser.index') }}">
-                    <svg stroke="currentColor" stroke-width="1.5">
-                    </svg>
-                    services
+                    study abroad from
                 </a>
 
             </li>
@@ -76,7 +101,7 @@
                 <a aria-expanded="false" href="{{ route('event-categery.index') }}">
                     <svg stroke="currentColor" stroke-width="1.5">
                     </svg>
-                    event category
+                    gallary
                 </a>
 
             </li>
@@ -85,7 +110,7 @@
                 <a aria-expanded="false" href="{{ route('articleSubCategory.index') }}">
                     <svg stroke="currentColor" stroke-width="1.5">
                     </svg>
-                    article category
+                    article sub categories
                 </a>
 
             </li>
@@ -93,23 +118,9 @@
                 <a aria-expanded="false" href="{{ route('newArticle.index') }}">
                     <svg stroke="currentColor" stroke-width="1.5">
                     </svg>
-                    new article
+                    articles
                 </a>
 
-            </li>
-            <li>
-                <a aria-expanded="false" href="{{ route('why-us.index') }}">
-                    <svg stroke="currentColor" stroke-width="1.5">
-                    </svg>
-                    why us
-                </a>
-            </li>
-            <li>
-                <a aria-expanded="false" href="{{ route('counters.index') }}">
-                    <svg stroke="currentColor" stroke-width="1.5">
-                    </svg>
-                    counters
-                </a>
             </li>
         </ul>
     </div>

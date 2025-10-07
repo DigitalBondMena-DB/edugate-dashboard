@@ -53,11 +53,11 @@
                                                 <span class="badge bg-success rounded-pill">{{ $study_abroad->id }}</span>
                                             </td>
 
-                                            <td class="text-start text-wrap-cell">
+                                            <td class="text-center text-wrap-cell">
                                                 {{ strlen($study_abroad->name) > 20 ? substr($study_abroad->name, 0, 20) . '...' : $study_abroad->name }}
                                             </td>
 
-                                            <td class="text-start text-wrap-cell">
+                                            <td class="text-center text-wrap-cell">
                                                 @if ($study_abroad->email)
                                                     <a href="mailto:{{ $study_abroad->email }}"
                                                         class="link-dark text-decoration-underline">
@@ -68,7 +68,7 @@
                                                 @endif
                                             </td>
 
-                                            <td class="text-start text-wrap-cell">
+                                            <td class="text-center text-wrap-cell">
                                                 @if ($study_abroad->phone)
                                                     <a href="tel:{{ preg_replace('/\s+/', '', $study_abroad->phone) }}"
                                                         class="link-dark">

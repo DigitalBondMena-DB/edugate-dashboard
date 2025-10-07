@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 
-@php $pageTitle = 'Edit Event Category'; @endphp
+@php $pageTitle = 'Edit Gallary'; @endphp
 
 @section('title')
     {{ $pageTitle }}

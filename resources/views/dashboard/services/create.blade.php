@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 
-@php $pageTitle = 'Add New Feedback'; @endphp
+@php $pageTitle = 'Add New Testimonial'; @endphp
 
 @section('title')
     {{ $pageTitle }}
@@ -113,7 +113,7 @@
                             </div>
                         </div>
                         <div class="mb-4">
-                            <label class="form-label fw-bold text-dark">Feedback Image <span class="text-danger">*</span></label>
+                            <label class="form-label fw-bold text-dark">Testimonial Image <span class="text-danger">*</span></label>
                             <div class="border rounded p-3 bg-light">
                                 <div class="d-flex align-items-center">
                                     <div class="me-3">
@@ -137,11 +137,11 @@
                         <div class="border-top pt-4">
                             <div class="d-flex justify-content-between align-items-center">
                                 <a href="{{ route('service.index') }}" class="btn btn-outline-secondary">
-                                    <span class="me-1">←</span> Back to Feedbacks
+                                    <span class="me-1">←</span> Back to Testimonials
                                 </a>
                                 
                                 <button type="submit" class="btn btn-primary px-4">
-                                    <span class="me-1">💾</span> Create Feedback
+                                    <span class="me-1">💾</span> Create Testimonial
                                 </button>
                             </div>
                         </div>

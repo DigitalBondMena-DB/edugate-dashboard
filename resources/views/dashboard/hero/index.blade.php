@@ -14,7 +14,6 @@
                     {{ Session::get('flash_message') }}
                 </div>
             @endif
-            
             <div class="card">
                 <div class="card-header card-header-primary">
                     <div class="row align-items-center">

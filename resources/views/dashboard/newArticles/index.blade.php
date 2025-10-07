@@ -97,10 +97,10 @@
                                                 <span class="badge bg-success rounded-pill">{{ $article->id }}</span>
                                             </td>
 
-                                            <td class="text-start text-wrap-cell">
+                                            <td class="text-center text-wrap-cell">
                                                 {{ ($article->ar_title > 30) ? ('...' . Str::substr($article->ar_title, 0, 30)) : ($article->ar_title ?: '-') }}
                                             </td>
-                                            <td class="text-start text-wrap-cell">
+                                            <td class="text-center text-wrap-cell">
                                                 {{ ($article->en_title > 30) ? (Str::substr($article->en_title, 0, 30) . '...') : ($article->en_title ?: '-') }}
                                             </td>
                                             <td class="text-center">
@@ -180,21 +180,11 @@
                         @endif
                     </div>
                 </div>
-
-
-                @if ($rows->hasPages())
-                    <div class="card-footer bg-transparent border-0 py-3">
-                        <div class="d-flex justify-content-center">
-                            {{ $rows->withQueryString()->onEachSide(1)->links() }}
-                        </div>
-                    </div>
-                @endif
-
             </div>
 
         </div>
     </div>
-
+@include('dashboard.includes.pagination')
     <style>
         .fixed-table {
             table-layout: fixed;

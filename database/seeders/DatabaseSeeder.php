@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\HeroSection;
 use App\Models\PageBanner;
 use Illuminate\Database\Seeder;
 
@@ -71,5 +72,9 @@ class DatabaseSeeder extends Seeder
         ];
 
         PageBanner::insert($data);
+        HeroSection::create([
+            'title_ar' => 'hero',
+            'title_en' => 'hero',
+        ]);
     }
 }

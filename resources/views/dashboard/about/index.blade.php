@@ -42,14 +42,12 @@
                                 <tbody>
                                     <tr>
 
-                                        <td class="text-start">
-                                            <div class="story-full">
-                                                {{ strlen($about->ar_story) > 100 ? substr($about->ar_story, 0, 100) . '...' : $about->ar_story }}
-                                            </div>
+                                        <td class="text-center">
+                                                {{ strlen($about->ar_story) > 100 ?  substr($about->ar_story, 0, 100) . '...' : $about->ar_story }}
                                         </td>
 
 
-                                        <td class="text-start">
+                                        <td class="text-center">
                                             <div class="story-full">
                                                 {{ strlen($about->en_story) > 100 ? substr($about->en_story, 0, 100) . '...' : $about->en_story }}
                                             </div>
@@ -139,16 +137,6 @@
         .slider-thumbnail:hover {
             transform: scale(1.06);
             box-shadow: 0 6px 16px rgba(0, 0, 0, .22);
-        }
-
-
-        .story-full {
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            overflow-wrap: anywhere;
-            line-height: 1.6;
-            min-height: 58px;
-            padding-block: 6px;
         }
 
 

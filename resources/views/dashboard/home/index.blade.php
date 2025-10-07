@@ -307,21 +307,28 @@
                     <div class="col-lg-4 col-md-6">
                         <a href="/admin/event-categery" class="quick-link">
                             <div class="quick-link-icon icon-bg-1">
-                                <i class="fas fa-calendar-alt"></i>
+                                <i class="fas fa-images"></i>
                             </div>
-                            <span>Event Categories</span>
+                            <span>Gallaries</span>
                         </a>
                     </div>
 
                     <div class="col-lg-4 col-md-6">
-                        <a href="/admin/about" class="quick-link">
-                            <div class="quick-link-icon icon-bg-2">
-                                <i class="fas fa-info-circle"></i>
+                        <a href="/admin/newArticle" class="quick-link">
+                            <div class="quick-link-icon icon-bg-5">
+                                <i class="fa-solid fa-newspaper"></i>
                             </div>
-                            <span>Edit About Page</span>
+                            <span>Articles</span>
                         </a>
                     </div>
-
+                    <div class="col-lg-4 col-md-6">
+                        <a href="/admin/articleSubCategory" class="quick-link">
+                            <div class="quick-link-icon icon-bg-6">
+                                <i class="fas fa-layer-group"></i>
+                            </div>
+                            <span>Article Sub Categories</span>
+                        </a>
+                    </div>
                     <div class="col-lg-4 col-md-6">
                         <a href="/admin/clients" class="quick-link">
                             <div class="quick-link-icon icon-bg-3">
@@ -336,25 +343,16 @@
                             <div class="quick-link-icon icon-bg-4">
                                 <i class="fas fa-comments"></i>
                             </div>
-                            <span>User Contacts</span>
+                            <span>Contact Us Messages</span>
                         </a>
                     </div>
 
                     <div class="col-lg-4 col-md-6">
-                        <a href="/admin/serviceuser" class="quick-link">
-                            <div class="quick-link-icon icon-bg-5">
-                                <i class="fas fa-cogs"></i>
+                        <a href="/admin/study_abroad" class="quick-link">
+                            <div class="quick-link-icon icon-bg-2">
+                                <i class="fa-solid fa-hand-point-up"></i>
                             </div>
-                            <span>Services</span>
-                        </a>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <a href="/admin/articleSubCategory" class="quick-link">
-                            <div class="quick-link-icon icon-bg-6">
-                                <i class="fas fa-layer-group"></i>
-                            </div>
-                            <span>Article Categories</span>
+                            <span>Study Abroad Requests</span>
                         </a>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 
-@php $pageTitle = 'Show Study Abroad Request'; @endphp
+@php $pageTitle = 'Show Contact Us Request'; @endphp
 
 @section('title')
     {{ $pageTitle }}
@@ -38,6 +38,10 @@
                         <label class="form-label fw-bold text-dark d-block">Request Type</label>
                         <input type="text" class="form-control" value="{{ $feedback->request_type }}" disabled
                             aria-disabled="true">
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label fw-bold text-dark d-block">Message</label>
+                        <textarea cols="30" rows="10" class="form-control">{{$feedback->message}}</textarea>
                     </div>
                 </div>
 

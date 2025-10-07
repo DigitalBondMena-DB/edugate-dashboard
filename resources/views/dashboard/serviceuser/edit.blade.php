@@ -50,7 +50,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-4">
                                     <label class="form-label fw-bold text-dark">Arabic Text <span
@@ -74,8 +74,24 @@
                                     @enderror
                                 </div>
                             </div>
+                        </div> --}}
+                        <div class="mb-4">
+                            <label class="form-label fw-bold text-dark">Arabic Text <span
+                                    class="text-danger">*</span></label>
+                            <textarea name="ar_first_text" rows="6" class="form-control ckeditor @error('ar_first_text') is-invalid @enderror"
+                                placeholder="Enter Arabic text">{{ old('ar_first_text', $row->ar_first_text) }}</textarea>
+                            @error('ar_first_text')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
-
+                        <div class="mb-4">
+                            <label class="form-label fw-bold text-dark">English Text</label>
+                            <textarea name="en_first_text" rows="6" class="form-control ckeditor @error('en_first_text') is-invalid @enderror"
+                                placeholder="Enter English text">{{ old('en_first_text', $row->en_first_text) }}</textarea>
+                            @error('en_first_text')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
                         <div class="mb-4">
                             <label class="form-label fw-bold text-dark">Service Image</label>
 

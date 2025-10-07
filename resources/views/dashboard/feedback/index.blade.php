@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 
-@php $pageTitle = 'Study Abroad Requests Control'; @endphp
+@php $pageTitle = 'Conatct US Form Control'; @endphp
 
 @section('title')
     {{ $pageTitle }}
@@ -25,11 +25,11 @@
                             <table class="table table-hover align-middle mb-0 fixed-table clean-head">
 
                                 <colgroup>
-                                    <col style="width:8%">
-                                    <col style="width:24%">
-                                    <col style="width:24%">
-                                    <col style="width:12%">
-                                    <col style="width:12%">
+                                    <col style="width:7%">
+                                    <col style="width:23%">
+                                    <col style="width:23%">
+                                    <col style="width:17%">
+                                    <col style="width:10%">
                                     <col style="width:10%">
                                     <col style="width:10%">
                                 </colgroup>
@@ -53,22 +53,22 @@
                                                 <span class="badge bg-success rounded-pill">{{ $feedback->id }}</span>
                                             </td>
 
-                                            <td class="text-start text-wrap-cell">
-                                                {{ strlen($feedback->name) > 20 ? substr($feedback->name, 0, 20) . '...' : $feedback->name }}
+                                            <td class="text-center text-wrap-cell">
+                                                {{ strlen($feedback->name) > 19 ? substr($feedback->name, 0, 19) . '...' : $feedback->name }}
                                             </td>
 
-                                            <td class="text-start text-wrap-cell">
+                                            <td class="text-center text-wrap-cell">
                                                 @if ($feedback->email)
                                                     <a href="mailto:{{ $feedback->email }}"
                                                         class="link-dark text-decoration-underline">
-                                                        {{ strlen($feedback->email) > 20 ? substr($feedback->email, 0, 20) . '...' : $feedback->email }}
+                                                        {{ strlen($feedback->email) > 19 ? substr($feedback->email, 0, 19) . '...' : $feedback->email }}
                                                     </a>
                                                 @else
                                                     <span class="text-muted">—</span>
                                                 @endif
                                             </td>
 
-                                            <td class="text-start text-wrap-cell">
+                                            <td class="text-center text-wrap-cell">
                                                 @if ($feedback->phone)
                                                     <a href="tel:{{ preg_replace('/\s+/', '', $feedback->phone) }}"
                                                         class="link-dark">

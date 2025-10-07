@@ -76,11 +76,11 @@
                                                 <span class="badge bg-success rounded-pill">{{ $subCategory->id }}</span>
                                             </td>
 
-                                            <td class="text-start text-wrap-cell" dir="rtl">
+                                            <td class="text-center text-wrap-cell" dir="rtl">
                                                 {{ $subCategory->ar_title }}
                                             </td>
 
-                                            <td class="text-start text-wrap-cell" dir="ltr">
+                                            <td class="text-center text-wrap-cell" dir="ltr">
                                                 {{ $subCategory->en_title }}
                                             </td>
 

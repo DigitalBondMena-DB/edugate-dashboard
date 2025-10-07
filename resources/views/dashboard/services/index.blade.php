@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 
-@php $pageTitle = 'Feedbacks Control'; @endphp
+@php $pageTitle = 'Testimonials Control'; @endphp
 
 @section('title')
     {{ $pageTitle }}
@@ -22,7 +22,7 @@
                         </div>
                         <div class="col-md-4 col-6 text-end">
                             <a class="btn btn-white btn-round shadow-sm px-4" href="{{ route('service.create') }}">
-                                <i class="fas fa-plus me-2"></i> Add New Feedback
+                                <i class="fas fa-plus me-2"></i> Add New Testimonial
                             </a>
                         </div>
                     </div>
@@ -44,9 +44,9 @@
                                 <thead class="table-light">
                                     <tr>
                                         <th class="text-center">#</th>
-                                        <th class="text-center">Feedback Name (AR)</th>
-                                        <th class="text-center">Feedback Name (EN)</th>
-                                        <th class="text-center">Feedback Image</th>
+                                        <th class="text-center">Name (AR)</th>
+                                        <th class="text-center">Name (EN)</th>
+                                        <th class="text-center">Image</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
@@ -58,8 +58,8 @@
                                                 <span class="badge bg-success rounded-pill">{{ $feedback->id }}</span>
                                             </td>
 
-                                            <td class="text-start text-wrap-cell">{{ $feedback->ar_name }}</td>
-                                            <td class="text-start text-wrap-cell">{{ $feedback->en_name }}</td>
+                                            <td class="text-center text-wrap-cell">{{ $feedback->ar_name }}</td>
+                                            <td class="text-center text-wrap-cell">{{ $feedback->en_name }}</td>
 
                                             <td class="text-center">
                                                 <img src="{{ asset('service/' . $feedback->image) }}" alt="Feedback Image"
@@ -130,10 +130,9 @@
                                         <span style="font-size:3rem;">🎨</span>
                                     </div>
                                 </div>
-                                <h5 class="text-muted mb-3">No Feedbacks Available</h5>
-                                <p class="text-muted mb-4">Start creating beautiful Feedbacks for your website</p>
+                                <h5 class="text-muted mb-3">No Testimonials Available</h5>
                                 <a href="{{ route('service.create') }}" class="btn btn-primary btn-round shadow-sm px-4">
-                                    <span class="me-2 fw-bold">+</span> Create First Feedback
+                                    <span class="me-2 fw-bold">+</span> Create First Testimonial
                                 </a>
                             </div>
                         @endif

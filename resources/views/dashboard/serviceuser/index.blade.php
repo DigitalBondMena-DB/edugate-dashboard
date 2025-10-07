@@ -130,7 +130,6 @@
                                     </div>
                                 </div>
                                 <h5 class="text-muted mb-3">No Services Available</h5>
-                                <p class="text-muted mb-4">Start creating beautiful Services for your website</p>
                                 <a href="{{ route('serviceuser.create') }}"
                                     class="btn btn-primary btn-round shadow-sm px-4">
                                     <span class="me-2 fw-bold">+</span> Create First Service
