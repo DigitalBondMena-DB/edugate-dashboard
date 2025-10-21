@@ -3,17 +3,14 @@
 namespace App\Http\Controllers\BackEnd;
 
 use App\SeoTag;
-use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\Backend\StoreSeoTagRequest;
 use App\Http\Requests\Backend\UpdateSeoTagRequest;
 
 class SeoTagController extends Controller
 {
-      /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -22,7 +19,7 @@ class SeoTagController extends Controller
     {
         $rows = SeoTag::latest()->paginate(10);
 
-        return view('backend.tags.index', compact('rows'));
+        return view('dashboard.seo_tags.index', compact('rows'));
     }
 
     /**
@@ -32,7 +29,7 @@ class SeoTagController extends Controller
      */
     public function create()
     {
-        return view('backend.tags.create');
+        return view('dashboard.seo_tags.create');
     }
 
     /**
@@ -43,18 +40,17 @@ class SeoTagController extends Controller
      */
     public function store(StoreSeoTagRequest $request)
     {
-        $requestArray = $request->all();
-        $tagDAta = SeoTag::where('tag_type' , $request->tag_type)->get()->first();
-        if($tagDAta){
+        $requestArray = $request->validated();
+        $tagDAta = SeoTag::where('tag_type', $request->tag_type)->get()->first();
+        if ($tagDAta) {
             Session::flash('flash_message', 'Tag Page Used before');
-        return redirect()->route('tags.index');
+            return redirect()->route('tags.index');
         } else {
-            
-        $row = SeoTag::create($requestArray);
-        Session::flash('flash_message', 'Tag added successfully');
-        return redirect()->route('tags.index');
-        }
 
+            $row = SeoTag::create($requestArray);
+            Session::flash('flash_message', 'Tag added successfully');
+            return redirect()->route('tags.index');
+        }
     }
 
     /**
@@ -79,7 +75,7 @@ class SeoTagController extends Controller
         $row = SeoTag::findorFail($id);
         // dd($row);
 
-        return view('backend.tags.edit', compact('row'));
+        return view('dashboard.seo_tags.edit', compact('row'));
     }
 
     /**
@@ -94,7 +90,13 @@ class SeoTagController extends Controller
         // dd(1);
         $tags = SeoTag::findorFail($id);
 
-        $requestArray = $request->all();
+        $requestArray = $request->validated();
+        $tagDAta = SeoTag::where('tag_type', $request->tag_type)
+            ->where('id', '!=', $id)->get()->first();
+        if ($tagDAta) {
+            Session::flash('flash_message', 'Tag Page Used before');
+            return redirect()->route('tags.index');
+        }
 
 
         $tags->update($requestArray);
@@ -116,6 +118,14 @@ class SeoTagController extends Controller
         $tags->delete();
 
         Session::flash('flash_message', 'Tag deleted successfully');
+        return redirect()->route('tags.index');
+    }
+
+    public function toggleStatus(SeoTag $tag)
+    {
+        $tag->active = $tag->active === 'activated' ? 'deactivated' : 'activated';
+        $tag->save();
+        Session::flash('flash_message', "Tag {$tag->active} successfully.");
         return redirect()->route('tags.index');
     }
 }

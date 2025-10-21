@@ -122,6 +122,22 @@
                 </a>
 
             </li>
+            <li>
+                <a aria-expanded="false" href="{{ route('privacy-policy.index') }}">
+                    <svg stroke="currentColor" stroke-width="1.5">
+                    </svg>
+                    privacy policy
+                </a>
+
+            </li>
+            <li>
+                <a aria-expanded="false" href="{{ route('tags.index') }}">
+                    <svg stroke="currentColor" stroke-width="1.5">
+                    </svg>
+                    seo tags
+                </a>
+
+            </li>
         </ul>
     </div>
 </nav>

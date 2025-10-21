@@ -15,7 +15,7 @@
                         <div>
                             <h4 class="card-title text-dark mb-1">{{ $pageTitle }}</h4>
                         </div>
-                    </div>route
+                    </div>
                 </div>
                 <div class="card-body p-4">
                     <form action="{{ route('serviceuser.update', $row->id) }}" method="POST" enctype="multipart/form-data">
@@ -25,11 +25,11 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">Arabic Name <span
+                                    <label class="form-label fw-bold text-dark">Arabic Title <span
                                             class="text-danger">*</span></label>
                                     <input type="text" name="ar_name" id="ar_name"
                                         class="form-control @error('ar_name') is-invalid @enderror"
-                                        value="{{ old('ar_name', $row->ar_name) }}" placeholder="Enter Name in Arabic">
+                                        value="{{ old('ar_name', $row->ar_name) }}" placeholder="Enter Title in Arabic">
                                     @error('ar_name')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -38,11 +38,11 @@
 
                             <div class="col-md-6">
                                 <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">English Name <span
+                                    <label class="form-label fw-bold text-dark">English Title <span
                                             class="text-danger">*</span></label>
                                     <input type="text" name="en_name" id="en_name"
                                         class="form-control @error('en_name') is-invalid @enderror"
-                                        value="{{ old('en_name', $row->en_name) }}" placeholder="Enter Name in English">
+                                        value="{{ old('en_name', $row->en_name) }}" placeholder="Enter Title in English">
                                     @error('en_name')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -76,17 +76,17 @@
                             </div>
                         </div> --}}
                         <div class="mb-4">
-                            <label class="form-label fw-bold text-dark">Arabic Text <span
+                            <label class="form-label fw-bold text-dark">Arabic Description <span
                                     class="text-danger">*</span></label>
-                            <textarea name="ar_first_text" rows="6" class="form-control ckeditor @error('ar_first_text') is-invalid @enderror"
+                            <textarea name="ar_first_text" rows="6" class="form-control @error('ar_first_text') is-invalid @enderror"
                                 placeholder="Enter Arabic text">{{ old('ar_first_text', $row->ar_first_text) }}</textarea>
                             @error('ar_first_text')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-4">
-                            <label class="form-label fw-bold text-dark">English Text</label>
-                            <textarea name="en_first_text" rows="6" class="form-control ckeditor @error('en_first_text') is-invalid @enderror"
+                            <label class="form-label fw-bold text-dark">English Description</label>
+                            <textarea name="en_first_text" rows="6" class="form-control @error('en_first_text') is-invalid @enderror"
                                 placeholder="Enter English text">{{ old('en_first_text', $row->en_first_text) }}</textarea>
                             @error('en_first_text')
                                 <div class="invalid-feedback">{{ $message }}</div>

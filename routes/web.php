@@ -21,6 +21,7 @@ Route::post('/login', [LoginController::class, 'submitAdminLoginForm'])->name('l
 Route::namespace('BackEnd')->prefix('admin')->middleware('admin')->group(function () {
 
     Route::resource('/tags', 'SeoTagController');
+    Route::patch('/tags/{tag}/toggle-status', 'SeoTagController@toggleStatus')->name('tags.toggleStatus');
 
 
 
@@ -60,7 +61,9 @@ Route::namespace('BackEnd')->prefix('admin')->middleware('admin')->group(functio
 
     Route::resource('counters', 'CounterController');
     Route::resource('hero', 'HeroController');
-
+    Route::get('privacy-policy', 'PrivacyPolicyController@index')->name('privacy-policy.index');
+    Route::get('privacy-policy/edit', 'PrivacyPolicyController@edit')->name('privacy-policy.edit');
+    Route::put('privacy-policy', 'PrivacyPolicyController@update')->name('privacy-policy.update');
     Route::get('why-us', 'WhyUsController@index')->name('why-us.index');
     Route::get('why-us/create', 'WhyUsController@create')->name('why-us.create');
     Route::post('why-us', 'WhyUsController@store')->name('why-us.store');

@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\Backend\UpdateContactRequest;
 use Intervention\Image\Laravel\Facades\Image;
-use Illuminate\Support\Str; 
+use Illuminate\Support\Str;
 
 class ContactUsController extends Controller
 {
@@ -26,7 +26,7 @@ class ContactUsController extends Controller
     public function update(UpdateContactRequest $request) {
         $contactUs = ContactUs::firstOrFail();
         $data = $request->validated();
-           
+
         if($request->hasFile('banner_image')) {
             $file = $request->file('banner_image');
             $fileName = time().Str::random(10).'.'.'webp';

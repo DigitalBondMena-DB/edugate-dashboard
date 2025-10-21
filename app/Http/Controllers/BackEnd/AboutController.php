@@ -106,21 +106,69 @@ class AboutController extends Controller
         //
     }
 
-    private function imageHandler($file, $existingImage = null) {
-        $fileName = time().Str::random(10).'.'.'webp';
-        if(!file_exists(public_path('about'))) {
-            mkdir(public_path('about'), 0755, true);
+    // private function imageHandler($file, $existingImage = null) {
+    //     $fileName = time().Str::random(10).'.'.'webp';
+    //     if(!file_exists(public_path('about'))) {
+    //         mkdir(public_path('about'), 0755, true);
+    //     }
+    //     $imagePath = public_path('about/' . $fileName);
+    //     $image = Image::read($file->getRealPath())
+    //         ->toWebp(80)
+    //         ->save($imagePath);
+    //         // dd($existingImage);
+    //     if($existingImage !== NULL) {
+    //         if(file_exists(public_path('about/'. $existingImage))) {
+    //             unlink(public_path('about/'. $existingImage));
+    //         }
+    //     }
+    //     return $fileName;
+    // }
+
+    private function imageHandler($file, $existingImage = null)
+{
+    $baseName = time() . Str::random(10);
+    $folder = public_path('about');
+
+    if (!file_exists($folder)) {
+        mkdir($folder, 0755, true);
+    }
+
+    $image = Image::read($file->getRealPath());
+
+    $sizes = [
+        'mobile' => 480,
+        'tablet' => 768,
+        'pc'     => 1200,
+    ];
+
+    $mainFileName = null;
+
+    foreach ($sizes as $device => $width) {
+        $resized = clone $image;
+        $resized
+            ->scale(width: $width)
+            ->toWebp(80);
+
+        $fileName = "{$baseName}_{$device}.webp";
+        $resized->save("{$folder}/{$fileName}");
+
+        if ($device === 'pc') {
+            $mainFileName = $fileName;
         }
-        $imagePath = public_path('about/' . $fileName);
-        $image = Image::read($file->getRealPath())
-            ->toWebp(80)
-            ->save($imagePath);
-            // dd($existingImage);
-        if($existingImage !== NULL) {
-            if(file_exists(public_path('about/'. $existingImage))) {
-                unlink(public_path('about/'. $existingImage));
+    }
+
+    if ($existingImage !== null) {
+        $oldBase = preg_replace('/_(mobile|tablet|pc)\.webp$/', '', $existingImage);
+
+        foreach (['mobile', 'tablet', 'pc'] as $device) {
+            $oldPath = "{$folder}/{$oldBase}_{$device}.webp";
+            if (file_exists($oldPath)) {
+                unlink($oldPath);
             }
         }
-        return $fileName;
     }
+    return $mainFileName;
+}
+
+
 }

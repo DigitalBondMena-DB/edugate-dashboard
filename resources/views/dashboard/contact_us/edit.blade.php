@@ -25,15 +25,31 @@
                         @method('PUT')
 
                         {{-- Email --}}
-                        <div class="mb-4">
-                            <label class="form-label fw-bold text-dark">Email <span class="text-danger">*</span></label>
-                            <input type="email" name="email" id="email"
-                                class="form-control @error('email') is-invalid @enderror"
-                                value="{{ old('email', $contact->email) }}" placeholder="Enter Email">
-                            @error('email')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold text-dark">Email <span class="text-danger">*</span></label>
+                                    <input type="email" name="email" id="email"
+                                        class="form-control @error('email') is-invalid @enderror"
+                                        value="{{ old('email', $contact->email) }}" placeholder="Enter Email">
+                                    @error('email')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold text-dark">Whatsapp Number <span class="text-danger">*</span></label>
+                                    <input type="whatsapp_number" name="whatsapp_number" id="whatsapp_number"
+                                        class="form-control @error('whatsapp_number') is-invalid @enderror"
+                                        value="{{ old('whatsapp_number', $contact->whatsapp_number) }}" placeholder="Enter Whatsapp Number">
+                                    @error('whatsapp_number')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
+
 
                         {{-- Phones --}}
                         @php
@@ -84,6 +100,7 @@
                                 </div>
                             </div>
                         </div>
+
 
                         {{-- Arabic & English Address --}}
                         <div class="row">
@@ -192,6 +209,16 @@
                                     @enderror
                                 </div>
                             </div>
+                        </div>
+                        {{-- map url --}}
+                        <div class="mb-4">
+                            <label class="form-label fw-bold text-dark">Map URL </label>
+                            <input type="text" name="map_url"
+                                class="form-control @error('map_url') is-invalid @enderror"
+                                value="{{ old('map_url', $contact->map_url) }}" placeholder="Enter Map URL">
+                            @error('map_url')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         {{-- Banner Image --}}

@@ -24,11 +24,11 @@ class UpdateSeoTagRequest extends FormRequest
     public function rules()
     {
         return [
-            'en_tag_title' => '',
-            'ar_tag_title' => 'required',
-            'en_tag_paragraph' => '',
-            'ar_tag_paragraph' => 'required',
-            'tag_type' =>'required'
+            'en_tag_title' => 'required|string',
+            'ar_tag_title' => 'required|string',
+            'en_tag_paragraph' => 'required|string',
+            'ar_tag_paragraph' => 'required|string',
+            'tag_type' =>'required|string|exists:seo_tags,tag_type'
         ];
     }
 }
