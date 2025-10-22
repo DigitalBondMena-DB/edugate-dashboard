@@ -72,7 +72,7 @@
                                                 <a href="{{ route('page-banners.edit', $banner->id) }}"
                                                     class="btn btn-outline-primary btn-sm" title="Edit"
                                                     data-bs-toggle="tooltip">
-                                                    ✏️ Edit
+                                                    ✏️
                                                 </a>
                                             </td>
                                         </tr>

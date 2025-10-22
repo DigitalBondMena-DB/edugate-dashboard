@@ -24,10 +24,10 @@
                         @if (!empty($about))
                             <table class="table table-hover align-middle mb-0 clean-head fixed-cols">
                                 <colgroup>
-                                    <col style="width:30%">
-                                    <col style="width:30%">
-                                    <col style="width:22%">
-                                    <col style="width:18%">
+                                    <col style="width:35%">
+                                    <col style="width:35%">
+                                    <col style="width:15%">
+                                    <col style="width:15%">
                                 </colgroup>
 
                                 <thead class="table-light">
@@ -43,13 +43,13 @@
                                     <tr>
 
                                         <td class="text-center">
-                                                {{ strlen($about->ar_story) > 100 ?  substr($about->ar_story, 0, 100) . '...' : $about->ar_story }}
+                                                {{ strlen($about->ar_story) > 120 ?  substr($about->ar_story, 0, 120) . '...' : $about->ar_story }}
                                         </td>
 
 
                                         <td class="text-center">
                                             <div class="story-full">
-                                                {{ strlen($about->en_story) > 100 ? substr($about->en_story, 0, 100) . '...' : $about->en_story }}
+                                                {{ strlen($about->en_story) > 120 ? substr($about->en_story, 0, 120) . '...' : $about->en_story }}
                                             </div>
                                         </td>
 
@@ -91,7 +91,7 @@
                                         <td class="text-center">
                                             <a href="{{ route('about.edit') }}" class="btn btn-outline-primary btn-sm"
                                                 title="Edit About">
-                                                ✏️ Edit
+                                                ✏️
                                             </a>
                                         </td>
                                     </tr>

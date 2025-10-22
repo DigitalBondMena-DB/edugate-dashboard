@@ -29,9 +29,6 @@
                                 <a class="btn btn-white btn-round shadow-sm px-4 mb-2" href="{{ route('why-us.create') }}">
                                     <i class="fas fa-plus me-2"></i> Add Field
                                 </a>
-                                <a class="btn btn-white btn-round shadow-sm px-4" href="{{ route('why-us.editImage') }}">
-                                    <i class="fas fa-image me-2"></i> Edit Main Image
-                                </a>
                             </div>
                         </div>
                     </div>

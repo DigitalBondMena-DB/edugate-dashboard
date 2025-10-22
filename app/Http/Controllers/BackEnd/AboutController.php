@@ -3,64 +3,25 @@
 namespace App\Http\Controllers\BackEnd;
 
 use App\About;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\Backend\UpdateAboutRequest;
-use Intervention\Image\Laravel\Facades\Image;
-use Illuminate\Support\Str;
+use App\Services\ImageService;
 
 class AboutController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    protected $imageService;
+
+    public function __construct(ImageService $imageService)
+    {
+        $this->imageService = $imageService;
+    }
     public function index()
     {
         $about = About::select('ar_story', 'en_story', 'image')->firstOrFail();
         return view('dashboard.about.index', compact('about'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit()
     {
         $about = About::firstOrFail();
@@ -68,25 +29,14 @@ class AboutController extends Controller
         return view('dashboard.about.edit', compact('about'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdateAboutRequest $request)
     {
-        // dd('here');
         $data = $request->validated();
 
         $about = About::firstOrFail();
-        // dd($about);
 
-        if($request->hasFile('image')) {
-            // $about->image == "" ? $about->image = NULL : $about->image;
-            $fileName = $this->imageHandler($request->file('image'), $about->image ?? NULL);
-            $data['image'] = $fileName;
+        if ($request->hasFile('image')) {
+            $data['image'] = $this->imageService->handle($request->file('image'), 'about', $about->image ?? null);
         }
 
         $about->update($data);
@@ -94,81 +44,4 @@ class AboutController extends Controller
         Session::flash('flash_message', 'About updated successfully');
         return redirect()->route('about.index');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-    // private function imageHandler($file, $existingImage = null) {
-    //     $fileName = time().Str::random(10).'.'.'webp';
-    //     if(!file_exists(public_path('about'))) {
-    //         mkdir(public_path('about'), 0755, true);
-    //     }
-    //     $imagePath = public_path('about/' . $fileName);
-    //     $image = Image::read($file->getRealPath())
-    //         ->toWebp(80)
-    //         ->save($imagePath);
-    //         // dd($existingImage);
-    //     if($existingImage !== NULL) {
-    //         if(file_exists(public_path('about/'. $existingImage))) {
-    //             unlink(public_path('about/'. $existingImage));
-    //         }
-    //     }
-    //     return $fileName;
-    // }
-
-    private function imageHandler($file, $existingImage = null)
-{
-    $baseName = time() . Str::random(10);
-    $folder = public_path('about');
-
-    if (!file_exists($folder)) {
-        mkdir($folder, 0755, true);
-    }
-
-    $image = Image::read($file->getRealPath());
-
-    $sizes = [
-        'mobile' => 480,
-        'tablet' => 768,
-        'pc'     => 1200,
-    ];
-
-    $mainFileName = null;
-
-    foreach ($sizes as $device => $width) {
-        $resized = clone $image;
-        $resized
-            ->scale(width: $width)
-            ->toWebp(80);
-
-        $fileName = "{$baseName}_{$device}.webp";
-        $resized->save("{$folder}/{$fileName}");
-
-        if ($device === 'pc') {
-            $mainFileName = $fileName;
-        }
-    }
-
-    if ($existingImage !== null) {
-        $oldBase = preg_replace('/_(mobile|tablet|pc)\.webp$/', '', $existingImage);
-
-        foreach (['mobile', 'tablet', 'pc'] as $device) {
-            $oldPath = "{$folder}/{$oldBase}_{$device}.webp";
-            if (file_exists($oldPath)) {
-                unlink($oldPath);
-            }
-        }
-    }
-    return $mainFileName;
-}
-
-
 }

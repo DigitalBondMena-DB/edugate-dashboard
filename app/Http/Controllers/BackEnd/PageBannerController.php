@@ -6,15 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Models\PageBanner;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Intervention\Image\Laravel\Facades\Image;
+use App\Services\ImageService;
 
 
 class PageBannerController extends Controller
 {
+    protected $imageService;
+    public function __construct(ImageService $imageService)
+    {
+        $this->imageService = $imageService;
+    }
     public function index()
     {
-        $row = PageBanner::select('id', 'title', 'ar_alt','en_alt','image')->get();
+        $row = PageBanner::select('id', 'title', 'ar_alt', 'en_alt', 'image')->get();
         return view('dashboard.page-banner.index', compact('row'));
     }
 
@@ -30,16 +34,9 @@ class PageBannerController extends Controller
             'en_alt' => 'required|string|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048'
         ]);
-        $file = $request->file('image');
-        $fileName = time() . Str::random(10) . '.' . 'webp';
-        if (!file_exists(public_path('banners'))) {
-            mkdir(public_path('banners'), 0755, true);
+        if ($request->hasFile('image')) {
+            $data['image'] = $this->imageService->handle($request->file('image'), 'banners', $pageBanner->image);
         }
-        $imagePath = public_path('banners/' . $fileName);
-        $image = Image::read($file->getRealPath())
-            ->toWebp(80)
-            ->save($imagePath);
-        $data['image'] = $fileName;
         $pageBanner->update($data);
 
         Session::flash('flash_message', 'Banner updated successfully');

@@ -84,8 +84,7 @@
                                             <td class="text-center">
                                                 <div class="d-flex justify-content-center gap-2">
                                                     <a href="{{ route('clients.edit', $partner->id) }}"
-                                                        class="btn btn-outline-primary btn-sm" title="Edit Partner"><i
-                                                            class="fas fa-edit"></i></a>
+                                                        class="btn btn-outline-primary btn-sm" title="Edit Partner">✏️</a>
 
                                                     <form action="{{ route('clients.toggleStatus', $partner->id) }}"
                                                         method="POST" class="d-inline">

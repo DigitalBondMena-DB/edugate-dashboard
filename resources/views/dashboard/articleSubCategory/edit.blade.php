@@ -58,10 +58,8 @@
                                 <div class="mb-4">
                                     <label class="form-label fw-bold text-dark">Arabic Description <span
                                             class="text-danger">*</span></label>
-                                    <input type="text" name="ar_description" id="ar_description"
-                                        class="form-control @error('ar_description') is-invalid @enderror"
-                                        value="{{ old('ar_description', $row->ar_description) }}"
-                                        placeholder="Enter sub category description in Arabic">
+                                    <textarea name="ar_description" rows="4" class="form-control @error('ar_description') is-invalid @enderror"
+                                        placeholder="Enter sub category description in Arabic">{{ old('ar_description', $row->ar_description) }}</textarea>
                                     @error('ar_description')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -72,69 +70,9 @@
                                 <div class="mb-4">
                                     <label class="form-label fw-bold text-dark">English Description <span
                                             class="text-danger">*</span></label>
-                                    <input type="text" name="en_description" id="en_description"
-                                        class="form-control @error('en_description') is-invalid @enderror"
-                                        value="{{ old('en_description', $row->en_description) }}"
-                                        placeholder="Enter sub category description in English">
+                                    <textarea name="en_description" rows="4" class="form-control @error('en_description') is-invalid @enderror"
+                                        placeholder="Enter sub category description in English">{{ old('en_description', $row->en_description) }}</textarea>
                                     @error('en_description')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">Arabic Tag Title <span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" name="ar_tag_title" id="ar_tag_title"
-                                        class="form-control @error('ar_tag_title') is-invalid @enderror"
-                                        value="{{ old('ar_tag_title', $row->ar_tag_title) }}"
-                                        placeholder="Enter sub category title in Arabic">
-                                    @error('ar_tag_title')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">English Tag Title <span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" name="en_tag_title" id="en_tag_title"
-                                        class="form-control @error('en_tag_title') is-invalid @enderror"
-                                        value="{{ old('en_tag_title', $row->en_tag_title) }}"
-                                        placeholder="Enter sub category title in English">
-                                    @error('en_tag_title')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">Arabic Tag Description <span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" name="ar_tag_description" id="ar_tag_description"
-                                        class="form-control @error('ar_tag_description') is-invalid @enderror"
-                                        value="{{ old('ar_tag_description', $row->ar_tag_description) }}"
-                                        placeholder="Enter sub category title in Arabic">
-                                    @error('ar_tag_description')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">English Tag Description <span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" name="en_tag_description" id="en_tag_description"
-                                        class="form-control @error('en_tag_description') is-invalid @enderror"
-                                        value="{{ old('en_tag_description', $row->en_tag_description) }}"
-                                        placeholder="Enter sub category title in English">
-                                    @error('en_tag_description')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -169,16 +107,37 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="mb-4">
+                            <label class="form-label fw-bold text-dark">Arabic Detail Description <span
+                                    class="text-danger">*</span></label>
+                            <textarea name="ar_detail_text" rows="4"
+                                class="form-control @error('ar_detail_text') is-invalid @enderror ckeditor"
+                                placeholder="Enter sub category detail description in Arabic">{{ old('ar_detail_text', $row->ar_detail_text) }}</textarea>
+                            @error('ar_detail_text')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold text-dark">English Detail Description <span
+                                    class="text-danger">*</span></label>
+                            <textarea name="en_detail_text" rows="4"
+                                class="form-control @error('en_detail_text') is-invalid @enderror ckeditor"
+                                placeholder="Enter sub category detail description in English">{{ old('en_detail_text', $row->en_detail_text) }}</textarea>
+                            @error('en_detail_text')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">Arabic Detail Description <span
+                                    <label class="form-label fw-bold text-dark">Arabic Meta Title <span
                                             class="text-danger">*</span></label>
-                                    <input type="text" name="ar_detail_text" id="ar_detail_text"
-                                        class="form-control @error('ar_detail_text') is-invalid @enderror"
-                                        value="{{ old('ar_detail_text', $row->ar_detail_text) }}"
-                                        placeholder="Enter sub category detail description in Arabic">
-                                    @error('ar_detail_text')
+                                    <input type="text" name="ar_tag_title" id="ar_tag_title"
+                                        class="form-control @error('ar_tag_title') is-invalid @enderror"
+                                        value="{{ old('ar_tag_title', $row->ar_tag_title) }}"
+                                        placeholder="Enter sub category meta title in Arabic">
+                                    @error('ar_tag_title')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -186,13 +145,40 @@
 
                             <div class="col-md-6">
                                 <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">English Detail Description <span
+                                    <label class="form-label fw-bold text-dark">English Meta Title <span
                                             class="text-danger">*</span></label>
-                                    <input type="text" name="en_detail_text" id="en_detail_text"
-                                        class="form-control @error('en_detail_text') is-invalid @enderror"
-                                        value="{{ old('en_detail_text', $row->en_detail_text) }}"
-                                        placeholder="Enter sub category detail description in English">
-                                    @error('en_detail_text')
+                                    <input type="text" name="en_tag_title" id="en_tag_title"
+                                        class="form-control @error('en_tag_title') is-invalid @enderror"
+                                        value="{{ old('en_tag_title', $row->en_tag_title) }}"
+                                        placeholder="Enter sub category meta title in English">
+                                    @error('en_tag_title')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold text-dark">Arabic Meta Description <span
+                                            class="text-danger">*</span></label>
+                                    <textarea name="ar_tag_description" rows="4"
+                                        class="form-control @error('ar_tag_description') is-invalid @enderror"
+                                        placeholder="Enter sub category meta description in Arabic">{{ old('ar_tag_description', $row->ar_tag_description) }}</textarea>
+                                    @error('ar_tag_description')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold text-dark">English Meta Description <span
+                                            class="text-danger">*</span></label>
+                                    <textarea name="en_tag_description" rows="4"
+                                        class="form-control @error('en_tag_description') is-invalid @enderror"
+                                        placeholder="Enter sub category meta description in English">{{ old('en_tag_description', $row->en_tag_description) }}</textarea>
+                                    @error('en_tag_description')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -219,8 +205,6 @@
                                 </div>
                             </div>
                         </div>
-
-
 
                         <div class="mb-4">
                             <label class="form-label fw-bold text-dark">Banner Image</label>
@@ -260,7 +244,7 @@
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body text-center p-0">
-                                                <img src="{{ asset('service/' . $row->banner_image) }}"
+                                                <img src="{{ asset('subcategory/' . $row->banner_image) }}"
                                                     class="img-fluid rounded" alt="Full Size Image"
                                                     style="max-height: 70vh; object-fit: contain;">
                                             </div>
@@ -288,8 +272,8 @@
                                             {{ $row->banner_image ? 'Change Image (Optional)' : 'Upload New Image' }}
                                         </label>
                                         <input type="file" name="banner_image" id="image"
-                                            class="form-control @error('banner_image') is-invalid @enderror" accept="image/*"
-                                            onchange="previewNewImage(this)">
+                                            class="form-control @error('banner_image') is-invalid @enderror"
+                                            accept="image/*" onchange="previewNewImage(this)">
                                         <small class="text-muted mt-1 d-block">
                                             Supported formats: JPG, PNG, GIF (Max: 2MB)
                                             {{ $row->banner_image ? ' • Leave empty to keep current image' : '' }}
