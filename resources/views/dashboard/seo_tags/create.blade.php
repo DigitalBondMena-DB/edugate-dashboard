@@ -25,11 +25,11 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">Arabic Tag Title <span
+                                    <label class="form-label fw-bold text-dark">Arabic Meta Title <span
                                             class="text-danger">*</span></label>
                                     <input type="text" name="ar_tag_title"
                                         class="form-control @error('ar_tag_title') is-invalid @enderror"
-                                        value="{{ old('ar_tag_title') }}" placeholder="Tag Title in Arabic">
+                                        value="{{ old('ar_tag_title') }}" placeholder="Meta Title in Arabic">
                                     @error('ar_tag_title')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -38,11 +38,11 @@
 
                             <div class="col-md-6">
                                 <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">English Tag Title <span
+                                    <label class="form-label fw-bold text-dark">English Meta Title <span
                                             class="text-danger">*</span></label>
                                     <input type="text" name="en_tag_title"
                                         class="form-control @error('en_tag_title') is-invalid @enderror"
-                                        value="{{ old('en_tag_title') }}" placeholder="Tag Title in English">
+                                        value="{{ old('en_tag_title') }}" placeholder="Meta Title in English">
                                     @error('en_tag_title')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -51,18 +51,18 @@
                         </div>
 
                         <div class="mb-4">
-                            <label class="form-label fw-bold text-dark">Arabic Tag Paragraph</label>
+                            <label class="form-label fw-bold text-dark">Arabic Meta Description</label>
                             <textarea name="ar_tag_paragraph" rows="4" class="form-control @error('ar_tag_paragraph') is-invalid @enderror"
-                                placeholder="Arabic Tag Paragraph">{{ old('ar_tag_paragraph') }}</textarea>
+                                placeholder="Arabic Meta Description">{{ old('ar_tag_paragraph') }}</textarea>
                             @error('ar_tag_paragraph')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
 
                         <div class="mb-4">
-                            <label class="form-label fw-bold text-dark">English Tag Paragraph</label>
+                            <label class="form-label fw-bold text-dark">English Meta Description</label>
                             <textarea name="en_tag_paragraph" rows="4" class="form-control @error('en_tag_paragraph') is-invalid @enderror"
-                                placeholder="English Tag Paragraph">{{ old('en_tag_paragraph') }}</textarea>
+                                placeholder="English Meta Description">{{ old('en_tag_paragraph') }}</textarea>
                             @error('en_tag_paragraph')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

@@ -26,6 +26,8 @@ class StoreOrUpdateEventCategeryRequest extends FormRequest
         return [
             'ar_name'        => 'required|string|max:255',
             'en_name'        => 'required|string|max:255',
+            'en_title'       => 'required|string|max:255',
+            'ar_title'       => 'required|string|max:255',
             'ar_description' => 'required|string',
             'en_description' => 'required|string',
 
@@ -41,7 +43,7 @@ class StoreOrUpdateEventCategeryRequest extends FormRequest
             'en_name.required' => 'English title is required.',
             'ar_description.required' => 'Arabic description is required.',
             'en_description.required' => 'English description is required.',
-            
+
             'gallery_images.*.image'      => 'Gallery image must be an image.',
             'gallery_images.*.mimes'      => 'Gallery image must be a file of type: jpeg, png, jpg, webp.',
             'gallery_images.*.max'        => 'Gallery image size must not exceed 2MB.',

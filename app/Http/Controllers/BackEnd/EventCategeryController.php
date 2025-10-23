@@ -46,7 +46,7 @@ class EventCategeryController extends Controller
 
     public function edit($id)
     {
-        $row = EventCategery::select('id', 'en_name', 'ar_name', 'ar_description', 'en_description')
+        $row = EventCategery::select('id', 'en_name', 'ar_name','en_title', 'ar_title', 'ar_description', 'en_description')
             ->with(['gallaries:id,event_categery_id,image'])
             ->findorFail($id);
         return view('dashboard.event_categery.edit', compact('row'));

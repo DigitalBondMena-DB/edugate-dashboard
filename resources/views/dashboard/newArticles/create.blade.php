@@ -64,14 +64,14 @@
                             @enderror
                         </div>
 
-                        {{-- Meta / Tags --}}
+                        {{-- Meta  --}}
                         <div class="row g-4 mt-1">
                             <div class="col-md-6">
-                                <label class="form-label fw-bold">Arabic Tag Title <span
+                                <label class="form-label fw-bold">Arabic Meta Title <span
                                         class="text-danger">*</span></label>
                                 <input type="text" name="ar_tag_title" id="ar_tag_title"
                                     class="form-control @error('ar_tag_title') is-invalid @enderror"
-                                    value="{{ old('ar_tag_title') }}" placeholder="Tag title in Arabic" required>
+                                    value="{{ old('ar_tag_title') }}" placeholder="Meta title in Arabic" required>
                                 <div class="form-text"><span id="ar_tag_title_count">0</span> chars</div>
                                 @error('ar_tag_title')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -79,10 +79,10 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label class="form-label fw-bold">English Tag Title</label>
+                                <label class="form-label fw-bold">English Meta Title</label>
                                 <input type="text" name="en_tag_title" id="en_tag_title"
                                     class="form-control @error('en_tag_title') is-invalid @enderror"
-                                    value="{{ old('en_tag_title') }}" placeholder="Tag title in English">
+                                    value="{{ old('en_tag_title') }}" placeholder="Meta title in English">
                                 <div class="form-text"><span id="en_tag_title_count">0</span> chars</div>
                                 @error('en_tag_title')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -90,10 +90,10 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label class="form-label fw-bold">Arabic Tag Description <span
+                                <label class="form-label fw-bold">Arabic Meta Description <span
                                         class="text-danger">*</span></label>
                                 <textarea name="ar_tag_desc" id="ar_tag_desc" class="form-control @error('ar_tag_desc') is-invalid @enderror"
-                                    rows="3" placeholder="Tag description in Arabic" required>{{ old('ar_tag_desc') }}</textarea>
+                                    rows="3" placeholder="Meta description in Arabic" required>{{ old('ar_tag_desc') }}</textarea>
                                 <div class="form-text"><span id="ar_tag_desc_count">0</span> chars</div>
                                 @error('ar_tag_desc')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -101,9 +101,9 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label class="form-label fw-bold">English Tag Description</label>
+                                <label class="form-label fw-bold">English Meta Description</label>
                                 <textarea name="en_tag_desc" id="en_tag_desc" class="form-control @error('en_tag_desc') is-invalid @enderror"
-                                    rows="3" placeholder="Tag description in English">{{ old('en_tag_desc') }}</textarea>
+                                    rows="3" placeholder="Meta description in English">{{ old('en_tag_desc') }}</textarea>
                                 <div class="form-text"><span id="en_tag_desc_count">0</span> chars</div>
                                 @error('en_tag_desc')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -114,7 +114,7 @@
                         {{-- Scripts --}}
                         <div class="row g-4 mt-1">
                             <div class="col-md-6">
-                                <label class="form-label fw-bold">Article Script</label>
+                                <label class="form-label fw-bold">Article Script 1</label>
                                 <textarea name="blog_script" id="blog_script" class="form-control @error('blog_script') is-invalid @enderror"
                                     rows="3" placeholder="Blog script in Arabic">{{ old('blog_script') }}</textarea>
                                 @error('blog_script')
@@ -123,7 +123,7 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label class="form-label fw-bold">Article Second Script</label>
+                                <label class="form-label fw-bold">Article Script 2</label>
                                 <textarea name="blog_second_script" id="blog_second_script"
                                     class="form-control @error('blog_second_script') is-invalid @enderror" rows="3"
                                     placeholder="Blog second script in Arabic">{{ old('blog_second_script') }}</textarea>

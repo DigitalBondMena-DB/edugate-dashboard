@@ -75,54 +75,51 @@
                                 </div>
                             </div>
                         </div>
-
+                        <div class="row">
+                            <div class="col-md-6">
                         <div class="mb-4">
                             <label class="form-label fw-bold text-dark">Arabic Detail Title <span class="text-danger">*</span></label>
-                            <textarea name="ar_detail_title" rows="4"
-                                      class="form-control @error('ar_detail_title') is-invalid @enderror ckeditor"
-                                      placeholder="Enter sub category Detail title in Arabic">{{ old('ar_detail_title') }}</textarea>
+                            <input type="text" name="ar_detail_title" id="ar_detail_title"
+                                   class="form-control @error('ar_detail_title') is-invalid @enderror"
+                                   value="{{ old('ar_detail_title') }}" placeholder="Enter sub category detail title in Arabic">
                             @error('ar_detail_title')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+                            </div>
 
+                            <div class="col-md-6">
                         <div class="mb-4">
                             <label class="form-label fw-bold text-dark">English Detail Title <span class="text-danger">*</span></label>
-                            <textarea name="en_detail_title" rows="4"
-                                      class="form-control @error('en_detail_title') is-invalid @enderror ckeditor"
-                                      placeholder="Enter sub category Detail title in English">{{ old('en_detail_title') }}</textarea>
+                            <input type="text" name="en_detail_title" id="en_detail_title"
+                                   class="form-control @error('en_detail_title') is-invalid @enderror"
+                                   value="{{ old('en_detail_title') }}" placeholder="Enter sub category detail title in English">
                             @error('en_detail_title')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+                            </div>
+                        </div>
 
-                        <div class="row">
-                            <div class="col-md-6">
                                 <div class="mb-4">
                                     <label class="form-label fw-bold text-dark">Arabic Detail Description <span class="text-danger">*</span></label>
-                                    <input type="text" name="ar_detail_text" id="ar_detail_text"
-                                           class="form-control @error('ar_detail_text') is-invalid @enderror"
-                                           value="{{ old('ar_detail_text') }}"
-                                           placeholder="Enter sub category detail description in Arabic">
+                                    <textarea name="ar_detail_text" rows="4"
+                                              class="form-control @error('ar_detail_text') is-invalid @enderror ckeditor"
+                                              placeholder="Enter sub category detail description in Arabic">{{ old('ar_detail_text') }}</textarea>
                                     @error('ar_detail_text')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-                            </div>
 
-                            <div class="col-md-6">
                                 <div class="mb-4">
                                     <label class="form-label fw-bold text-dark">English Detail Description <span class="text-danger">*</span></label>
-                                    <input type="text" name="en_detail_text" id="en_detail_text"
-                                           class="form-control @error('en_detail_text') is-invalid @enderror"
-                                           value="{{ old('en_detail_text') }}"
-                                           placeholder="Enter sub category detail description in English">
+                                    <textarea name="en_detail_text" rows="4"
+                                              class="form-control @error('en_detail_text') is-invalid @enderror ckeditor"
+                                              placeholder="Enter sub category detail description in English">{{ old('en_detail_text') }}</textarea>
                                     @error('en_detail_text')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-                            </div>
-                        </div>
 
                         <div class="row">
                             <div class="col-md-6">

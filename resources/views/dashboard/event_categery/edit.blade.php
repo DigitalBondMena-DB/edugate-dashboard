@@ -31,7 +31,7 @@
                                     <input type="text" name="ar_name"
                                         class="form-control @error('ar_name') is-invalid @enderror"
                                         value="{{ old('ar_name', $row->ar_name ?? $row->ar_name) }}"
-                                        placeholder="العنوان بالعربية">
+                                        placeholder="Name in Arabic">
                                     @error('ar_name')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -52,11 +52,40 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold text-dark">Arabic Title <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="ar_title"
+                                        class="form-control @error('ar_title') is-invalid @enderror"
+                                        value="{{ old('ar_title', $row->ar_title ?? $row->ar_title) }}"
+                                        placeholder="Title in Arabic">
+                                    @error('ar_title')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold text-dark">English Title <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="en_title"
+                                        class="form-control @error('en_title') is-invalid @enderror"
+                                        value="{{ old('en_title', $row->en_title ?? $row->en_title) }}"
+                                        placeholder="Title in English">
+                                    @error('en_title')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="mb-4">
                             <label class="form-label fw-bold text-dark">Arabic Description</label>
                             <textarea name="ar_description" rows="4" class="form-control @error('ar_description') is-invalid @enderror"
-                                placeholder="وصف مختصر">{{ old('ar_description', $row->ar_description) }}</textarea>
+                                placeholder="Short description">{{ old('ar_description', $row->ar_description) }}</textarea>
                             @error('ar_description')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

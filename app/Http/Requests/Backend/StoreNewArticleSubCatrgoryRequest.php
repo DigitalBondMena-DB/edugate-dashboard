@@ -32,7 +32,7 @@ class StoreNewArticleSubCatrgoryRequest extends FormRequest
             'en_tag_description'  => 'required|string',
             'ar_tag_description'  => 'required|string',
             'new_article_catrgory_id' => 'required|integer|exists:new_article_catrgories,id',
-            'banner_image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'banner_image' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
             'ar_description' => 'required|string',
             'en_description' => 'required|string',
             'ar_detail_title' => 'required|string',

@@ -95,7 +95,7 @@
 
                             <div class="col-md-6">
                                 <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">English detail Title <span
+                                    <label class="form-label fw-bold text-dark">English Detail Title <span
                                             class="text-danger">*</span></label>
                                     <input type="text" name="en_detail_title" id="en_detail_title"
                                         class="form-control @error('en_detail_title') is-invalid @enderror"

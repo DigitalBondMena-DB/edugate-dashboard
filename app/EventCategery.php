@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class EventCategery extends Model
 {
     use HasFactory;
-    protected $fillable = ['en_name', 'ar_name', 'ar_description', 'en_description', 'active'];
+    protected $fillable = ['en_name', 'ar_name', 'ar_description', 'en_description', 'active', 'en_title', 'ar_title'];
 
-    
+
 
     public function event_details() {
         return $this->hasMany(EventDetail::class);

@@ -75,11 +75,11 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        {{-- ================= Meta (Tag) ================= --}}
+                        {{-- ================= Meta (Meta) ================= --}}
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">Arabic Tag Title <span
+                                    <label class="form-label fw-bold text-dark">Arabic Meta Title <span
                                             class="text-danger">*</span></label>
                                     <input type="text" name="ar_tag_title"
                                         class="form-control @error('ar_tag_title') is-invalid @enderror"
@@ -95,7 +95,7 @@
 
                             <div class="col-md-6">
                                 <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">English Tag Title</label>
+                                    <label class="form-label fw-bold text-dark">English Meta Title</label>
                                     <input type="text" name="en_tag_title"
                                         class="form-control @error('en_tag_title') is-invalid @enderror"
                                         value="{{ old('en_tag_title', $row->en_tag_title) }}"
@@ -109,7 +109,7 @@
                             </div>
                         </div>
                         <div class="mb-4">
-                            <label class="form-label fw-bold text-dark">Arabic Tag Description <span
+                            <label class="form-label fw-bold text-dark">Arabic Meta Description <span
                                     class="text-danger">*</span></label>
                             <textarea name="ar_tag_desc" rows="4" class="form-control @error('ar_tag_desc') is-invalid @enderror"
                                 placeholder="Enter Arabic tag description">{{ old('ar_tag_desc', $row->ar_tag_desc) }}</textarea>
@@ -120,7 +120,7 @@
                                     id="ar_tag_desc_count">0</span></small>
                         </div>
                         <div class="mb-4">
-                            <label class="form-label fw-bold text-dark">English Tag Description</label>
+                            <label class="form-label fw-bold text-dark">English Meta Description</label>
                             <textarea name="en_tag_desc" rows="4" class="form-control @error('en_tag_desc') is-invalid @enderror"
                                 placeholder="Enter English tag description">{{ old('en_tag_desc', $row->en_tag_desc) }}</textarea>
                             @error('en_tag_desc')
@@ -131,7 +131,7 @@
                         </div>
                         {{-- ================= Scripts (single) ================= --}}
                         <div class="mb-4">
-                            <label class="form-label fw-bold text-dark">Article Script</label>
+                            <label class="form-label fw-bold text-dark">Article Script 1</label>
                             <textarea name="blog_script" rows="4" class="form-control @error('blog_script') is-invalid @enderror"
                                 placeholder="Paste script here">{{ old('blog_script', $row->blog_script) }}</textarea>
                             @error('blog_script')
@@ -140,7 +140,7 @@
                         </div>
 
                         <div class="mb-4">
-                            <label class="form-label fw-bold text-dark">Article Second Script</label>
+                            <label class="form-label fw-bold text-dark">Article Script 2</label>
                             <textarea name="blog_second_script" rows="4"
                                 class="form-control @error('blog_second_script') is-invalid @enderror" placeholder="Paste second script here">{{ old('blog_second_script', $row->blog_second_script) }}</textarea>
                             @error('blog_second_script')
