@@ -230,7 +230,7 @@
 
                         {{-- ================= Main Image ================= --}}
                         <div class="mb-4">
-                            <label class="form-label fw-bold text-dark">Main Image</label>
+                            <label class="form-label fw-bold text-dark">Image</label>
                             @if ($row->main_image)
                                 <div class="mb-3">
                                     <div class="border rounded p-3 bg-light">
@@ -300,68 +300,6 @@
                                     <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                             </div>
-                        </div>
-
-                        {{-- ================= Current Gallery (checkbox delete) ================= --}}
-                        <div class="mb-4">
-                            <label class="form-label fw-bold text-dark">Current Gallery</label>
-
-                            @if (isset($articleImages) && $articleImages->count())
-                                <div class="row g-3">
-                                    @foreach ($articleImages as $img)
-                                        <div class="col-6 col-md-3">
-                                            <div class="border rounded p-2 text-center h-100 d-flex flex-column">
-                                                <a href="#" data-bs-toggle="modal"
-                                                    data-bs-target="#imgModal{{ $img->id }}">
-                                                    <img src="{{ asset($img->image_url) }}" alt="gallery"
-                                                        class="rounded"
-                                                        style="width:100%; height:150px; object-fit:cover;">
-                                                </a>
-                                                <div class="form-check mt-2 text-start">
-                                                    <input class="form-check-input" type="checkbox"
-                                                        name="deleted_images[]" value="{{ $img->id }}"
-                                                        id="del{{ $img->id }}">
-                                                    <label class="form-check-label small text-danger"
-                                                        for="del{{ $img->id }}">
-                                                        Delete this image
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="imgModal{{ $img->id }}" tabindex="-1"
-                                            aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered modal-lg">
-                                                <div class="modal-content border-0">
-                                                    <div class="modal-body p-0 text-center">
-                                                        <img src="{{ asset($img->image_url) }}" class="img-fluid"
-                                                            style="max-height:80vh; object-fit:contain;">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            @else
-                                <div class="text-muted">No images yet.</div>
-                            @endif
-                        </div>
-
-                        {{-- ================= Add More Images ================= --}}
-                        <div class="mb-4">
-                            <label class="form-label fw-bold text-dark">Add More Images</label>
-                            <input type="file" name="arrayOfImages[]" multiple
-                                class="form-control @error('arrayOfImages') is-invalid @enderror" accept="image/*"
-                                placeholder="Upload gallery images">
-                            <small class="text-muted d-block mt-1">Select multiple images to append to this
-                                gallery.</small>
-                            @error('arrayOfImages')
-                                <div class="invalid-feedback d-block">{{ $message }}</div>
-                            @enderror
-                            @error('arrayOfImages.*')
-                                <div class="invalid-feedback d-block">{{ $message }}</div>
-                            @enderror
                         </div>
 
                         <div class="border-top pt-4 d-flex justify-content-between">

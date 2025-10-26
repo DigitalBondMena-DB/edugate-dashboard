@@ -161,23 +161,12 @@
                         {{-- Media --}}
                         <div class="row g-4 mt-1">
                             <div class="col-md-6">
-                                <label class="form-label fw-bold">Main Image <span class="text-danger">*</span></label>
+                                <label class="form-label fw-bold">Image <span class="text-danger">*</span></label>
                                 <input type="file" name="main_image" id="main_image"
                                     class="form-control @error('main_image') is-invalid @enderror" accept="image/*"
                                     required>
                                 <small class="text-muted d-block mt-1">Accepted: JPG, JPEG, PNG, WEBP</small>
                                 @error('main_image')
-                                    <div class="invalid-feedback d-block">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-6">
-                                <label class="form-label fw-bold">Gallery Images</label>
-                                <input type="file" name="arrayOfImages[]" id="arrayOfImages"
-                                    class="form-control @error('arrayOfImages') is-invalid @enderror" accept="image/*"
-                                    multiple>
-                                <small class="text-muted d-block mt-1">You can select multiple images</small>
-                                @error('arrayOfImages')
                                     <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                             </div>

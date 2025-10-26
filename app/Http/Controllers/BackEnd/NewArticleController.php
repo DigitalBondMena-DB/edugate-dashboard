@@ -8,6 +8,7 @@ use App\NewArticleImage;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\NewArticleSubCatrgory;
+use App\Services\ImageService;
 use Illuminate\Http\UploadedFile;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -21,13 +22,12 @@ use Intervention\Image\Laravel\Facades\Image;
 class NewArticleController extends Controller
 {
     private const MAIN_DIR     = 'newArticle';
-    private const GALLERY_DIR  = 'articleImages';
     private const WEBP_QUALITY = 75;
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    protected $imageService;
+    public function __construct(ImageService $imageService)
+    {
+        $this->imageService = $imageService;
+    }
     public function index(Request $request)
     {
         $search   = trim((string) $request->get('q', ''));
@@ -69,128 +69,19 @@ class NewArticleController extends Controller
         return view('dashboard.newArticles.index', compact('rows', 'subCategories', 'search', 'subId', 'status'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $categoreies = NewArticleSubCatrgory::get();
         return view('dashboard.newArticles.create', compact('categoreies'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    // public function store(Request $request)
-    // {
 
-    //     $dateNow = Carbon::now('Africa/Cairo')->format('Y-m-d');
-    //     // dd($request->schedule_date , $request->schedule_time , $dateNow);
-
-    //     if ($request->hasFile('main_image')) {
-    //         $file = $request->file('main_image');
-    //         $fileName = time() . str_random(10);
-    //         $file = (string) Image::make($request->file('main_image'))->encode('webp', 75)->save(public_path('newArticle/' . $fileName, 'webp'));
-    //         // $file->move(public_path('newArticle'), $fileName);
-
-    //     }
-
-    //     $newdate = $request->schedule_date . ' ' . $request->schedule_time;
-    //     // dd($newdate);
-
-    //     function make_slug($string, $separator = '-')
-    //     {
-    //         $string = trim($string);
-    //         $string = mb_strtolower($string, 'UTF-8');
-
-    //         $string = preg_replace("/[^a-z0-9_\s\-ءاأإآؤئبتثجحخدذرزسشصضطظعغفقكلمنهويةى]/u", "", $string);
-
-    //         // Remove multiple dashes or whitespaces or underscores
-    //         $string = preg_replace("/[\s\-]+/", " ", $string);
-
-    //         // Convert whitespaces and underscore to the given separator
-    //         $string = preg_replace("/[\s_]/", $separator, $string);
-
-    //         return $string;
-    //     }
-
-    //     $ar_slug = make_slug($request->ar_title);
-
-
-    //     $ar_slug = make_slug($request->ar_title);
-
-    //     $requestArray = [
-    //         'en_slug' => Str::slug($request->en_title),
-    //         'ar_slug' => $ar_slug,
-    //         'main_image' =>  $fileName,
-
-    //         'ar_tag_title' => $request->ar_tag_title,
-    //         'schedule_date' => $newdate,
-    //         'ar_tag_desc' => $request->ar_tag_desc,
-    //         'new_article_catrgory_id' => $request->new_article_catrgory_id,
-    //         'article_date' => $request->schedule_date,
-    //         'blog_script' => $request->blog_script,
-    //         'blog_second_script' => $request->blog_second_script,
-    //         'status' => $request->status,
-    //         'article_counter' => 0
-    //     ] + $request->all();
-
-
-    //     $row = NewArticle::create($requestArray);
-    //     $arrayofimages =  $request->file('arrayOfImages');;
-    //     // dd($arrayofimages);
-    //     if ($arrayofimages) {
-    //         foreach ($arrayofimages as $arrayofimage) {
-
-    //             $fileName = time() . str_random(10);
-    //             $file = (string) Image::make($arrayofimage)->encode('webp', 75)->save(public_path('articleImages/' . $fileName, 'webp'));
-
-
-    //             // dd($arrayofimages);
-    //             NewArticleImage::create([
-    //                 'image' => $fileName,
-    //                 'new_article_id' => $row->id,
-    //                 'image_url' => 'articleImages/' . $fileName
-    //             ]);
-    //             // dd($arrayofimage);
-    //         }
-    //     }
-
-
-
-    //     Session::flash('flash_message', 'Blog added successfully!');
-    //     return redirect()->route('newArticle.edit', $row->id);
-    // }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $row = NewArticle::findOrFail($id);
-        $articleImages = NewArticleImage::where('new_article_id', $row->id)->get();
         $categoreies = NewArticleSubCatrgory::get();
 
-        return view('dashboard.newArticles.edit', compact('row', 'articleImages', 'categoreies'));
+        return view('dashboard.newArticles.edit', compact('row', 'categoreies'));
     }
 
 
@@ -203,13 +94,6 @@ class NewArticleController extends Controller
         return redirect()->route('newArticle.index');
     }
 
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $validated = $this->validateStore($request);
@@ -220,10 +104,7 @@ class NewArticleController extends Controller
 
         $mainImageName = null;
         if ($request->hasFile('main_image')) {
-            if (!file_exists(public_path(self::MAIN_DIR))) {
-                mkdir(public_path(self::MAIN_DIR), 0777, true);
-            }
-            $mainImageName = $this->saveWebp($request->file('main_image'), self::MAIN_DIR);
+            $mainImageName = $this->imageService->handle($request->file('main_image'), 'newArticle', null);
         }
 
         $payload = array_merge($validated, [
@@ -236,13 +117,6 @@ class NewArticleController extends Controller
         ]);
 
         $article = NewArticle::create($payload);
-
-        if ($request->hasFile('arrayOfImages')) {
-            if (!file_exists(public_path(self::GALLERY_DIR))) {
-                mkdir(public_path(self::GALLERY_DIR), 0777, true);
-            }
-            $this->saveGallery($request->file('arrayOfImages'), $article->id);
-        }
 
         Session::flash('flash_message', 'Blog added successfully!');
         return redirect()->route('newArticle.edit', $article->id);
@@ -259,28 +133,9 @@ class NewArticleController extends Controller
 
         $mainImageName = $article->main_image;
         if ($request->hasFile('main_image')) {
-            $newName = $this->saveWebp($request->file('main_image'), self::MAIN_DIR);
-            if ($newName) {
-                $this->deleteIfExists(public_path(self::MAIN_DIR . '/' . $mainImageName));
-                $mainImageName = $newName;
-            }
+            $mainImageName = $this->imageService->handle($request->file('main_image'), 'newArticle', $mainImageName);
         }
 
-        if ($request->filled('deleted_images') && is_array($request->deleted_images)) {
-            $toDelete = \App\NewArticleImage::whereIn('id', $request->deleted_images)
-                ->where('new_article_id', $article->id)
-                ->get();
-
-            foreach ($toDelete as $img) {
-                // امسح الملف من الديسك
-                $this->deleteIfExists(public_path(trim(self::GALLERY_DIR, '/') . '/' . $img->image));
-                if (!empty($img->image_url)) {
-                    $this->deleteIfExists(public_path(ltrim($img->image_url, '/')));
-                }
-                // امسح السجل
-                $img->delete();
-            }
-        }
 
         $payload = array_merge($validated, [
             'en_slug'        => $englishSlug,
@@ -291,55 +146,13 @@ class NewArticleController extends Controller
 
         $article->update($payload);
 
-        if ($request->hasFile('arrayOfImages')) {
-            $this->saveGallery($request->file('arrayOfImages'), $article->id);
-        }
-
         Session::flash('flash_message', 'Blog updated successfully!');
-        return $request->hasFile('arrayOfImages')
-            ? redirect()->route('newArticle.edit', $article->id)
-            : redirect()->route('newArticle.index');
+        return redirect()->route('newArticle.index');
     }
 
 
     /* ===================== Helpers (Clean) ===================== */
 
-    private function webpName(): string
-    {
-        return now()->timestamp . '_' . Str::random(10) . '.webp';
-    }
-
-    private function saveWebp(UploadedFile $file, string $dir): ?string
-    {
-        try {
-            $name = $this->webpName();
-            $path = public_path(trim($dir, '/') . '/' . $name);
-            if (!is_dir(dirname($path))) {
-                mkdir(dirname($path), 0777, true);
-            }
-            Image::read($file)
-                ->toWebp(self::WEBP_QUALITY)
-                ->save($path);
-            return $name;
-        } catch (\Throwable $e) {
-            return null;
-        }
-    }
-    private function saveGallery(array $files, int $articleId): void
-    {
-        foreach ($files as $img) {
-            if (!$img instanceof UploadedFile) continue;
-
-            $name = $this->saveWebp($img, self::GALLERY_DIR);
-            if (!$name) continue;
-
-            NewArticleImage::create([
-                'image'          => $name,
-                'new_article_id' => $articleId,
-                'image_url'      => self::GALLERY_DIR . '/' . $name,
-            ]);
-        }
-    }
 
     private function combineSchedule(?string $date, ?string $time): ?string
     {
@@ -357,10 +170,6 @@ class NewArticleController extends Controller
         return preg_replace("/[\s_]/", $sep, $text);
     }
 
-    private function deleteIfExists(string $absolutePath): void
-    {
-        if (is_file($absolutePath)) @unlink($absolutePath);
-    }
 
     private function validateStore(Request $request): array
     {
@@ -432,7 +241,7 @@ class NewArticleController extends Controller
             'blog_script'        => 'nullable|string',
             'blog_second_script' => 'nullable|string',
 
-            'schedule_date' => 'nullable|date|after_or_equal:today',
+            'schedule_date' => 'nullable|date',
             'schedule_time' => 'nullable|date_format:H:i',
 
             'new_article_sub_catrgory_id' => "required|integer|exists:{$subTable},id",
