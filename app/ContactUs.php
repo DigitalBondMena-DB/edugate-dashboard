@@ -17,6 +17,7 @@ class ContactUs extends Model
     'linkedin' ,
     'tiktok' ,
     'whatsapp_number',
+    'youtube',
     'map_url',
     'banner_image'];
     protected $casts = [

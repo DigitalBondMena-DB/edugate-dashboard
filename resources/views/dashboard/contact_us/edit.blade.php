@@ -210,6 +210,21 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold text-dark">Youtube<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="youtube"
+                                        class="form-control @error('youtube') is-invalid @enderror"
+                                        value="{{ old('youtube', $contact->youtube) }}" placeholder="Enter Youtube">
+                                    @error('youtube')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
                         {{-- map url --}}
                         <div class="mb-4">
                             <label class="form-label fw-bold text-dark">Map URL </label>
