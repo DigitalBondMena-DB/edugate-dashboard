@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\EnBlog;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -9,10 +10,10 @@ class NewArticleSubCatrgory extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'en_title', 
-        'ar_title', 
-        'en_slug' , 
-        'ar_slug', 
+        'en_title',
+        'ar_title',
+        'en_slug' ,
+        'ar_slug',
         'en_tag_title',
         'ar_tag_title',
         'en_tag_description',
@@ -35,5 +36,9 @@ class NewArticleSubCatrgory extends Model
 
     public function article_data() {
         return $this->hasMany(NewArticle::class);
+    }
+
+    public function en_blogs() {
+        return $this->hasMany(EnBlog::class);
     }
 }

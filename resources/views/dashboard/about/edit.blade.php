@@ -28,7 +28,7 @@
                         <div class="mb-4">
                             <label class="form-label fw-bold text-dark">Arabic Story <span
                                     class="text-danger">*</span></label>
-                            <textarea name="ar_story" id="ar_story" class="form-control dataTables_filter @error('ar_story') is-invalid @enderror"
+                            <textarea name="ar_story" id="ar_story" class="form-control dataTables_filter ckeditor @error('ar_story') is-invalid @enderror"
                                 rows="4" placeholder="Enter Story in Arabic">{{ old('ar_story', $about->ar_story) }}</textarea>
                             @error('ar_story')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -38,7 +38,7 @@
                         <div class="mb-4">
                             <label class="form-label fw-bold text-dark">English Story <span
                                     class="text-danger">*</span></label>
-                            <textarea name="en_story" id="en_story" class="form-control @error('en_story') is-invalid @enderror" rows="4"
+                            <textarea name="en_story" id="en_story" class="form-control ckeditor @error('en_story') is-invalid @enderror" rows="4"
                                 placeholder="Enter Story in English">{{ old('en_story', $about->en_story) }}</textarea>
                             @error('en_story')
                                 <div class="invalid-feedback">{{ $message }}</div>

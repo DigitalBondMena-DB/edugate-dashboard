@@ -46,6 +46,8 @@ Route::namespace('BackEnd')->prefix('admin')->middleware('admin')->group(functio
     Route::resource('/newArticle', 'NewArticleController')->except(['destroy']);
     Route::patch('/newArticles/{newArticle}/toggle-status', 'NewArticleController@toggleStatus')->name('newArticle.toggleStatus');
 
+    Route::resource('/enBlog', 'EnBlogController')->except(['destroy']);
+    Route::patch('/enBlog/{enBlog}/toggle-status', 'EnBlogController@toggleStatus')->name('enBlog.toggleStatus');
 
     Route::get('/about/edit', 'AboutController@edit')->name('about.edit');
     Route::put('/about', 'AboutController@update')->name('about.update');
