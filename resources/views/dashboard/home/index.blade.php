@@ -305,7 +305,7 @@
 
                 <div class="row">
                     <div class="col-lg-4 col-md-6">
-                        <a href="/admin/event-categery" class="quick-link">
+                        <a href="{{ route('event-categery.index') }}" class="quick-link">
                             <div class="quick-link-icon icon-bg-1">
                                 <i class="fas fa-images"></i>
                             </div>
@@ -314,32 +314,15 @@
                     </div>
 
                     <div class="col-lg-4 col-md-6">
-                        <a href="/admin/newArticle" class="quick-link">
+                        <a href="{{ route('newArticle.index') }}" class="quick-link">
                             <div class="quick-link-icon icon-bg-5">
                                 <i class="fa-solid fa-newspaper"></i>
                             </div>
-                            <span>Articles</span>
+                            <span>Articles (Ar)</span>
                         </a>
                     </div>
                     <div class="col-lg-4 col-md-6">
-                        <a href="/admin/articleSubCategory" class="quick-link">
-                            <div class="quick-link-icon icon-bg-6">
-                                <i class="fas fa-layer-group"></i>
-                            </div>
-                            <span>Article Sub Categories</span>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <a href="/admin/clients" class="quick-link">
-                            <div class="quick-link-icon icon-bg-3">
-                                <i class="fas fa-handshake"></i>
-                            </div>
-                            <span>Manage Partners</span>
-                        </a>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <a href="/admin/feedback" class="quick-link">
+                        <a href="{{ route('feedback.index') }}" class="quick-link">
                             <div class="quick-link-icon icon-bg-4">
                                 <i class="fas fa-comments"></i>
                             </div>
@@ -348,7 +331,24 @@
                     </div>
 
                     <div class="col-lg-4 col-md-6">
-                        <a href="/admin/study_abroad" class="quick-link">
+                        <a href="{{ route('articleSubCategory.index') }}" class="quick-link">
+                            <div class="quick-link-icon icon-bg-6">
+                                <i class="fas fa-layer-group"></i>
+                            </div>
+                            <span>Article Sub Categories</span>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+                        <a href={{ route('enBlog.index') }} class="quick-link">
+                            <div class="quick-link-icon icon-bg-3">
+                                <i class="fa-solid fa-newspaper"></i>
+                            </div>
+                            <span>Articles (En)</span>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <a href="{{ route('study_abroad.index') }}" class="quick-link">
                             <div class="quick-link-icon icon-bg-2">
                                 <i class="fa-solid fa-hand-point-up"></i>
                             </div>

@@ -20,8 +20,20 @@
                     <form action="{{ route('enBlog.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
-                        {{-- Titles --}}
+                        {{-- Slug (only for admin) --}}
+                        @if(auth()->user()->role == 'super-admin' || auth()->user()->role == 'admin')
                         <div class="row">
+                            <label class="form-label fw-bold">Slug</label>
+                            <input type="text" name="slug" id="slug"
+                                class="form-control @error('slug') is-invalid @enderror"
+                                value="{{ old('slug') }}" placeholder="Enter Slug">
+                            @error('slug')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        @endif
+                        {{-- Titles --}}
+                        <div class="row mt-3">
                                 <label class="form-label fw-bold">Title</label>
                                 <input type="text" name="title" id="title"
                                     class="form-control @error('title') is-invalid @enderror"

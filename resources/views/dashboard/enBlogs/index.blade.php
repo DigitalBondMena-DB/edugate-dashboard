@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 
-@php $pageTitle = 'English Blogs'; @endphp
+@php $pageTitle = 'English Articles Control'; @endphp
 
 @section('title')
     {{ $pageTitle }}
@@ -94,7 +94,7 @@
                                             </td>
 
                                             <td class="text-center text-wrap-cell">
-                                                {{ ($article->title > 60) ? (Str::substr($article->title, 0, 60) . '...') : ($article->title ?: '-') }}
+                                                {{ (strlen($article->title) > 150) ? (Str::substr($article->title, 0, 150) . '...') : ($article->title ?: '-') }}
                                             </td>
                                             <td class="text-center">
 

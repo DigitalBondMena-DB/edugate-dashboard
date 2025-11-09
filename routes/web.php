@@ -2,13 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\BackEnd\HeroController;
 use App\Http\Controllers\BackEnd\HomeController;
 
+Route::middleware('auth.dashboard')->group(function () {
 
-Route::middleware('admin')->group(function () {
-
-    Route::get('/dashboard', [HomeController::class, 'index'])->name('welcome');
-    Route::redirect('/', '/dashboard');
+    Route::get('/', [HomeController::class, 'index'])->name('welcome');
     Route::post('/logout', [LoginController::class, 'logout'])->name('admin.logout');
 });
 
@@ -18,7 +17,7 @@ Route::get('/login', function () {
 })->name('admin.show.login');
 Route::post('/login', [LoginController::class, 'submitAdminLoginForm'])->name('login');
 
-Route::namespace('BackEnd')->prefix('admin')->middleware('admin')->group(function () {
+Route::namespace('BackEnd')->group(function () {
 
     Route::resource('/tags', 'SeoTagController');
     Route::patch('/tags/{tag}/toggle-status', 'SeoTagController@toggleStatus')->name('tags.toggleStatus');
@@ -62,7 +61,7 @@ Route::namespace('BackEnd')->prefix('admin')->middleware('admin')->group(functio
     Route::resource('/user-contact', 'ContactController');
 
     Route::resource('counters', 'CounterController');
-    Route::resource('hero', 'HeroController');
+
     Route::get('privacy-policy', 'PrivacyPolicyController@index')->name('privacy-policy.index');
     Route::get('privacy-policy/edit', 'PrivacyPolicyController@edit')->name('privacy-policy.edit');
     Route::put('privacy-policy', 'PrivacyPolicyController@update')->name('privacy-policy.update');
@@ -76,4 +75,8 @@ Route::namespace('BackEnd')->prefix('admin')->middleware('admin')->group(functio
     Route::post('why-us/image', 'WhyUsController@updateImage')->name('why-us.updateImage');
     Route::resource('page-banners', 'PageBannerController');
 });
-
+// Route::middleware('auth.dashboard')->group(function () {
+    Route::get('/hero', [HeroController::class, 'index'])->name('hero.index');
+    Route::get('/hero/edit', [HeroController::class, 'edit'])->name('hero.edit');
+    Route::put('/hero', [HeroController::class, 'update'])->name('hero.update');
+// });

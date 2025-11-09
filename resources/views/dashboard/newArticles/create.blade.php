@@ -21,98 +21,55 @@
                         @csrf
 
                         {{-- Titles --}}
-                        <div class="row g-4">
-                            <div class="col-md-6">
-                                <label class="form-label fw-bold">Arabic Title <span class="text-danger">*</span></label>
+                        <div class="row mt-3">
+                                <label class="form-label fw-bold">Title <span class="text-danger">*</span></label>
                                 <input type="text" name="ar_title" id="ar_title"
                                     class="form-control @error('ar_title') is-invalid @enderror"
-                                    value="{{ old('ar_title') }}" placeholder="Enter title in Arabic" required>
+                                    value="{{ old('ar_title') }}" placeholder="Enter Title" required>
                                 <div class="form-text"><span id="ar_title_count">0</span> chars</div>
                                 @error('ar_title')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
-                            </div>
-
-                            <div class="col-md-6">
-                                <label class="form-label fw-bold">English Title</label>
-                                <input type="text" name="en_title" id="en_title"
-                                    class="form-control @error('en_title') is-invalid @enderror"
-                                    value="{{ old('en_title') }}" placeholder="Enter title in English">
-                                <div class="form-text"><span id="en_title_count">0</span> chars</div>
-                                @error('en_title')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
                         </div>
 
                         {{-- Texts --}}
-                        <div class="row g-4 mt-1">
-                            <label class="form-label fw-bold">Arabic Text <span class="text-danger">*</span></label>
+                        <div class="row mt-3">
+                            <label class="form-label fw-bold">Text <span class="text-danger">*</span></label>
                             <textarea name="ar_text" id="ar_text" class="form-control ckeditor @error('ar_text') is-invalid @enderror"
-                                rows="6" placeholder="Article text in Arabic" required>{{ old('ar_text') }}</textarea>
+                                rows="6" placeholder="Article Text" required>{{ old('ar_text') }}</textarea>
                             @error('ar_text')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="row g-4 mt-1">
-
-                            <label class="form-label fw-bold">English Text</label>
-                            <textarea name="en_text" id="en_text" class="form-control ckeditor @error('en_text') is-invalid @enderror"
-                                rows="6" placeholder="Article text in English">{{ old('en_text') }}</textarea>
-                            @error('en_text')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
 
                         {{-- Meta  --}}
-                        <div class="row g-4 mt-1">
-                            <div class="col-md-6">
-                                <label class="form-label fw-bold">Arabic Meta Title <span
+                            <div class="row mt-3">
+                                <label class="form-label fw-bold">Meta Title <span
                                         class="text-danger">*</span></label>
                                 <input type="text" name="ar_tag_title" id="ar_tag_title"
                                     class="form-control @error('ar_tag_title') is-invalid @enderror"
-                                    value="{{ old('ar_tag_title') }}" placeholder="Meta title in Arabic" required>
+                                    value="{{ old('ar_tag_title') }}" placeholder="Meta Title" required>
                                 <div class="form-text"><span id="ar_tag_title_count">0</span> chars</div>
                                 @error('ar_tag_title')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
-                            <div class="col-md-6">
-                                <label class="form-label fw-bold">English Meta Title</label>
-                                <input type="text" name="en_tag_title" id="en_tag_title"
-                                    class="form-control @error('en_tag_title') is-invalid @enderror"
-                                    value="{{ old('en_tag_title') }}" placeholder="Meta title in English">
-                                <div class="form-text"><span id="en_tag_title_count">0</span> chars</div>
-                                @error('en_tag_title')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
 
-                            <div class="col-md-6">
-                                <label class="form-label fw-bold">Arabic Meta Description <span
+
+                            <div class="row mt-3">
+                                <label class="form-label fw-bold">Meta Description <span
                                         class="text-danger">*</span></label>
                                 <textarea name="ar_tag_desc" id="ar_tag_desc" class="form-control @error('ar_tag_desc') is-invalid @enderror"
-                                    rows="3" placeholder="Meta description in Arabic" required>{{ old('ar_tag_desc') }}</textarea>
+                                    rows="3" placeholder="Meta Description" required>{{ old('ar_tag_desc') }}</textarea>
                                 <div class="form-text"><span id="ar_tag_desc_count">0</span> chars</div>
                                 @error('ar_tag_desc')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
-                            <div class="col-md-6">
-                                <label class="form-label fw-bold">English Meta Description</label>
-                                <textarea name="en_tag_desc" id="en_tag_desc" class="form-control @error('en_tag_desc') is-invalid @enderror"
-                                    rows="3" placeholder="Meta description in English">{{ old('en_tag_desc') }}</textarea>
-                                <div class="form-text"><span id="en_tag_desc_count">0</span> chars</div>
-                                @error('en_tag_desc')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-
                         {{-- Scripts --}}
-                        <div class="row g-4 mt-1">
+                        <div class="row mt-3">
                             <div class="col-md-6">
                                 <label class="form-label fw-bold">Article Script 1</label>
                                 <textarea name="blog_script" id="blog_script" class="form-control @error('blog_script') is-invalid @enderror"
@@ -134,7 +91,7 @@
                         </div>
 
                         {{-- Schedule --}}
-                        <div class="row g-4 mt-1">
+                        <div class="row mt-3">
                             <div class="col-md-6">
                                 <label class="form-label fw-bold">Publish Date</label>
                                 <input type="date" name="schedule_date" id="schedule_date"
@@ -159,8 +116,7 @@
                         </div>
 
                         {{-- Media --}}
-                        <div class="row g-4 mt-1">
-                            <div class="col-md-6">
+                        <div class="row mt-3">
                                 <label class="form-label fw-bold">Image <span class="text-danger">*</span></label>
                                 <input type="file" name="main_image" id="main_image"
                                     class="form-control @error('main_image') is-invalid @enderror" accept="image/*"
@@ -169,11 +125,10 @@
                                 @error('main_image')
                                     <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
-                            </div>
                         </div>
 
                         {{-- Category & Status --}}
-                        <div class="row g-4 mt-1">
+                        <div class="row mt-3">
                             <div class="col-md-6">
                                 <label class="form-label fw-bold">Sub Category <span class="text-danger">*</span></label>
                                 <select name="new_article_sub_catrgory_id"
@@ -227,11 +182,8 @@
             // Char counters
             const counters = [
                 ['ar_title', 'ar_title_count'],
-                ['en_title', 'en_title_count'],
                 ['ar_tag_title', 'ar_tag_title_count'],
-                ['en_tag_title', 'en_tag_title_count'],
                 ['ar_tag_desc', 'ar_tag_desc_count'],
-                ['en_tag_desc', 'en_tag_desc_count'],
             ];
             counters.forEach(([inputId, counterId]) => {
                 const el = document.getElementById(inputId);

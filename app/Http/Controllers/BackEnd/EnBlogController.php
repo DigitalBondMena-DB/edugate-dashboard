@@ -67,8 +67,26 @@ class EnBlogController extends Controller
     {
         $validated = $this->validateStore($request);
 
-        $schedule    = $this->combineSchedule($validated['schedule_date'] ?? null, $validated['schedule_time'] ?? null);
-        $slug = Str::slug((string) ($validated['title'] ?? ''));
+        $schedule = $this->combineSchedule($validated['schedule_date'] ?? null, $validated['schedule_time'] ?? null);
+
+        if (auth()->user()->role === 'super-admin' || auth()->user()->role === 'admin') {
+
+            if (!empty($request->slug)) {
+                $slug = $request->slug;
+            } else {
+                $slug = Str::slug($validated['title']);
+            }
+        } else {
+            $slug = Str::slug($validated['title']);
+        }
+
+        $checkSlug = EnBlog::where('slug', $slug)->first();
+        if ($checkSlug) {
+            return redirect()
+                ->route('enBlog.create')
+                ->with('error', 'Slug already exists!');
+        }
+
 
         $image = null;
         if ($request->hasFile('image')) {
@@ -85,7 +103,7 @@ class EnBlogController extends Controller
 
         $article = EnBlog::create($payload);
 
-        Session::flash('flash_message', 'Blog added successfully!');
+        Session::flash('flash_message', 'Article added successfully!');
         return redirect()->route('enBlog.edit', $article->id);
     }
 
@@ -104,7 +122,24 @@ class EnBlogController extends Controller
         $validated = $this->validateUpdate($request);
 
         $schedule    = $this->combineSchedule($validated['schedule_date'] ?? null, $validated['schedule_time'] ?? null);
-        $slug = Str::slug((string) ($validated['title'] ?? ''));
+
+        if (auth()->user()->role === 'super-admin' || auth()->user()->role === 'admin') {
+
+            if (!empty($request->slug)) {
+                $slug = $request->slug;
+            } else {
+                $slug = Str::slug($validated['title']);
+            }
+        } else {
+            $slug = Str::slug($validated['title']);
+        }
+
+        $checkSlug = EnBlog::where('slug', $slug)->where('id', '!=', $id)->first();
+        if ($checkSlug) {
+            return redirect()
+                ->route('enBlog.create')
+                ->with('error', 'Slug already exists!');
+        }
 
         $image = $article->image;
         if ($request->hasFile('image')) {
@@ -113,22 +148,23 @@ class EnBlogController extends Controller
 
 
         $payload = array_merge($validated, [
-            'en_slug'        => $slug,
+            'slug'        => $slug,
             'image'     => $image,
             'schedule_date'  => $schedule,
         ]);
 
         $article->update($payload);
 
-        Session::flash('flash_message', 'Blog updated successfully!');
+        Session::flash('flash_message', 'Article updated successfully!');
         return redirect()->route('enBlog.index');
     }
 
-    public function toggleStatus(EnBlog $newArticle)
+    public function toggleStatus(EnBlog $enBlog)
     {
-        $newArticle->status = $newArticle->status === 1 ? 0 : 1;
-        $newArticle->save();
-        Session::flash('flash_message', "Article {$newArticle->status} successfully.");
+        $enBlog->status = $enBlog->status === 1 ? 0 : 1;
+        $enBlog->save();
+        $msg = $enBlog->status == 1 ? 'published' : 'unpublished';
+        Session::flash('flash_message', "Article {$msg} successfully.");
         return redirect()->route('enBlog.index');
     }
 
@@ -145,24 +181,21 @@ class EnBlogController extends Controller
         return $date . ' ' . $time;
     }
 
-    private function makeArabicSlug(?string $text, string $sep = '-'): string
-    {
-        $text = trim((string)$text);
-        $text = mb_strtolower($text, 'UTF-8');
-        $text = preg_replace("/[^a-z0-9_\s\-ءاأإآؤئبتثجحخدذرزسشصضطظعغفقكلمنهويةى]/u", "", $text);
-        $text = preg_replace("/[\s\-]+/", " ", $text);
-        return preg_replace("/[\s_]/", $sep, $text);
-    }
 
 
     private function validateStore(Request $request): array
     {
         $subTable = (new NewArticleSubCatrgory)->getTable();
 
+
+
+
         $rules = [
-            'title'  => 'required|string|max:255',
+            'slug' => 'nullable|string|max:190|regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/|unique:en_blogs,slug',
+
+            'title'  => 'required|string|max:190',
             'text'   => 'required|string',
-            'meta_title' => 'required|string|max:255',
+            'meta_title' => 'required|string|max:190',
             'meta_description'  => 'required|string|max:1000',
 
             'script_1'        => 'nullable|string',
@@ -200,11 +233,13 @@ class EnBlogController extends Controller
         $subTable = (new NewArticleSubCatrgory)->getTable();
 
         $rules = [
-            'title'  => 'required|string|max:255',
+            'slug' => 'nullable|string|max:190|regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/|unique:en_blogs,slug,' . $request->id,
+
+            'title'  => 'required|string|max:190',
 
             'text'   => 'required|string',
 
-            'meta_title' => 'required|string|max:255',
+            'meta_title' => 'required|string|max:190',
 
             'meta_description'  => 'required|string|max:1000',
 
@@ -253,6 +288,8 @@ class EnBlogController extends Controller
             'in'       => 'Invalid selection.',
             'array'    => 'Invalid list.',
             'integer'  => 'Invalid number.',
+            'regex'    => 'Invalid slug. Allowed characters: a-z, 0-9, hyphens.',
+            'unique'   => 'Slug must be unique.',
         ];
     }
 
@@ -270,6 +307,7 @@ class EnBlogController extends Controller
             'new_article_sub_catrgory_id' => 'sub category',
             'status' => 'status',
             'image' => 'image',
+            'slug' => 'slug',
         ];
     }
 }

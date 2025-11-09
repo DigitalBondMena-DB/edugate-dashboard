@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 
-@php $pageTitle = 'Articles Control'; @endphp
+@php $pageTitle = 'Arabic Articles Control'; @endphp
 
 @section('title')
     {{ $pageTitle }}
@@ -41,9 +41,7 @@
                                 <option value="0">All Sub Categories</option>
                                 @foreach ($subCategories as $sc)
                                     <option value="{{ $sc->id }}" @selected((string) ($subId ?? request('sub_category_id')) === (string) $sc->id)>
-                                        {{ $sc->ar_title }} @if ($sc->en_title)
-                                            - {{ $sc->en_title }}
-                                        @endif
+                                        {{ $sc->ar_title }}
                                     </option>
                                 @endforeach
                             </select>
@@ -74,8 +72,7 @@
 
                                 <colgroup>
                                     <col style="width:8%">
-                                    <col style="width:26%">
-                                    <col style="width:26%">
+                                    <col style="width:52%">
                                     <col style="width:15%">
                                     <col style="width:18%">
                                 </colgroup>
@@ -84,7 +81,6 @@
                                     <tr>
                                         <th class="text-center">#</th>
                                         <th class="text-center">Title (AR)</th>
-                                        <th class="text-center">Title (EN)</th>
                                         <th class="text-center">Article Image</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
@@ -98,11 +94,9 @@
                                             </td>
 
                                             <td class="text-center text-wrap-cell">
-                                                {{ ($article->ar_title > 30) ? ('...' . Str::substr($article->ar_title, 0, 30)) : ($article->ar_title ?: '-') }}
+                                                {{ (strlen($article->ar_title) > 150) ? ('...' . Str::substr($article->ar_title, 0, 150)) : ($article->ar_title ?: '-') }}
                                             </td>
-                                            <td class="text-center text-wrap-cell">
-                                                {{ ($article->en_title > 30) ? (Str::substr($article->en_title, 0, 30) . '...') : ($article->en_title ?: '-') }}
-                                            </td>
+                                            
                                             <td class="text-center">
 
                                                 <img src="{{ asset('newArticle/' . $article->main_image) }}"

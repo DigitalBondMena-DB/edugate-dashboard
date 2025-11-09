@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class Admin
+class Auth
 {
     /**
      * Handle an incoming request.
@@ -19,7 +19,7 @@ class Admin
             return redirect('/login');
         }
 
-        if(auth()->user()->role === 'super-admin' || auth()->user()->role === 'admin') {
+        if(auth()->user()->role === 'super-admin' || auth()->user()->role === 'admin' || auth()->user()->role === 'writer') {
             return $next($request);
         } else {
             abort(403);

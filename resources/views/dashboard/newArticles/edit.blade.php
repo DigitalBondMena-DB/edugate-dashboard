@@ -26,111 +26,58 @@
                         @method('PUT')
 
                         {{-- ================= Titles ================= --}}
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">Arabic Title <span
+                                <div class="row mt-3">
+                                    <label class="form-label fw-bold text-dark">Title <span
                                             class="text-danger">*</span></label>
                                     <input type="text" name="ar_title"
                                         class="form-control @error('ar_title') is-invalid @enderror"
-                                        value="{{ old('ar_title', $row->ar_title) }}" placeholder="Enter Arabic title">
+                                        value="{{ old('ar_title', $row->ar_title) }}" placeholder="Enter Title">
                                     @error('ar_title')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                     <small class="text-muted d-block mt-1">Total characters: <span
                                             id="ar_title_count">0</span></small>
                                 </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">English Title</label>
-                                    <input type="text" name="en_title"
-                                        class="form-control @error('en_title') is-invalid @enderror"
-                                        value="{{ old('en_title', $row->en_title) }}" placeholder="Enter English title">
-                                    @error('en_title')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                    <small class="text-muted d-block mt-1">Total characters: <span
-                                            id="en_title_count">0</span></small>
-                                </div>
-                            </div>
-                        </div>
 
                         {{-- ================= Texts ================= --}}
-                        <div class="mb-4">
-                            <label class="form-label fw-bold text-dark">Arabic Text <span
+                        <div class="row mt-3">
+                            <label class="form-label fw-bold text-dark">Text <span
                                     class="text-danger">*</span></label>
                             <textarea name="ar_text" rows="6" class="form-control ckeditor @error('ar_text') is-invalid @enderror"
-                                placeholder="Enter Arabic text">{{ old('ar_text', $row->ar_text) }}</textarea>
+                                placeholder="Enter Text">{{ old('ar_text', $row->ar_text) }}</textarea>
                             @error('ar_text')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="mb-4">
-                            <label class="form-label fw-bold text-dark">English Text</label>
-                            <textarea name="en_text" rows="6" class="form-control ckeditor @error('en_text') is-invalid @enderror"
-                                placeholder="Enter English text">{{ old('en_text', $row->en_text) }}</textarea>
-                            @error('en_text')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
                         {{-- ================= Meta (Meta) ================= --}}
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">Arabic Meta Title <span
+                        <div class="row mt-3">
+                                    <label class="form-label fw-bold text-dark">Meta Title <span
                                             class="text-danger">*</span></label>
                                     <input type="text" name="ar_tag_title"
                                         class="form-control @error('ar_tag_title') is-invalid @enderror"
                                         value="{{ old('ar_tag_title', $row->ar_tag_title) }}"
-                                        placeholder="Enter Arabic tag title">
+                                        placeholder="Enter Meta Title">
                                     @error('ar_tag_title')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                     <small class="text-muted d-block mt-1">Total characters: <span
                                             id="ar_tag_title_count">0</span></small>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="mb-4">
-                                    <label class="form-label fw-bold text-dark">English Meta Title</label>
-                                    <input type="text" name="en_tag_title"
-                                        class="form-control @error('en_tag_title') is-invalid @enderror"
-                                        value="{{ old('en_tag_title', $row->en_tag_title) }}"
-                                        placeholder="Enter English tag title">
-                                    @error('en_tag_title')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                    <small class="text-muted d-block mt-1">Total characters: <span
-                                            id="en_tag_title_count">0</span></small>
-                                </div>
-                            </div>
                         </div>
-                        <div class="mb-4">
-                            <label class="form-label fw-bold text-dark">Arabic Meta Description <span
+
+                        <div class="row mt-3">
+                            <label class="form-label fw-bold text-dark">Meta Description <span
                                     class="text-danger">*</span></label>
                             <textarea name="ar_tag_desc" rows="4" class="form-control @error('ar_tag_desc') is-invalid @enderror"
-                                placeholder="Enter Arabic tag description">{{ old('ar_tag_desc', $row->ar_tag_desc) }}</textarea>
+                                placeholder="Enter Meta Description">{{ old('ar_tag_desc', $row->ar_tag_desc) }}</textarea>
                             @error('ar_tag_desc')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                             <small class="text-muted d-block mt-1">Total characters: <span
                                     id="ar_tag_desc_count">0</span></small>
                         </div>
-                        <div class="mb-4">
-                            <label class="form-label fw-bold text-dark">English Meta Description</label>
-                            <textarea name="en_tag_desc" rows="4" class="form-control @error('en_tag_desc') is-invalid @enderror"
-                                placeholder="Enter English tag description">{{ old('en_tag_desc', $row->en_tag_desc) }}</textarea>
-                            @error('en_tag_desc')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                            <small class="text-muted d-block mt-1">Total characters: <span
-                                    id="en_tag_desc_count">0</span></small>
-                        </div>
                         {{-- ================= Scripts (single) ================= --}}
-                        <div class="mb-4">
+                        <div class="row mt-3">
+                        <div class="col-md-6">
                             <label class="form-label fw-bold text-dark">Article Script 1</label>
                             <textarea name="blog_script" rows="4" class="form-control @error('blog_script') is-invalid @enderror"
                                 placeholder="Paste script here">{{ old('blog_script', $row->blog_script) }}</textarea>
@@ -139,7 +86,7 @@
                             @enderror
                         </div>
 
-                        <div class="mb-4">
+                        <div class="col-md-6">
                             <label class="form-label fw-bold text-dark">Article Script 2</label>
                             <textarea name="blog_second_script" rows="4"
                                 class="form-control @error('blog_second_script') is-invalid @enderror" placeholder="Paste second script here">{{ old('blog_second_script', $row->blog_second_script) }}</textarea>
@@ -147,8 +94,9 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+                        </div>
                         {{-- ================= Category / Status ================= --}}
-                        <div class="row">
+                        <div class="row mt-3">
                             <div class="col-md-6">
                                 <div class="mb-4">
                                     <label class="form-label fw-bold text-dark">Sub Category <span
@@ -371,13 +319,8 @@
 
             document.addEventListener('DOMContentLoaded', () => {
                 bindCharCount('input[name="ar_title"]', 'ar_title_count');
-                bindCharCount('input[name="en_title"]', 'en_title_count');
-
                 bindCharCount('input[name="ar_tag_title"]', 'ar_tag_title_count');
-                bindCharCount('input[name="en_tag_title"]', 'en_tag_title_count');
-
                 bindCharCount('textarea[name="ar_tag_desc"]', 'ar_tag_desc_count');
-                bindCharCount('textarea[name="en_tag_desc"]', 'en_tag_desc_count');
             });
         </script>
     @endpush

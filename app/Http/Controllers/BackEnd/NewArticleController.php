@@ -4,25 +4,16 @@ namespace App\Http\Controllers\BackEnd;
 
 use Carbon\Carbon;
 use App\NewArticle;
-use App\NewArticleImage;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\NewArticleSubCatrgory;
 use App\Services\ImageService;
-use Illuminate\Http\UploadedFile;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-use Intervention\Image\Laravel\Facades\Image;
-
-// use App\Http\Requests\Backend\StoreNewArticleRequest;
-// use App\Http\Requests\Backend\UpdateNewArticleRequest    ;
-
 
 class NewArticleController extends Controller
 {
-    private const MAIN_DIR     = 'newArticle';
-    private const WEBP_QUALITY = 75;
     protected $imageService;
     public function __construct(ImageService $imageService)
     {
@@ -37,20 +28,16 @@ class NewArticleController extends Controller
         $rows = NewArticle::select(
             'id',
             'ar_title',
-            'en_title',
             'ar_slug',
-            'en_slug',
             'status',
             'main_image',
             'new_article_sub_catrgory_id'
         )
-            ->with(['sub_category_data:id,ar_title,en_title'])
+            ->with(['sub_category_data:id,ar_title'])
             ->when($search !== '', function ($q) use ($search) {
                 $q->where(function ($w) use ($search) {
                     $w->where('ar_title', 'like', "%{$search}%")
-                        ->orWhere('en_title', 'like', "%{$search}%")
-                        ->orWhere('ar_slug', 'like', "%{$search}%")
-                        ->orWhere('en_slug', 'like', "%{$search}%");
+                        ->orWhere('ar_slug', 'like', "%{$search}%");
                 });
             })
             ->when($subId && $subId !== '0', function ($q) use ($subId) {
@@ -63,7 +50,7 @@ class NewArticleController extends Controller
             ->paginate(20)
             ->withQueryString();
 
-        $subCategories = NewArticleSubCatrgory::select('id', 'ar_title', 'en_title')
+        $subCategories = NewArticleSubCatrgory::select('id', 'ar_title')
             ->orderBy('ar_title')->get();
 
         return view('dashboard.newArticles.index', compact('rows', 'subCategories', 'search', 'subId', 'status'));
@@ -75,7 +62,31 @@ class NewArticleController extends Controller
         return view('dashboard.newArticles.create', compact('categoreies'));
     }
 
+    public function store(Request $request)
+    {
+        $validated = $this->validateStore($request);
 
+        $schedule    = $this->combineSchedule($validated['schedule_date'] ?? null, $validated['schedule_time'] ?? null);
+        $arabicSlug  = $this->makeArabicSlug($validated['ar_title'] ?? null);
+
+        $mainImageName = null;
+        if ($request->hasFile('main_image')) {
+            $mainImageName = $this->imageService->handle($request->file('main_image'), 'newArticle', null);
+        }
+
+        $payload = array_merge($validated, [
+            'ar_slug'                     => $arabicSlug,
+            'main_image'                  => $mainImageName,
+            'schedule_date'               => $schedule,
+            'article_date'                => $validated['schedule_date'] ?? null,
+            'article_counter'             => 0,
+        ]);
+
+        $article = NewArticle::create($payload);
+
+        Session::flash('flash_message', 'Article added successfully!');
+        return redirect()->route('newArticle.edit', $article->id);
+    }
     public function edit($id)
     {
         $row = NewArticle::findOrFail($id);
@@ -90,37 +101,12 @@ class NewArticleController extends Controller
     {
         $newArticle->status = $newArticle->status === 1 ? 0 : 1;
         $newArticle->save();
-        Session::flash('flash_message', "Article {$newArticle->status} successfully.");
+        $msg = $newArticle->status == 1 ? 'published' : 'unpublished';
+        Session::flash('flash_message', "Article {$msg} successfully.");
         return redirect()->route('newArticle.index');
     }
 
-    public function store(Request $request)
-    {
-        $validated = $this->validateStore($request);
 
-        $schedule    = $this->combineSchedule($validated['schedule_date'] ?? null, $validated['schedule_time'] ?? null);
-        $arabicSlug  = $this->makeArabicSlug($validated['ar_title'] ?? null);
-        $englishSlug = Str::slug((string) ($validated['en_title'] ?? ''));
-
-        $mainImageName = null;
-        if ($request->hasFile('main_image')) {
-            $mainImageName = $this->imageService->handle($request->file('main_image'), 'newArticle', null);
-        }
-
-        $payload = array_merge($validated, [
-            'en_slug'                     => $englishSlug,
-            'ar_slug'                     => $arabicSlug,
-            'main_image'                  => $mainImageName,
-            'schedule_date'               => $schedule,
-            'article_date'                => $validated['schedule_date'] ?? null,
-            'article_counter'             => 0,
-        ]);
-
-        $article = NewArticle::create($payload);
-
-        Session::flash('flash_message', 'Blog added successfully!');
-        return redirect()->route('newArticle.edit', $article->id);
-    }
 
     public function update(Request $request, $id)
     {
@@ -129,7 +115,6 @@ class NewArticleController extends Controller
 
         $schedule    = $this->combineSchedule($validated['schedule_date'] ?? null, $validated['schedule_time'] ?? null);
         $arabicSlug  = $this->makeArabicSlug($validated['ar_title'] ?? null);
-        $englishSlug = Str::slug((string) ($validated['en_title'] ?? ''));
 
         $mainImageName = $article->main_image;
         if ($request->hasFile('main_image')) {
@@ -138,7 +123,6 @@ class NewArticleController extends Controller
 
 
         $payload = array_merge($validated, [
-            'en_slug'        => $englishSlug,
             'ar_slug'        => $arabicSlug,
             'main_image'     => $mainImageName,
             'schedule_date'  => $schedule,
@@ -146,7 +130,7 @@ class NewArticleController extends Controller
 
         $article->update($payload);
 
-        Session::flash('flash_message', 'Blog updated successfully!');
+        Session::flash('flash_message', 'Article updated successfully!');
         return redirect()->route('newArticle.index');
     }
 
@@ -176,17 +160,13 @@ class NewArticleController extends Controller
         $subTable = (new NewArticleSubCatrgory)->getTable();
 
         $rules = [
-            'ar_title'  => 'required|string|max:255',
-            'en_title'  => 'nullable|string|max:255',
+            'ar_title'  => 'required|string|max:190',
 
             'ar_text'   => 'required|string',
-            'en_text'   => 'nullable|string',
 
-            'ar_tag_title' => 'required|string|max:255',
-            'en_tag_title' => 'nullable|string|max:255',
+            'ar_tag_title' => 'required|string|max:190',
 
             'ar_tag_desc'  => 'required|string|max:1000',
-            'en_tag_desc'  => 'nullable|string|max:1000',
 
             'blog_script'        => 'nullable|string',
             'blog_second_script' => 'nullable|string',
@@ -199,9 +179,6 @@ class NewArticleController extends Controller
             'status' => 'required|in:0,1',
 
             'main_image' => 'required|image|mimes:jpeg,jpg,png,webp|max:4096',
-
-            'arrayOfImages'   => 'nullable|array|max:20',
-            'arrayOfImages.*' => 'image|mimes:jpeg,jpg,png,webp|max:6144',
         ];
 
         $validator = Validator::make($request->all(), $rules, $this->messages(), $this->attributes());
@@ -226,18 +203,10 @@ class NewArticleController extends Controller
         $subTable = (new NewArticleSubCatrgory)->getTable();
 
         $rules = [
-            'ar_title'  => 'required|string|max:255',
-            'en_title'  => 'nullable|string|max:255',
-
+            'ar_title'  => 'required|string|max:190',
             'ar_text'   => 'required|string',
-            'en_text'   => 'nullable|string',
-
-            'ar_tag_title' => 'required|string|max:255',
-            'en_tag_title' => 'nullable|string|max:255',
-
+            'ar_tag_title' => 'required|string|max:190',
             'ar_tag_desc'  => 'required|string|max:1000',
-            'en_tag_desc'  => 'nullable|string|max:1000',
-
             'blog_script'        => 'nullable|string',
             'blog_second_script' => 'nullable|string',
 
@@ -249,9 +218,6 @@ class NewArticleController extends Controller
             'status' => 'required|in:0,1',
 
             'main_image' => 'nullable|image|mimes:jpeg,jpg,png,webp|max:4096',
-
-            'arrayOfImages'   => 'nullable|array|max:20',
-            'arrayOfImages.*' => 'image|mimes:jpeg,jpg,png,webp|max:6144',
         ];
 
         $validator = Validator::make($request->all(), $rules, $this->messages(), $this->attributes());
@@ -293,13 +259,9 @@ class NewArticleController extends Controller
     {
         return [
             'ar_title'  => 'Arabic title',
-            'en_title'  => 'English title',
             'ar_text'   => 'Arabic text',
-            'en_text'   => 'English text',
             'ar_tag_title' => 'Arabic tag title',
-            'en_tag_title' => 'English tag title',
             'ar_tag_desc'  => 'Arabic tag description',
-            'en_tag_desc'  => 'English tag description',
             'blog_script'  => 'Article script',
             'blog_second_script' => 'Article second script',
             'schedule_date' => 'publish date',
@@ -307,8 +269,6 @@ class NewArticleController extends Controller
             'new_article_sub_catrgory_id' => 'sub category',
             'status' => 'status',
             'main_image' => 'main image',
-            'arrayOfImages' => 'gallery images',
-            'arrayOfImages.*' => 'gallery image',
         ];
     }
 }

@@ -45,3 +45,4 @@ class HeroController extends Controller
         return redirect()->route('hero.index');
     }
 }
+

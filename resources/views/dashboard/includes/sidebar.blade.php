@@ -118,7 +118,15 @@
                 <a aria-expanded="false" href="{{ route('newArticle.index') }}">
                     <svg stroke="currentColor" stroke-width="1.5">
                     </svg>
-                    articles
+                    araticles (ar)
+                </a>
+
+            </li>
+            <li>
+                <a aria-expanded="false" href="{{ route('enBlog.index') }}">
+                    <svg stroke="currentColor" stroke-width="1.5">
+                    </svg>
+                    articles (en)
                 </a>
 
             </li>
