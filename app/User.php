@@ -18,7 +18,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'ar_name','en_name', 'email', 'password', 'phone', 'role', 'degree_needed', 'status', 'calls', 'source', 'comment' , 'admin_status' , 'image' , 'facebook_link' , 'tweet_link' , 'insta_link'
+        'ar_name','en_name', 'email', 'password', 'phone', 'role', 'degree_needed', 'status', 'calls', 'source', 'comment' , 'admin_status' , 'image' , 'facebook_link' , 'tweet_link' , 'insta_link', 'status'
     ];
 
     /**
@@ -37,37 +37,6 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'status' => 'boolean'
     ];
-
-    public function personal_info() {
-        return $this->hasOne(UserPersonal::class);
-    }
-
-    public function academic_info() {
-        return $this->hasOne(UserAcademic::class);
-    }
-
-    public function academic_admission_forms() {
-        return $this->hasMany(AdmissionForm::class, 'academic_guide', 'name');
-    }
-
-    public function file_movement() {
-        return $this->hasMany(FileMovement::class);
-    }
-
-    public function ifUserHasFileMovement() {
-        return $this->file_movement()->count() ? $this->file_movement() : null;
-    }
-
-    public function user_admission_forms() {
-        return $this->hasMany(AdmissionForm::class, 'user_id', 'id');
-    }
-
-    // public function list_user_admission_forms() {
-    //     return $this->user_admission_forms()->where('registered', 0);
-    // }
-
-    // public function registered_user_admission_forms() {
-    //     return $this->user_admission_forms()->where('registered', 1);
-    // }
 }

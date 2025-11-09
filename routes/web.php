@@ -1,13 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AdminController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\BackEnd\HeroController;
 use App\Http\Controllers\BackEnd\HomeController;
 
 Route::middleware('auth.dashboard')->group(function () {
 
-    Route::get('/', [HomeController::class, 'index'])->name('welcome');
+    Route::get('/dashboard', [HomeController::class, 'index'])->name('welcome');
+    Route::redirect('/', '/dashboard');
+
     Route::post('/logout', [LoginController::class, 'logout'])->name('admin.logout');
 });
 
@@ -17,7 +19,9 @@ Route::get('/login', function () {
 })->name('admin.show.login');
 Route::post('/login', [LoginController::class, 'submitAdminLoginForm'])->name('login');
 
-Route::namespace('BackEnd')->group(function () {
+Route::namespace('BackEnd')->middleware('auth.dashboard')->prefix('dashboard')->group(function () {
+
+    Route::resource('/hero', 'HeroController');
 
     Route::resource('/tags', 'SeoTagController');
     Route::patch('/tags/{tag}/toggle-status', 'SeoTagController@toggleStatus')->name('tags.toggleStatus');
@@ -75,8 +79,12 @@ Route::namespace('BackEnd')->group(function () {
     Route::post('why-us/image', 'WhyUsController@updateImage')->name('why-us.updateImage');
     Route::resource('page-banners', 'PageBannerController');
 });
-// Route::middleware('auth.dashboard')->group(function () {
-    Route::get('/hero', [HeroController::class, 'index'])->name('hero.index');
-    Route::get('/hero/edit', [HeroController::class, 'edit'])->name('hero.edit');
-    Route::put('/hero', [HeroController::class, 'update'])->name('hero.update');
-// });
+Route::middleware('admin')->prefix('dashboard')->group(function () {
+Route::get('/users', [AdminController::class, 'index'])->name('users.index');
+Route::get('/users/create', [AdminController::class, 'create'])->name('users.create');
+Route::post('/users', [AdminController::class, 'store'])->name('users.store');
+Route::get('/users/{user}/edit', [AdminController::class, 'edit'])->name('users.edit');
+Route::put('/users/{user}', [AdminController::class, 'update'])->name('users.update');
+Route::patch('/users/{user}/toggle-status', [AdminController::class, 'toggleStatus'])->name('users.toggleStatus');
+Route::patch('/users/{user}/change-role', [AdminController::class, 'changeRole'])->name('users.changeRole');
+});

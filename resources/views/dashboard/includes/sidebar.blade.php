@@ -146,6 +146,16 @@
                 </a>
 
             </li>
+            @if('admin' == auth()->user()->role || 'super-admin' == auth()->user()->role)
+            <li>
+                <a aria-expanded="false" href="{{ route('users.index') }}">
+                    <svg stroke="currentColor" stroke-width="1.5">
+                    </svg>
+                    manage users
+                </a>
+
+            </li>
+            @endif
         </ul>
     </div>
 </nav>
