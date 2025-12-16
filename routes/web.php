@@ -19,6 +19,11 @@ Route::get('/login', function () {
 })->name('admin.show.login');
 Route::post('/login', [LoginController::class, 'submitAdminLoginForm'])->name('login');
 
+Route::post('/search/flexible', [HomeController::class, 'getFlexibleData'])
+    ->name('search.flexible');
+Route::view('/smart-search', 'hero')
+    ->name('smart-search');
+
 Route::namespace('BackEnd')->middleware('auth.dashboard')->prefix('dashboard')->group(function () {
 
     Route::resource('/hero', 'HeroController');
