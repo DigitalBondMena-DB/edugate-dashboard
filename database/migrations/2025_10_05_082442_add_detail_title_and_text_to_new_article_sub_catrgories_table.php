@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::table('new_article_sub_catrgories', function (Blueprint $table) {
             $table->string('ar_description')->nullable();
             $table->string('en_description')->nullable();
-            $table->string('ar_detail_title')->nullable();
-            $table->string('en_detail_title')->nullable();
+            // $table->string('ar_detail_title')->nullable();
+            // $table->string('en_detail_title')->nullable();
             $table->text('ar_detail_text')->nullable();
             $table->text('en_detail_text')->nullable();
             $table->string('banner_image')->nullable();

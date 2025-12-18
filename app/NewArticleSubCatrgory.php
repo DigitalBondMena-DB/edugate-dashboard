@@ -23,8 +23,8 @@ class NewArticleSubCatrgory extends Model
         'banner_image',
         'ar_description',
         'en_description',
-        'ar_detail_title',
-        'en_detail_title',
+        // 'ar_detail_title',
+        // 'en_detail_title',
         'ar_detail_text',
         'en_detail_text',
     ];

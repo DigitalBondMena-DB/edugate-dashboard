@@ -67,7 +67,24 @@ class NewArticleController extends Controller
         $validated = $this->validateStore($request);
 
         $schedule    = $this->combineSchedule($validated['schedule_date'] ?? null, $validated['schedule_time'] ?? null);
+
+        if (auth()->user()->role === 'super-admin' || auth()->user()->role === 'admin') {
+            if (!empty($request->slug)) {
         $arabicSlug  = $this->makeArabicSlug($validated['ar_title'] ?? null);
+            } else {
+                $arabicSlug = $this->makeArabicSlug($validated['ar_title'] ?? null);
+            }
+        } else {
+            $arabicSlug  = $this->makeArabicSlug($validated['ar_title'] ?? null);
+        }
+
+        $checkSlug = NewArticle::where('ar_slug', $arabicSlug)->exists();
+        if ($checkSlug) {
+            return redirect()
+                ->route('newArticle.create')
+                ->with('error', 'Slug already exists!');
+        }
+
 
         $mainImageName = null;
         if ($request->hasFile('main_image')) {
@@ -111,10 +128,26 @@ class NewArticleController extends Controller
     public function update(Request $request, $id)
     {
         $article   = NewArticle::findOrFail($id);
-        $validated = $this->validateUpdate($request);
+        $validated = $this->validateUpdate($request, $id);
 
         $schedule    = $this->combineSchedule($validated['schedule_date'] ?? null, $validated['schedule_time'] ?? null);
-        $arabicSlug  = $this->makeArabicSlug($validated['ar_title'] ?? null);
+        if (auth()->user()->role === 'super-admin' || auth()->user()->role === 'admin') {
+
+            if (!empty($request->ar_slug)) {
+                $arabicSlug = $request->ar_slug;
+            } else {
+                $arabicSlug = $this->makeArabicSlug($validated['ar_title'] ?? null);
+            }
+        } else {
+            $arabicSlug = $this->makeArabicSlug($validated['ar_title'] ?? null);
+        }
+
+        $checkSlug = NewArticle::where('ar_slug', $arabicSlug)->where('id', '!=', $id)->first();
+        if ($checkSlug) {
+            return redirect()
+                ->route('newArticle.edit', $id)
+                ->with('error', 'Slug already exists!');
+        }
 
         $mainImageName = $article->main_image;
         if ($request->hasFile('main_image')) {
@@ -160,6 +193,8 @@ class NewArticleController extends Controller
         $subTable = (new NewArticleSubCatrgory)->getTable();
 
         $rules = [
+            'ar_slug' => 'nullable|string|max:190|regex:/^[\p{Arabic}a-z0-9]+(?:-[\p{Arabic}a-z0-9]+)*$/u|unique:new_articles,ar_slug',
+
             'ar_title'  => 'required|string|max:190',
 
             'ar_text'   => 'required|string',
@@ -198,11 +233,13 @@ class NewArticleController extends Controller
         return $validator->validate();
     }
 
-    private function validateUpdate(Request $request): array
+    private function validateUpdate(Request $request, $id): array
     {
         $subTable = (new NewArticleSubCatrgory)->getTable();
 
         $rules = [
+            'ar_slug' => 'nullable|string|max:190|regex:/^[\p{Arabic}a-z0-9]+(?:-[\p{Arabic}a-z0-9]+)*$/u|unique:new_articles,ar_slug,' . $id,
+
             'ar_title'  => 'required|string|max:190',
             'ar_text'   => 'required|string',
             'ar_tag_title' => 'required|string|max:190',

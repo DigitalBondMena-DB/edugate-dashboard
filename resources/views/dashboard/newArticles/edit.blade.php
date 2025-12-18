@@ -24,7 +24,18 @@
                     <form action="{{ route('newArticle.update', $row->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-
+                        {{-- ================= Slug (only for admin) ================= --}}
+                        @if(auth()->user()->role == 'super-admin' || auth()->user()->role == 'admin')
+                        <div class="row">
+                            <label class="form-label fw-bold">Slug</label>
+                            <input type="text" name="ar_slug" id="ar_slug"
+                                class="form-control @error('ar_slug') is-invalid @enderror"
+                                value="{{ old('ar_slug', $row->ar_slug) }}" placeholder="Enter Slug">
+                            @error('ar_slug')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        @endif
                         {{-- ================= Titles ================= --}}
                                 <div class="row mt-3">
                                     <label class="form-label fw-bold text-dark">Title <span

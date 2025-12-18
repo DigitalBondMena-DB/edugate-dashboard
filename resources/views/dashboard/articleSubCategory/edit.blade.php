@@ -78,7 +78,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-4">
                                     <label class="form-label fw-bold text-dark">Arabic Detail Title <span
@@ -106,7 +106,7 @@
                                     @enderror
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="mb-4">
                             <label class="form-label fw-bold text-dark">Arabic Detail Description <span
                                     class="text-danger">*</span></label>

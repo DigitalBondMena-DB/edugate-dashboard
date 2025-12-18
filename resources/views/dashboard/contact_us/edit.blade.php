@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="card-body p-4">
-
+                    
                     <form action="{{ route('contact-us.update') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -236,78 +236,38 @@
                             @enderror
                         </div>
 
-                        {{-- Banner Image --}}
+                        {{-- map embed --}}
                         <div class="mb-4">
-                            <label class="form-label fw-bold text-dark">Banner Image</label>
-                            @if ($contact->banner_image)
-                                <div class="mb-3">
-                                    <div class="border rounded p-3 bg-light">
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-3">
-                                                <span style="font-size: 1.5rem;">🖼️</span>
-                                            </div>
-                                            <div class="position-relative">
-                                                <p class="mb-2 fw-bold text-muted">Current Image:</p>
-                                                <div class="position-relative image-preview-container">
-                                                    <img class="rounded border shadow-sm slider-thumbnail"
-                                                        style="width: 150px; height: 100px; object-fit: cover; cursor: pointer;"
-                                                        src="{{ asset('contact_us/' . $contact->banner_image) }}"
-                                                        alt="Current Banner Image" data-bs-toggle="modal"
-                                                        data-bs-target="#imageModalBanner">
-                                                </div>
-                                                <small class="text-muted d-block mt-1">Click to preview full size</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <label class="form-label fw-bold text-dark">Map Embed </label>
+                            <input type="text" name="map_embed"
+                                class="form-control @error('map_embed') is-invalid @enderror"
+                                value="{{ old('map_embed', $contact->map_embed) }}" placeholder="Enter Map Embed">
+                            @error('map_embed')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
 
-                                {{-- Modal --}}
-                                <div class="modal fade" id="imageModalBanner" tabindex="-1"
-                                    aria-labelledby="imageModalLabelBanner" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="imageModalLabelBanner">
-                                                    <i class="fas fa-image me-2"></i>Banner Preview
-                                                </h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body text-center p-0">
-                                                <img src="{{ asset('contact_us/' . $contact->banner_image) }}"
-                                                    class="img-fluid rounded" alt="Full Size Banner Image"
-                                                    style="max-height: 70vh; object-fit: contain;">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
 
-                            <div class="border rounded p-3 bg-light">
-                                <div class="d-flex align-items-center">
-                                    <div class="me-3"><span style="font-size: 2rem;">📸</span></div>
-                                    <div class="flex-grow-1">
-                                        <label class="form-label mb-2 fw-semibold">
-                                            {{ $contact->banner_image ? 'Change Image (Optional)' : 'Upload New Image' }}
-                                        </label>
-                                        <input type="file" name="banner_image" id="banner_image"
-                                            class="form-control @error('banner_image') is-invalid @enderror"
-                                            accept="image/*" onchange="previewNewImage(this)">
-                                        <small class="text-muted mt-1 d-block">
-                                            Supported formats: JPG, JPEG, PNG, WEBP (Max: 2MB)
-                                        </small>
-                                        <div id="newImagePreview" class="mt-3" style="display: none;">
-                                            <p class="mb-2 fw-bold text-success small">New Image Preview:</p>
-                                            <img id="newImageDisplay" class="rounded border"
-                                                style="max-width: 150px; max-height: 100px; object-fit: cover;"
-                                                alt="New Image Preview">
-                                        </div>
-                                    </div>
-                                </div>
-                                @error('banner_image')
-                                    <div class="invalid-feedback d-block">{{ $message }}</div>
-                                @enderror
-                            </div>
+                        {{-- footer text (ar) --}}
+                        <div class="mb-4">
+                            <label class="form-label fw-bold text-dark">Footer Text (Ar)</label>
+                            <textarea name="ar_footer_text"
+                                class="form-control @error('ar_footer_text') is-invalid @enderror"
+                                rows="5">{{ old('ar_footer_text', $contact->ar_footer_text) }}</textarea>
+                            @error('ar_footer_text')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        {{-- footer text (en) --}}
+                        <div class="mb-4">
+                            <label class="form-label fw-bold text-dark">Footer Text (En)</label>
+                            <textarea name="en_footer_text"
+                                class="form-control @error('en_footer_text') is-invalid @enderror"
+                                rows="5">{{ old('en_footer_text', $contact->en_footer_text) }}</textarea>
+                            @error('en_footer_text')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="border-top pt-4">

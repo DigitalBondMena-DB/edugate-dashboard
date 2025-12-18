@@ -38,20 +38,20 @@ class SeoTagController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreSeoTagRequest $request)
-    {
-        $requestArray = $request->validated();
-        $tagDAta = SeoTag::where('tag_type', $request->tag_type)->get()->first();
-        if ($tagDAta) {
-            Session::flash('flash_message', 'Tag Page Used before');
-            return redirect()->route('tags.index');
-        } else {
+    // public function store(StoreSeoTagRequest $request)
+    // {
+    //     $requestArray = $request->validated();
+    //     $tagDAta = SeoTag::where('tag_type', $request->tag_type)->get()->first();
+    //     if ($tagDAta) {
+    //         Session::flash('flash_message', 'Tag Page Used before');
+    //         return redirect()->route('tags.index');
+    //     } else {
 
-            $row = SeoTag::create($requestArray);
-            Session::flash('flash_message', 'Tag added successfully');
-            return redirect()->route('tags.index');
-        }
-    }
+    //         $row = SeoTag::create($requestArray);
+    //         Session::flash('flash_message', 'Tag added successfully');
+    //         return redirect()->route('tags.index');
+    //     }
+    // }
 
     /**
      * Display the specified resource.
@@ -91,12 +91,12 @@ class SeoTagController extends Controller
         $tags = SeoTag::findorFail($id);
 
         $requestArray = $request->validated();
-        $tagDAta = SeoTag::where('tag_type', $request->tag_type)
-            ->where('id', '!=', $id)->get()->first();
-        if ($tagDAta) {
-            Session::flash('flash_message', 'Tag Page Used before');
-            return redirect()->route('tags.index');
-        }
+        // $tagDAta = SeoTag::where('tag_type', $request->tag_type)
+        //     ->where('id', '!=', $id)->get()->first();
+        // if ($tagDAta) {
+        //     Session::flash('flash_message', 'Tag Page Used before');
+        //     return redirect()->route('tags.index');
+        // }
 
 
         $tags->update($requestArray);
@@ -111,15 +111,15 @@ class SeoTagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        $tags = SeoTag::findorFail($id);
+    // public function destroy($id)
+    // {
+    //     $tags = SeoTag::findorFail($id);
 
-        $tags->delete();
+    //     $tags->delete();
 
-        Session::flash('flash_message', 'Tag deleted successfully');
-        return redirect()->route('tags.index');
-    }
+    //     Session::flash('flash_message', 'Tag deleted successfully');
+    //     return redirect()->route('tags.index');
+    // }
 
     public function toggleStatus(SeoTag $tag)
     {

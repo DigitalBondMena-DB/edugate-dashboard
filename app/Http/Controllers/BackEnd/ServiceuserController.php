@@ -22,23 +22,23 @@ class ServiceuserController extends Controller
         return view('dashboard.serviceuser.index', compact('rows'));
     }
 
-    public function create()
-    {
-        return view('dashboard.serviceuser.create');
-    }
+    // public function create()
+    // {
+    //     return view('dashboard.serviceuser.create');
+    // }
 
-    public function store(StoreServiceusersRequest $request)
-    {
-        $data = $request->validated();
+    // public function store(StoreServiceusersRequest $request)
+    // {
+    //     $data = $request->validated();
 
-        if ($request->hasFile('image')) {
-            $data['image'] = $this->imageService->handle($request->file('image'), 'serviceuser', null);
-        }
+    //     if ($request->hasFile('image')) {
+    //         $data['image'] = $this->imageService->handle($request->file('image'), 'serviceuser', null);
+    //     }
 
-        Serviceuser::create($data);
-        Session::flash('flash_message', 'Service added successfully');
-        return redirect()->route('serviceuser.index');
-    }
+    //     Serviceuser::create($data);
+    //     Session::flash('flash_message', 'Service added successfully');
+    //     return redirect()->route('serviceuser.index');
+    // }
 
     public function edit($id)
     {

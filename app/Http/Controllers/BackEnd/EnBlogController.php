@@ -119,7 +119,7 @@ class EnBlogController extends Controller
     public function update(Request $request, $id)
     {
         $article   = EnBlog::findOrFail($id);
-        $validated = $this->validateUpdate($request);
+        $validated = $this->validateUpdate($request, $id);
 
         $schedule    = $this->combineSchedule($validated['schedule_date'] ?? null, $validated['schedule_time'] ?? null);
 
@@ -228,12 +228,11 @@ class EnBlogController extends Controller
         return $validator->validate();
     }
 
-    private function validateUpdate(Request $request): array
+    private function validateUpdate(Request $request, $id): array
     {
         $subTable = (new NewArticleSubCatrgory)->getTable();
-
         $rules = [
-            'slug' => 'nullable|string|max:190|regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/|unique:en_blogs,slug,' . $request->id,
+            'slug' => 'nullable|string|max:190|regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/|unique:en_blogs,slug,' . $id,
 
             'title'  => 'required|string|max:190',
 

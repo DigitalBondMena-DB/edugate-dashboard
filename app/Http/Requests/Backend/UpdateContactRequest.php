@@ -36,9 +36,11 @@ class UpdateContactRequest extends FormRequest
             'linkedin' => 'required|string|url',
             'tiktok' => 'required|string|url',
             'youtube' => 'required|string|url',
-            'banner_image' => 'mimes:jpg,jpeg,png,webp',
             'whatsapp_number' => 'sometimes|nullable|string',
             'map_url' => 'sometimes|nullable|url',
+            'map_embed' => 'sometimes|nullable|string',
+            'ar_footer_text' => 'sometimes|nullable|string',
+            'en_footer_text' => 'sometimes|nullable|string',
         ];
     }
 }

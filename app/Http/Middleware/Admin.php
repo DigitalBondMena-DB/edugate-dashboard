@@ -13,12 +13,15 @@ class Admin
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, $superAdmin = false): Response
     {
         if(!auth()->user()) {
             return redirect('/login');
         }
-        if(auth()->user()->role !== 'admin' && auth()->user()->role !== 'super-admin') {
+        if($superAdmin && auth()->user()->role !== 'super-admin') {
+            abort(403);
+        }
+        if(auth()->user()->role !== 'admin' && !$superAdmin) {
             abort(403);
         }
         return $next($request);

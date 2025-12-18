@@ -71,7 +71,7 @@
                             @enderror
                         </div>
 
-                        <div class="mb-4">
+                        {{-- <div class="mb-4">
                             <label class="form-label fw-bold text-dark">Tag Type <span
                                     class="text-danger">*</span></label>
                             <select name="tag_type" class="form-select @error('tag_type') is-invalid @enderror">
@@ -101,7 +101,7 @@
                             @error('tag_type')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
-                        </div>
+                        </div> --}}
 
                         <div class="border-top pt-4 d-flex justify-content-between">
                             <a href="{{ route('tags.index') }}" class="btn btn-outline-secondary">

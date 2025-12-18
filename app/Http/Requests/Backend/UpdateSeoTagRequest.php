@@ -28,7 +28,7 @@ class UpdateSeoTagRequest extends FormRequest
             'ar_tag_title' => 'required|string',
             'en_tag_paragraph' => 'required|string',
             'ar_tag_paragraph' => 'required|string',
-            'tag_type' =>'required|string|exists:seo_tags,tag_type'
+            // 'tag_type' =>'required|string|exists:seo_tags,tag_type'
         ];
     }
 }

@@ -20,11 +20,11 @@
                         <div class="col-md-8 col-6">
                             <h4 class="card-title text-dark mb-0">{{ $pageTitle }}</h4>
                         </div>
-                        <div class="col-md-4 col-6 text-end">
-                            <a class="btn btn-white btn-round shadow-sm px-4" href="{{ route('tags.create') }}">
+                        {{-- <div class="col-md-4 col-6 text-end"> --}}
+                            {{-- <a class="btn btn-white btn-round shadow-sm px-4" href="{{ route('tags.create') }}">
                                 <i class="fas fa-plus me-2"></i> Add New Tag
-                            </a>
-                        </div>
+                            </a> --}}
+                        {{-- </div> --}}
                     </div>
                 </div>
 
@@ -112,10 +112,10 @@
                                     </div>
                                 </div>
                                 <h5 class="text-muted mb-3">No Tags</h5>
-                                <a href="{{ route('tags.create') }}"
+                                {{-- <a href="{{ route('tags.create') }}"
                                     class="btn btn-primary btn-round shadow-sm px-4">
                                     <span class="me-2">+</span> Add Tag
-                                </a>
+                                </a> --}}
                             </div>
                         @endif
                     </div>

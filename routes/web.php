@@ -28,13 +28,13 @@ Route::namespace('BackEnd')->middleware('auth.dashboard')->prefix('dashboard')->
 
     Route::resource('/hero', 'HeroController');
 
-    Route::resource('/tags', 'SeoTagController');
+    Route::resource('/tags', 'SeoTagController')->except(['create', 'store', 'destroy']);
     Route::patch('/tags/{tag}/toggle-status', 'SeoTagController@toggleStatus')->name('tags.toggleStatus');
 
 
 
 
-    Route::resource('/serviceuser', 'ServiceuserController');
+    Route::resource('/serviceuser', 'ServiceuserController')->except(['create', 'store']);
     Route::patch('/serviceusers/{serviceuser}/toggle-status', 'ServiceuserController@toggleStatus')->name('serviceuser.toggleStatus');
 
     Route::resource('/articleCategory', 'NewArticleCatrgoryController');
@@ -60,6 +60,12 @@ Route::namespace('BackEnd')->middleware('auth.dashboard')->prefix('dashboard')->
     Route::get('/about/edit', 'AboutController@edit')->name('about.edit');
     Route::put('/about', 'AboutController@update')->name('about.update');
     Route::resource('/about', 'AboutController')->except(['edit', 'update']);
+    
+    Route::get('/home-about/edit', 'HomeAboutController@edit')->name('home-about.edit');
+    Route::put('/home-about', 'HomeAboutController@update')->name('home-about.update');
+    Route::resource('/home-about', 'HomeAboutController')->except(['edit', 'update']);
+    
+    
     Route::resource('/clients', 'ClientsController');
     Route::patch('/clients/{client}/toggle-status', 'ClientsController@toggleStatus')->name('clients.toggleStatus');
     Route::resource('/feedback', 'ContactController');
@@ -84,7 +90,7 @@ Route::namespace('BackEnd')->middleware('auth.dashboard')->prefix('dashboard')->
     Route::post('why-us/image', 'WhyUsController@updateImage')->name('why-us.updateImage');
     Route::resource('page-banners', 'PageBannerController');
 });
-Route::middleware('admin')->prefix('dashboard')->group(function () {
+Route::middleware('admin:superAdmin')->prefix('dashboard')->group(function () {
 Route::get('/users', [AdminController::class, 'index'])->name('users.index');
 Route::get('/users/create', [AdminController::class, 'create'])->name('users.create');
 Route::post('/users', [AdminController::class, 'store'])->name('users.store');

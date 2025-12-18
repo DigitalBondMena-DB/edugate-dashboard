@@ -20,11 +20,11 @@
                         <div class="col-md-8 col-6">
                             <h4 class="card-title text-dark mb-0">{{ $pageTitle }}</h4>
                         </div>
-                        <div class="col-md-4 col-6 text-end">
+                        {{-- <div class="col-md-4 col-6 text-end">
                             <a class="btn btn-white btn-round shadow-sm px-4" href="{{ route('serviceuser.create') }}">
                                 <i class="fas fa-plus me-2"></i> Add New Service
                             </a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
 
@@ -35,9 +35,8 @@
 
                                 <colgroup>
                                     <col style="width:6%">
-                                    <col style="width:30%">
-                                    <col style="width:30%">
-                                    <col style="width:16%">
+                                    <col style="width:38%">
+                                    <col style="width:38%">
                                     <col style="width:18%">
                                 </colgroup>
 
@@ -46,7 +45,6 @@
                                         <th class="text-center">#</th>
                                         <th class="text-center">Service Name (AR)</th>
                                         <th class="text-center">Service Name (EN)</th>
-                                        <th class="text-center">Service Image</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
@@ -61,7 +59,7 @@
                                             <td class="text-start text-wrap-cell">{{ $service->ar_name }}</td>
                                             <td class="text-start text-wrap-cell">{{ $service->en_name }}</td>
 
-                                            <td class="text-center">
+                                            {{-- <td class="text-center">
                                                 <img src="{{ asset('serviceuser/' . $service->image) }}" alt="Service Image"
                                                     class="rounded border shadow-sm service-thumb" data-bs-toggle="modal"
                                                     data-bs-target="#imageModal{{ $service->id }}">
@@ -85,7 +83,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </td>
+                                            </td> --}}
 
                                             <td class="text-center actions-cell">
                                                 <div class="d-flex justify-content-center gap-2 flex-wrap">
@@ -130,10 +128,10 @@
                                     </div>
                                 </div>
                                 <h5 class="text-muted mb-3">No Services Available</h5>
-                                <a href="{{ route('serviceuser.create') }}"
+                                {{-- <a href="{{ route('serviceuser.create') }}"
                                     class="btn btn-primary btn-round shadow-sm px-4">
                                     <span class="me-2 fw-bold">+</span> Create First Service
-                                </a>
+                                </a> --}}
                             </div>
                         @endif
                     </div>

@@ -22,6 +22,13 @@
                 </a>
             </li>
             <li>
+                <a aria-expanded="false" href="{{ route('home-about.index') }}">
+                    <svg stroke="currentColor" stroke-width="1.5">
+                    </svg>
+                    home about section
+                </a>
+            </li>
+            <li>
                 <a aria-expanded="false" href="{{ route('page-banners.index') }}">
                     <svg stroke="currentColor" stroke-width="1.5">
                     </svg>
@@ -146,7 +153,7 @@
                 </a>
 
             </li>
-            @if('admin' == auth()->user()->role || 'super-admin' == auth()->user()->role)
+            @if('super-admin' == auth()->user()->role)
             <li>
                 <a aria-expanded="false" href="{{ route('users.index') }}">
                     <svg stroke="currentColor" stroke-width="1.5">

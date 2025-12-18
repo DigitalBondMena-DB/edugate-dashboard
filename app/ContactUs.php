@@ -19,7 +19,10 @@ class ContactUs extends Model
     'whatsapp_number',
     'youtube',
     'map_url',
-    'banner_image'];
+    'map_embed',
+    'ar_footer_text',
+    'en_footer_text',
+];
     protected $casts = [
         'phones' => 'array',
     ];
